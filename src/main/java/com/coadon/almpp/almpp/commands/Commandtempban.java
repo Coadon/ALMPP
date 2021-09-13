@@ -1,0 +1,55 @@
+package com.coadon.almpp.almpp.commands;
+
+import com.coadon.almpp.almpp.ALMPP;
+import com.coadon.almpp.almpp.utils.ExpireDateCalculator;
+import com.coadon.almpp.almpp.utils.MalformedDurationFormatException;
+import org.bukkit.ChatColor;
+import org.bukkit.Server;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Date;
+
+public class Commandtempban extends PluginCommand {
+
+    public Commandtempban(ALMPP plugin) {
+        super(plugin, "tempban");
+    }
+
+    @Override
+    public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
+        if (args.length() == 2) {
+            Player player = getPlayer(args.get(0));
+            if (!(player == null)) {
+                Date expireDate;
+                try {
+                    expireDate = ExpireDateCalculator.getExpireDate(args.get(1));
+                } catch (MalformedDurationFormatException e) {
+                    sender.sendMessage(ChatColor.RED + "Incorrect Argument: Invalid expiration date");
+                    return;
+                }
+                getPunisher().tempBanPlayer(player, plugin.DEFAULT_PUNISH_REASON, sender.getName(), expireDate);
+            } else {
+                sender.sendMessage(ChatColor.RED + "Player does not exist or online.");
+            }
+        } else if (args.length() > 2) {
+            Player player = getPlayer(args.get(0));
+            if (!(player == null)) {
+                Date expireDate;
+                try {
+                    expireDate = ExpireDateCalculator.getExpireDate(args.get(1));
+                } catch (MalformedDurationFormatException e) {
+                    sender.sendMessage(ChatColor.RED + "Incorrect Argument: Invalid expiration date");
+                    return;
+                }
+                getPunisher().tempBanPlayer(player, args.getCombinedFrom(2), sender.getName(), expireDate);
+            } else {
+                sender.sendMessage(ChatColor.RED + "Player does not exist or online.");
+            }
+        } else {
+            throw new InvalidCommandArgumentsException();
+        }
+    }
+}
