@@ -4,3 +4,65 @@ main: com.coadon.almpp.almpp.ALMPP
 api-version: 1.13
 authors: [ Coadon ]
 description: The Advanced Lightweight Minecraft Punish Plugin
+
+commands:
+  ban:
+    description: Permanently bans a player from the server.
+    permission: advancedban.ban
+    usage: /<command> <player> [reason]
+  tempban:
+    description: Temporarily bans a player from the server.
+    permission: advancedban.tempban
+    usage: /<command> <player> <duration> [reason]
+  kick:
+    description: Kicks a player from the server.
+    permission: advancedban.kick
+    usage: /<command> <player> [reason]
+  kickall:
+    description: Kicks every player from the server.
+    permission: advancedban.kickall
+    usage: /<command> [reason]
+  afkkick:
+    description: Kicks a player from the server in an afk kick manner.
+    permission: advancedban.afkkick
+    usage: /<command> <player>
+  warn:
+    description: Warn a player with a message.
+    permission: advancedban.warn
+    usage: /<command> <player> <message>
+  notice:
+    description: Notice a player with a message.
+    permission: advancedban.notice
+    usage: /<command> <player> <message>
+  brdcstban:
+    description: Toggle weather to broadcast when a player gets terminated or afk kicked.
+    permission: advancedban.brdcstban
+    usage: /<command> [on|off]
+
+permissions:
+  advancedban.*:
+    description: Root permission for advancedban.
+    children:
+      advancedban.ban: true
+      advancedban.tempban: true
+      advancedban.kick: true
+      advancedban.kickall: true
+      advancedban.warn: true
+      advancedban.brdcstban: true
+      advancedban.afkkick: true
+  advancedban.ban:
+    description: Permission to use the /ban command.
+  advancedban.tempban:
+    description: Permission to use the /tempban command.
+  advancedban.kick:
+    description: Permission to use the /kick command.
+  advancedban.kickall:
+    description: Permission to use the /kickall command.
+  advancedban.afkkick:
+    description: Permission to use the /afkkick command.
+  advancedban.warn:
+    description: Permission to use the /warn command.
+  advancedban.notice:
+    description: Permission to use the /notice command.
+  advancedban.brdcstban:
+    description: Permission to use the /brdcstban command.
