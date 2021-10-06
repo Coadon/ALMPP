@@ -1,6 +1,6 @@
 # ALMPP
 
-**The Advanced Lightweight Minecraft Punish Plugin** is a powerful and lightweight Punishment Plugin design for Bukkit servers.
+**The Advanced Lightweight Minecraft Punish Plugin** is a powerful and lightweight Punishment Plugin designed for Bukkit servers.
 
 ## Table of contents
 
@@ -15,14 +15,14 @@ To install the plugin to your server, put the Jar file into your server plugins 
 
 Then, if your server is running, restart your server.
 
-*Currently, this plugin only supports bukkit, spigot, or paper (recommended) servers.
-Other server software are not yet tested and won't guarantee plugin performance.*
+Currently, this plugin only supports bukkit, spigot, or paper (recommended) servers.
+Other server software are not tested and won't guarantee plugin performance.
 
-**Bungeecord proxy is not supported yet.**
+**Bungeecord proxies is not supported YET.**
 
 ## Features
 
 This plugin is currently under development, and will receive more features is future versions.
 
 This plugin improves the Punishment features in vanilla Minecraft. It introduces the feature to permanently and temporarily ban players,
-and includes an improved, clean ban gui.
+and includes an improved, cleaner ban gui.
