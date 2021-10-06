@@ -9,34 +9,42 @@ commands:
   ban:
     description: Permanently bans a player from the server.
     permission: advancedban.ban
+    aliases: [ acban, acb, banplayer, bnp, bn ]
     usage: /<command> <player> [reason]
   tempban:
     description: Temporarily bans a player from the server.
     permission: advancedban.tempban
+    aliases: [ actempban, actb, tempbanplayer, tbnp, tbn ]
     usage: /<command> <player> <duration> [reason]
   kick:
     description: Kicks a player from the server.
     permission: advancedban.kick
+    aliases: [ ackick, ack, kickplayer, kp, ck ]
     usage: /<command> <player> [reason]
   kickall:
     description: Kicks every player from the server.
     permission: advancedban.kickall
+    aliases: [ ackickall, acka, kickallplayers, kap, ka ]
     usage: /<command> [reason]
   afkkick:
     description: Kicks a player from the server in an afk kick manner.
     permission: advancedban.afkkick
+    aliases: [ acafkkick, acak, afkkickplayer, afkk ]
     usage: /<command> <player>
   warn:
     description: Warn a player with a message.
     permission: advancedban.warn
+    aliases: [ wrn, wr ]
     usage: /<command> <player> <message>
   notice:
     description: Notice a player with a message.
     permission: advancedban.notice
+    aliases: [ note, infop, ntice, nt ]
     usage: /<command> <player> <message>
   brdcstban:
     description: Toggle weather to broadcast when a player gets terminated or afk kicked.
     permission: advancedban.brdcstban
+    aliases: [ broadcastban, bcb ]
     usage: /<command> [on|off]
 
 permissions:
