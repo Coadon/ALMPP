@@ -30,4 +30,15 @@ public final class StringCombiner {
         }
         return combined.toString();
     }
+
+    public static String combine(Object[] items, String interval) {
+        StringBuilder combined = new StringBuilder();
+        for (Object item : items) {
+            if (item instanceof String || item instanceof Number)
+                combined.append(item).append(interval);
+            else
+                combined.append(item.toString()).append(interval);
+        }
+        return combined.toString();
+    }
 }
