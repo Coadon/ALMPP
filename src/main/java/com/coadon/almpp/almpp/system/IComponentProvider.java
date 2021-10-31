@@ -16,26 +16,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.commands;
+package com.coadon.almpp.almpp.system;
 
-import com.coadon.almpp.almpp.ALMPP;
-import org.bukkit.Server;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
+import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 
-public class Commandkickall extends PluginCommand {
+public interface IComponentProvider {
 
-    public Commandkickall(ALMPP plugin) {
-        super(plugin, "kickall");
-    }
+    @NotNull Component generateKickMessage(final @NotNull String reason, final @NotNull String date);
 
-    @Override
-    public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) {
-        if (args.length() > 0) {
-            getPunisher().kickAllPlayer(args.getCombined());
-        } else {
-            getPunisher().kickAllPlayer(plugin.DEFAULT_PUNISH_REASON);
-        }
-    }
+    @NotNull Component generateAfkKickMessage(final @NotNull String date);
+
+    @NotNull Component generateKickPermBanMessage(final @NotNull String reason, final @NotNull String date);
+
+    @NotNull Component generateKickTempBanMessage(final @NotNull String reason, final @NotNull String date, final @NotNull String expires);
+
+    @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName);
+
+    @NotNull String getAfkKickAnnouncementMessage(final @NotNull String targetName);
 }

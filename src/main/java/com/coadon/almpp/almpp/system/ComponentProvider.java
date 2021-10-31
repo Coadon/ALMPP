@@ -1,11 +1,39 @@
+/*
+ * ALMPP - The advanced lightweight punishment plugin for Minecraft
+ * Copyright (C) 2021 Coadon
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.coadon.almpp.almpp.system;
 
+import com.coadon.almpp.almpp.ALMPP;
+import com.coadon.almpp.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
-public final class ComponentGenerator implements IComponentGenerator {
+public final class ComponentProvider implements IComponentProvider {
+    private final ALMPP plugin;
+    private final Logger logger;
+
+    public ComponentProvider(ALMPP plugin) {
+        this.plugin = plugin;
+        this.logger = plugin.getSLF4JLogger();
+    }
 
     /**
      * Generates a kick message component with provided arguments.
@@ -83,11 +111,11 @@ public final class ComponentGenerator implements IComponentGenerator {
      * @return The combined and generated component.
      */
     @Override
-    public @NotNull Component generateTerminationAnnouncementMessage(final @NotNull String targetName) {
-        return Component.text("")
-                .append(Component.text("Player ").color(NamedTextColor.RED).decorate(TextDecoration.BOLD))
-                .append(Component.text(targetName).color(NamedTextColor.RED).decorate(TextDecoration.ITALIC))
-                .append(Component.text(" has been terminated from this server due to hacking, griefing, spamming, or abuse.\n").color(NamedTextColor.RED).decorate(TextDecoration.BOLD));
+    public @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName) {
+        String output = StringCombiner.combine(plugin.getConfig().getStringList("broadcast-ban-message.termination").toArray(), "\n");
+        output = output.replaceAll("\\[player]", targetName);
+        output = ChatColor.translateAlternateColorCodes('&', output);
+        return output;
     }
 
     /**
@@ -97,10 +125,10 @@ public final class ComponentGenerator implements IComponentGenerator {
      * @return The combined and generated component.
      */
     @Override
-    public @NotNull Component generateAfkKickAnnouncementMessage(final @NotNull String targetName) {
-        return Component.text("")
-                .append(Component.text("Player ").color(NamedTextColor.YELLOW).decorate(TextDecoration.BOLD))
-                .append(Component.text(targetName).color(NamedTextColor.YELLOW).decorate(TextDecoration.ITALIC))
-                .append(Component.text(" has been removed from this server due to inactivity.\n").color(NamedTextColor.YELLOW).decorate(TextDecoration.BOLD));
+    public @NotNull String getAfkKickAnnouncementMessage(final @NotNull String targetName) {
+        String output = StringCombiner.combine(plugin.getConfig().getStringList("broadcast-ban-message.afk-kick").toArray(), "\n");
+        output = output.replaceAll("\\[player]", targetName);
+        output = ChatColor.translateAlternateColorCodes('&', output);
+        return output;
     }
 }

@@ -1,0 +1,9 @@
+default-punish-reason: "The Ban Hammer had spoken."
+
+will-broadcast-ban-by-default: true
+
+broadcast-ban-message:
+  termination:
+    - "&l&cPlayer [player] has been terminated from this server due to hacking, griefing, spamming, or abuse."
+  afk-kick:
+    - "&ePlayer [player] has been AFK-kicked from this server."

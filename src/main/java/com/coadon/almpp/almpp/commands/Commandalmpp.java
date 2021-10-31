@@ -19,38 +19,22 @@
 package com.coadon.almpp.almpp.commands;
 
 import com.coadon.almpp.almpp.ALMPP;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class Commandkick extends PluginCommand {
+public class Commandalmpp extends PluginCommand {
 
-    public Commandkick(ALMPP plugin) {
-        super(plugin, "kick");
+    public Commandalmpp(ALMPP plugin) {
+        super(plugin, "almpp");
     }
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.length() == 1) {
-            Player player = getPlayer(args.get(0));
-            if (!(player == null)) {
-                getPunisher().kickPlayer(player, plugin.DEFAULT_PUNISH_REASON);
-            } else {
-                sender.sendMessage(ChatColor.RED + "Player does not exist or online.");
-            }
-        } else if (args.length() > 1) {
-            Player player = getPlayer(args.get(0));
-            if (!(player == null)) {
-                getPunisher().kickPlayer(
-                        player, args.getCombinedFrom(1));
-            } else {
-                sender.sendMessage(ChatColor.RED + "Player does not exist or online.");
-            }
-        } else {
-            throw new InvalidCommandArgumentsException();
-        }
+        sender.sendMessage(Component.text("ALMPP ").color(NamedTextColor.DARK_AQUA)
+                .append(Component.text("v" + plugin.getDescription().getVersion() + "\n").color(NamedTextColor.LIGHT_PURPLE)));
     }
 }
