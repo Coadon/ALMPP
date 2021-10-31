@@ -19,7 +19,7 @@
 package com.coadon.almpp.almpp.listeners;
 
 import com.coadon.almpp.almpp.ALMPP;
-import com.coadon.almpp.almpp.system.IComponentGenerator;
+import com.coadon.almpp.almpp.system.IComponentProvider;
 import com.coadon.almpp.almpp.system.IPunishmentExecutor;
 import org.bukkit.BanList;
 import org.bukkit.Server;
@@ -81,7 +81,7 @@ public abstract class PluginEventListener implements IPluginEventListener, Liste
         return plugin.getPunisher();
     }
 
-    protected IComponentGenerator getFormatter() {
+    protected IComponentProvider getFormatter() {
         return plugin.getFormatter();
     }
 

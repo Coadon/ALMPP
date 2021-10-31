@@ -8,69 +8,73 @@ description: The Advanced Lightweight Minecraft Punish Plugin
 commands:
   ban:
     description: Permanently bans a player from the server.
-    permission: advancedban.ban
+    permission: almpp.ban
     aliases: [ acban, acb, banplayer, bnp, bn ]
     usage: /<command> <player> [reason]
   tempban:
     description: Temporarily bans a player from the server.
-    permission: advancedban.tempban
+    permission: almpp.tempban
     aliases: [ actempban, actb, tempbanplayer, tbnp, tbn ]
     usage: /<command> <player> <duration> [reason]
   kick:
     description: Kicks a player from the server.
-    permission: advancedban.kick
+    permission: almpp.kick
     aliases: [ ackick, ack, kickplayer, kp, ck ]
     usage: /<command> <player> [reason]
   kickall:
     description: Kicks every player from the server.
-    permission: advancedban.kickall
+    permission: almpp.kickall
     aliases: [ ackickall, acka, kickallplayers, kap, ka ]
     usage: /<command> [reason]
   afkkick:
     description: Kicks a player from the server in an afk kick manner.
-    permission: advancedban.afkkick
+    permission: almpp.afkkick
     aliases: [ acafkkick, acak, afkkickplayer, afkk ]
     usage: /<command> <player>
   warn:
     description: Warn a player with a message.
-    permission: advancedban.warn
+    permission: almpp.warn
     aliases: [ wrn, wr ]
     usage: /<command> <player> <message>
   notice:
     description: Notice a player with a message.
-    permission: advancedban.notice
+    permission: almpp.notice
     aliases: [ note, infop, ntice, nt ]
     usage: /<command> <player> <message>
   brdcstban:
     description: Toggle weather to broadcast when a player gets terminated or afk kicked.
-    permission: advancedban.brdcstban
+    permission: almpp.brdcstban
     aliases: [ broadcastban, bcb ]
     usage: /<command> [on|off]
+  almpp:
+    description: Displays information about this plugin.
+    usage: /<command>
 
 permissions:
-  advancedban.*:
-    description: Root permission for advancedban.
+  almpp.*:
+    description: Root permission for ALMPP.
     children:
-      advancedban.ban: true
-      advancedban.tempban: true
-      advancedban.kick: true
-      advancedban.kickall: true
-      advancedban.warn: true
-      advancedban.brdcstban: true
-      advancedban.afkkick: true
-  advancedban.ban:
+      almpp.ban: true
+      almpp.tempban: true
+      almpp.kick: true
+      almpp.kickall: true
+      almpp.afkkick: true
+      almpp.warn: true
+      almpp.notice: true
+      almpp.brdcstban: true
+  almpp.ban:
     description: Permission to use the /ban command.
-  advancedban.tempban:
+  almpp.tempban:
     description: Permission to use the /tempban command.
-  advancedban.kick:
+  almpp.kick:
     description: Permission to use the /kick command.
-  advancedban.kickall:
+  almpp.kickall:
     description: Permission to use the /kickall command.
-  advancedban.afkkick:
+  almpp.afkkick:
     description: Permission to use the /afkkick command.
-  advancedban.warn:
+  almpp.warn:
     description: Permission to use the /warn command.
-  advancedban.notice:
+  almpp.notice:
     description: Permission to use the /notice command.
-  advancedban.brdcstban:
+  almpp.brdcstban:
     description: Permission to use the /brdcstban command.

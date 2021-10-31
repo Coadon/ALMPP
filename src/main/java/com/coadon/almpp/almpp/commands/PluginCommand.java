@@ -19,7 +19,7 @@
 package com.coadon.almpp.almpp.commands;
 
 import com.coadon.almpp.almpp.ALMPP;
-import com.coadon.almpp.almpp.system.IComponentGenerator;
+import com.coadon.almpp.almpp.system.IComponentProvider;
 import com.coadon.almpp.almpp.system.IPunishmentExecutor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -112,7 +112,7 @@ public abstract class PluginCommand implements IPluginCommand, CommandExecutor {
         return plugin.getPunisher();
     }
 
-    protected IComponentGenerator getFormatter() {
+    protected IComponentProvider getFormatter() {
         return plugin.getFormatter();
     }
 

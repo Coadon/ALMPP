@@ -18,7 +18,7 @@
 
 package com.coadon.almpp.almpp;
 
-import com.coadon.almpp.almpp.system.IComponentGenerator;
+import com.coadon.almpp.almpp.system.IComponentProvider;
 import com.coadon.almpp.almpp.system.IPunishmentExecutor;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
@@ -29,7 +29,7 @@ public interface IALMPP {
 
     void registerListeners(final Listener listener);
 
-    IComponentGenerator getFormatter();
+    IComponentProvider getFormatter();
 
     IPunishmentExecutor getPunisher();
 

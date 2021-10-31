@@ -28,7 +28,7 @@ import java.util.Date;
 public final class PunishmentExecutor implements IPunishmentExecutor {
     private final ALMPP plugin;
     private final Logger logger;
-    private final IComponentGenerator formatter;
+    private final IComponentProvider formatter;
 
     public PunishmentExecutor(ALMPP plugin) {
         this.plugin = plugin;
@@ -110,7 +110,7 @@ public final class PunishmentExecutor implements IPunishmentExecutor {
     private void broadcastBan(Player target) {
         if (plugin.willBroadcastBan()) {
             plugin.getServer().getOnlinePlayers().forEach(
-                    player -> player.sendMessage(formatter.generateTerminationAnnouncementMessage(target.getName()))
+                    player -> player.sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()))
             );
         }
     }
@@ -121,7 +121,7 @@ public final class PunishmentExecutor implements IPunishmentExecutor {
     private void broadcastAfk(Player target) {
         if (plugin.willBroadcastBan()) {
             plugin.getServer().getOnlinePlayers().forEach(
-                    player -> player.sendMessage(formatter.generateAfkKickAnnouncementMessage(target.getName()))
+                    player -> player.sendMessage(formatter.getAfkKickAnnouncementMessage(target.getName()))
             );
         }
     }

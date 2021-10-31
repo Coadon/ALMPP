@@ -21,7 +21,7 @@ package com.coadon.almpp.almpp.system;
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 
-public interface IComponentGenerator {
+public interface IComponentProvider {
 
     @NotNull Component generateKickMessage(final @NotNull String reason, final @NotNull String date);
 
@@ -31,7 +31,7 @@ public interface IComponentGenerator {
 
     @NotNull Component generateKickTempBanMessage(final @NotNull String reason, final @NotNull String date, final @NotNull String expires);
 
-    @NotNull Component generateTerminationAnnouncementMessage(final @NotNull String targetName);
+    @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName);
 
-    @NotNull Component generateAfkKickAnnouncementMessage(final @NotNull String targetName);
+    @NotNull String getAfkKickAnnouncementMessage(final @NotNull String targetName);
 }
