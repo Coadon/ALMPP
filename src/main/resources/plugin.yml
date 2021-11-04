@@ -9,27 +9,27 @@ commands:
   ban:
     description: Permanently bans a player from the server.
     permission: almpp.ban
-    aliases: [ acban, acb, banplayer, bnp, bn ]
+    aliases: [ permban, pbn, bn ]
     usage: /<command> <player> [reason]
   tempban:
     description: Temporarily bans a player from the server.
     permission: almpp.tempban
-    aliases: [ actempban, actb, tempbanplayer, tbnp, tbn ]
+    aliases: [ tmpban, tbn, tb ]
     usage: /<command> <player> <duration> [reason]
   kick:
     description: Kicks a player from the server.
     permission: almpp.kick
-    aliases: [ ackick, ack, kickplayer, kp, ck ]
+    aliases: [ k, kp, ck ]
     usage: /<command> <player> [reason]
   kickall:
     description: Kicks every player from the server.
     permission: almpp.kickall
-    aliases: [ ackickall, acka, kickallplayers, kap, ka ]
+    aliases: [ kall, kap, ka ]
     usage: /<command> [reason]
   afkkick:
     description: Kicks a player from the server in an afk kick manner.
     permission: almpp.afkkick
-    aliases: [ acafkkick, acak, afkkickplayer, afkk ]
+    aliases: [ afkk ]
     usage: /<command> <player>
   warn:
     description: Warn a player with a message.
