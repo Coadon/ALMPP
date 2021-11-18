@@ -48,6 +48,7 @@ commands:
     usage: /<command> [on|off]
   almpp:
     description: Displays information about this plugin.
+    permission: almpp.plugininfo
     usage: /<command>
 
 permissions:
@@ -78,3 +79,5 @@ permissions:
     description: Permission to use the /notice command.
   almpp.brdcstban:
     description: Permission to use the /brdcstban command.
+  almpp.plugininfo:
+    description: Permission to use the /almpp command.
