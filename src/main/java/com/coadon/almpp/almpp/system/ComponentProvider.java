@@ -28,11 +28,9 @@ import org.slf4j.Logger;
 
 public final class ComponentProvider implements IComponentProvider {
     private final ALMPP plugin;
-    private final Logger logger;
 
     public ComponentProvider(ALMPP plugin) {
         this.plugin = plugin;
-        this.logger = plugin.getSLF4JLogger();
     }
 
     /**
