@@ -20,12 +20,12 @@ package com.coadon.almpp.almpp;
 
 import com.coadon.almpp.almpp.system.IComponentProvider;
 import com.coadon.almpp.almpp.system.IPunishmentExecutor;
-import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
 
 public interface IALMPP {
 
-    void registerCommand(final String commandLabel, final CommandExecutor commandExe);
+    void registerCommand(final String commandLabel, final TabExecutor commandExe);
 
     void registerListeners(final Listener listener);
 

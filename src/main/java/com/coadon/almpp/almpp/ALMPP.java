@@ -25,7 +25,7 @@ import com.coadon.almpp.almpp.system.IComponentProvider;
 import com.coadon.almpp.almpp.system.IPunishmentExecutor;
 import com.coadon.almpp.almpp.system.PunishmentExecutor;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
@@ -74,8 +74,9 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
     }
 
     @Override
-    public void registerCommand(String commandLabel, CommandExecutor commandExe) {
+    public void registerCommand(String commandLabel, TabExecutor commandExe) {
         Objects.requireNonNull(getCommand(commandLabel)).setExecutor(commandExe);
+        Objects.requireNonNull(getCommand(commandLabel)).setTabCompleter(commandExe);
     }
 
     @Override
