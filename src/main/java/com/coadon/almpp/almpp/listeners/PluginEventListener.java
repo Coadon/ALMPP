@@ -36,7 +36,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class PluginEventListener implements IPluginEventListener, Listener {
+public abstract class PluginEventListener implements Listener {
     protected final ALMPP plugin;
     protected final Logger logger;
 
