@@ -25,6 +25,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class Commandafkkick extends PluginCommand {
 
@@ -44,5 +47,13 @@ public class Commandafkkick extends PluginCommand {
         } else {
             throw new InvalidCommandArgumentsException();
         }
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
+        if (args.length == 1)
+            return getListOfOnlinePlayers();
+
+        return null;
     }
 }

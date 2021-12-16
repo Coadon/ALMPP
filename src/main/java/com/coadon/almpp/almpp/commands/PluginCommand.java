@@ -28,6 +28,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.NotNull;
@@ -37,6 +38,7 @@ import org.slf4j.Logger;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public abstract class PluginCommand implements IPluginCommand, TabExecutor {
     protected final ALMPP plugin;
@@ -66,7 +68,7 @@ public abstract class PluginCommand implements IPluginCommand, TabExecutor {
     public abstract void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable;
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
         return null;
     }
 
@@ -113,5 +115,9 @@ public abstract class PluginCommand implements IPluginCommand, TabExecutor {
 
     protected IComponentProvider getFormatter() {
         return plugin.getFormatter();
+    }
+
+    protected List<String> getListOfOnlinePlayers() {
+        return getOnlinePlayers().stream().map(HumanEntity::getName).collect(Collectors.toList());
     }
 }

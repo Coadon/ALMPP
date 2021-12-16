@@ -19,16 +19,22 @@
 package com.coadon.almpp.almpp.commands;
 
 import com.coadon.almpp.almpp.ALMPP;
+import com.google.common.collect.ImmutableList;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class Commandbrdcstban extends PluginCommand {
 
     public Commandbrdcstban(ALMPP plugin) {
         super(plugin, "brdcstban");
     }
+
+    private static final List<String> AVAILABLE_ARGUMENTS = ImmutableList.of("on", "off");
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
@@ -43,5 +49,13 @@ public class Commandbrdcstban extends PluginCommand {
         } else {
             sender.sendMessage("Server will broadcast punishments: " + plugin.willBroadcastBan());
         }
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
+        if (args.length == 1)
+            return AVAILABLE_ARGUMENTS;
+
+        return null;
     }
 }
