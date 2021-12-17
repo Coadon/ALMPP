@@ -28,10 +28,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Commandbrdcstban extends PluginCommand {
+public class Commandbrdcstban extends ALMPPCommand {
 
     public Commandbrdcstban(ALMPP plugin) {
-        super(plugin, "brdcstban");
+        super(plugin);
     }
 
     private static final List<String> AVAILABLE_ARGUMENTS = ImmutableList.of("on", "off");

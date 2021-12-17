@@ -29,10 +29,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Commandkick extends PluginCommand {
+public class Commandkick extends ALMPPCommand {
 
     public Commandkick(ALMPP plugin) {
-        super(plugin, "kick");
+        super(plugin);
     }
 
     @Override

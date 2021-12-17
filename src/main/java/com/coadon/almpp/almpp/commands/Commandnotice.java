@@ -31,10 +31,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Commandnotice extends PluginCommand {
+public class Commandnotice extends ALMPPCommand {
 
     public Commandnotice(ALMPP plugin) {
-        super(plugin, "notice");
+        super(plugin);
     }
 
     @Override

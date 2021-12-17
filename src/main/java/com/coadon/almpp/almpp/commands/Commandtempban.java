@@ -33,10 +33,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Date;
 import java.util.List;
 
-public class Commandtempban extends PluginCommand {
+public class Commandtempban extends ALMPPCommand {
 
     public Commandtempban(ALMPP plugin) {
-        super(plugin, "tempban");
+        super(plugin);
     }
 
     // Common time durations, for use in tab completion

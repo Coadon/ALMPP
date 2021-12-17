@@ -40,15 +40,13 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public abstract class PluginCommand implements IPluginCommand, TabExecutor {
+public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
     protected final ALMPP plugin;
     protected final Logger logger;
-    protected final String cmdLabel;
 
-    public PluginCommand(ALMPP plugin, String commandLabel) {
+    public ALMPPCommand(ALMPP plugin) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
-        this.cmdLabel = commandLabel;
     }
 
     @Override

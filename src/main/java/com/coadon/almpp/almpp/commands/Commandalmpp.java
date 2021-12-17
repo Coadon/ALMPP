@@ -26,10 +26,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-public class Commandalmpp extends PluginCommand {
+public class Commandalmpp extends ALMPPCommand {
 
     public Commandalmpp(ALMPP plugin) {
-        super(plugin, "almpp");
+        super(plugin);
     }
 
     @Override

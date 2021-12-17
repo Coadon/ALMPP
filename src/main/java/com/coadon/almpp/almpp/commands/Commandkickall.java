@@ -24,10 +24,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-public class Commandkickall extends PluginCommand {
+public class Commandkickall extends ALMPPCommand {
 
     public Commandkickall(ALMPP plugin) {
-        super(plugin, "kickall");
+        super(plugin);
     }
 
     @Override

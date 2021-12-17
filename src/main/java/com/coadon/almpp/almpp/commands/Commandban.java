@@ -29,10 +29,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Commandban extends PluginCommand {
+public class Commandban extends ALMPPCommand {
 
     public Commandban(ALMPP plugin) {
-        super(plugin, "ban");
+        super(plugin);
     }
 
     @Override
