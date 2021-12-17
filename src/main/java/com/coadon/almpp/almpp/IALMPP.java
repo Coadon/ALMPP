@@ -18,8 +18,8 @@
 
 package com.coadon.almpp.almpp;
 
-import com.coadon.almpp.almpp.system.IComponentProvider;
-import com.coadon.almpp.almpp.system.IPunishmentExecutor;
+import com.coadon.almpp.almpp.system.ComponentProvider;
+import com.coadon.almpp.almpp.system.PunishmentExecutor;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
 
@@ -29,9 +29,9 @@ public interface IALMPP {
 
     void registerListeners(final Listener listener);
 
-    IComponentProvider getFormatter();
+    ComponentProvider getFormatter();
 
-    IPunishmentExecutor getPunisher();
+    PunishmentExecutor getPunisher();
 
     boolean willBroadcastBan();
 

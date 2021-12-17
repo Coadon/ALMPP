@@ -18,111 +18,20 @@
 
 package com.coadon.almpp.almpp.system;
 
-import com.coadon.almpp.almpp.ALMPP;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 
 import java.util.Date;
 
-public final class PunishmentExecutor implements IPunishmentExecutor {
-    private final ALMPP plugin;
-    private final Logger logger;
-    private final IComponentProvider formatter;
+public interface PunishmentExecutor {
 
-    public PunishmentExecutor(ALMPP plugin) {
-        this.plugin = plugin;
-        this.logger = plugin.getSLF4JLogger();
-        this.formatter = plugin.getFormatter();
-    }
+    void kickPlayer(final @NotNull Player player, final @NotNull String reason);
 
-    /**
-     * Kicks a player out of the server.
-     *
-     * @param player The player to be punished.
-     * @param reason The reason to be punished.
-     */
-    @Override
-    public void kickPlayer(final @NotNull Player player, final @NotNull String reason) {
-        broadcastBan(player);
-        player.kick(formatter.generateKickMessage(reason, new Date().toString()));
-        logger.info("Kicked " + player.getName() + " from the server");
-    }
+    void afkKickPlayer(final @NotNull Player player);
 
-    /**
-     * AFK Kicks a player out of the server.
-     *
-     * @param player The player to be punished.
-     */
-    @Override
-    public void afkKickPlayer(final @NotNull Player player) {
-        broadcastAfk(player);
-        player.kick(formatter.generateAfkKickMessage(new Date().toString()));
-        logger.info("AFK Kicked " + player.getName() + " from the server");
-    }
+    void permBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source);
 
-    /**
-     * Permanently bans a player out of the server.
-     *
-     * @param player The player to be punished.
-     * @param reason The reason to be punished.
-     * @param source The operator.
-     */
-    @Override
-    public void permBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source) {
-        broadcastBan(player);
-        player.kick(formatter.generateKickPermBanMessage(reason, new Date().toString()));
-        player.banPlayer(reason, source);
-        logger.info("Permanently banned " + player.getName() + " from the server");
-    }
+    void tempBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source, final @NotNull Date expires);
 
-    /**
-     * Temporarily bans a player out of the server.
-     *
-     * @param player The player to be punished.
-     * @param reason The reason to be punished.
-     * @param source The executor.
-     * @param expires The expiration date.
-     */
-    @Override
-    public void tempBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source, final @NotNull Date expires) {
-        broadcastBan(player);
-        player.kick(formatter.generateKickTempBanMessage(reason, new Date().toString(), expires.toString()));
-        player.banPlayer(reason, expires, source);
-        logger.info("Temporarily banned " + player.getName() + " from the server");
-    }
-
-    /**
-     * Kicks all online players out of the server
-     *
-     * @param reason The reason to be punished.
-     */
-    @Override
-    public void kickAllPlayer(final @NotNull String reason) {
-        plugin.getServer().getOnlinePlayers().forEach(
-                player -> player.kick(formatter.generateKickMessage(reason, new Date().toString())));
-        logger.info("Kicked everyone from the server");
-    }
-
-    /**
-     * Broadcast the server a player is terminated, only if BroadcastBan is enabled.
-     */
-    private void broadcastBan(Player target) {
-        if (plugin.willBroadcastBan()) {
-            plugin.getServer().getOnlinePlayers().forEach(
-                    player -> player.sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()))
-            );
-        }
-    }
-
-    /**
-     * Broadcast the server a player is afk kicked, only if BroadcastBan is enabled.
-     */
-    private void broadcastAfk(Player target) {
-        if (plugin.willBroadcastBan()) {
-            plugin.getServer().getOnlinePlayers().forEach(
-                    player -> player.sendMessage(formatter.getAfkKickAnnouncementMessage(target.getName()))
-            );
-        }
-    }
+    void kickAllPlayer(final @NotNull String reason);
 }

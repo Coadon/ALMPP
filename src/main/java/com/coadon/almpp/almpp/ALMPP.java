@@ -20,10 +20,10 @@ package com.coadon.almpp.almpp;
 
 import com.coadon.almpp.almpp.commands.*;
 import com.coadon.almpp.almpp.listeners.PlayerLoginListeners;
+import com.coadon.almpp.almpp.system.ComponentProviderImpl;
 import com.coadon.almpp.almpp.system.ComponentProvider;
-import com.coadon.almpp.almpp.system.IComponentProvider;
-import com.coadon.almpp.almpp.system.IPunishmentExecutor;
 import com.coadon.almpp.almpp.system.PunishmentExecutor;
+import com.coadon.almpp.almpp.system.PunishmentExecutorImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
@@ -38,8 +38,8 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
     public final String DEFAULT_PUNISH_REASON = getConfig().getString("default-punish-reason");
     private boolean willBroadcastBan = getConfig().getBoolean("will-broadcast-ban-by-default");
 
-    private final IComponentProvider componentGenerator = new ComponentProvider(this);
-    private final IPunishmentExecutor punishmentExecutor = new PunishmentExecutor(this);
+    private final ComponentProvider componentGenerator = new ComponentProviderImpl(this);
+    private final PunishmentExecutor punishmentExecutor = new PunishmentExecutorImpl(this);
 
     @Override
     public void onEnable() {
@@ -85,12 +85,12 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
     }
 
     @Override
-    public IComponentProvider getFormatter() {
+    public ComponentProvider getFormatter() {
         return componentGenerator;
     }
 
     @Override
-    public IPunishmentExecutor getPunisher() {
+    public PunishmentExecutor getPunisher() {
         return punishmentExecutor;
     }
 

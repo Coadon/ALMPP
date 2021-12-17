@@ -19,8 +19,8 @@
 package com.coadon.almpp.almpp.listeners;
 
 import com.coadon.almpp.almpp.ALMPP;
-import com.coadon.almpp.almpp.system.IComponentProvider;
-import com.coadon.almpp.almpp.system.IPunishmentExecutor;
+import com.coadon.almpp.almpp.system.ComponentProvider;
+import com.coadon.almpp.almpp.system.PunishmentExecutor;
 import org.bukkit.BanList;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -77,11 +77,11 @@ public abstract class PluginEventListener implements Listener {
         return plugin.getServer().getScheduler();
     }
 
-    protected IPunishmentExecutor getPunisher() {
+    protected PunishmentExecutor getPunisher() {
         return plugin.getPunisher();
     }
 
-    protected IComponentProvider getFormatter() {
+    protected ComponentProvider getFormatter() {
         return plugin.getFormatter();
     }
 

@@ -18,115 +18,20 @@
 
 package com.coadon.almpp.almpp.system;
 
-import com.coadon.almpp.almpp.ALMPP;
-import com.coadon.almpp.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 
-public final class ComponentProvider implements IComponentProvider {
-    private final ALMPP plugin;
+public interface ComponentProvider {
 
-    public ComponentProvider(ALMPP plugin) {
-        this.plugin = plugin;
-    }
+    @NotNull Component generateKickMessage(final @NotNull String reason, final @NotNull String date);
 
-    /**
-     * Generates a kick message component with provided arguments.
-     *
-     * @param reason The text to be displayed as the reason.
-     * @param date The text to be displayed as the date.
-     * @return The combined and generated component.
-     */
-    @Override
-    public @NotNull Component generateKickMessage(final @NotNull String reason, final @NotNull String date) {
-        return Component.text("")
-                .append(Component.text("You are kicked from this server!\n\n").color(NamedTextColor.RED))
-                .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
-                .append(Component.text(reason + "\n").color(NamedTextColor.WHITE))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date).color(NamedTextColor.WHITE));
-    }
+    @NotNull Component generateAfkKickMessage(final @NotNull String date);
 
-    /**
-     * Generates an AFK kick message component with provided arguments.
-     *
-     * @param date The text to be displayed as the date.
-     * @return The combined and generated component.
-     */
-    @Override
-    public @NotNull Component generateAfkKickMessage(final @NotNull String date) {
-        return Component.text("")
-                .append(Component.text("You are AFK kicked from this server!\n\n").color(NamedTextColor.GOLD))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date).color(NamedTextColor.WHITE));
-    }
+    @NotNull Component generateKickPermBanMessage(final @NotNull String reason, final @NotNull String date);
 
-    /**
-     * Generates a permanently banned message component with provided arguments.
-     *
-     * @param reason The text to be displayed as the reason.
-     * @param date The text to be displayed as the date.
-     * @return The combined and generated component.
-     */
-    @Override
-    public @NotNull Component generateKickPermBanMessage(final @NotNull String reason, final @NotNull String date) {
-        return Component.text("")
-                .append(Component.text("You are permanently banned from this server!\n\n").color(NamedTextColor.RED))
-                .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
-                .append(Component.text(reason + "\n").color(NamedTextColor.WHITE))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date + "\n").color(NamedTextColor.WHITE));
-    }
+    @NotNull Component generateKickTempBanMessage(final @NotNull String reason, final @NotNull String date, final @NotNull String expires);
 
-    /**
-     * Generates a temporarily banned message component with provided arguments.
-     *
-     * @param reason The text to be displayed as the reason.
-     * @param date The text to be displayed as the date.
-     * @param expires The text to be displayed as the expires date.
-     * @return The combined and generated component.
-     */
-    @Override
-    public @NotNull Component generateKickTempBanMessage(final @NotNull String reason, final @NotNull String date, final @NotNull String expires) {
-        return Component.text("")
-                .append(Component.text("You are temporarily banned until ").color(NamedTextColor.RED))
-                .append(Component.text(expires).color(NamedTextColor.WHITE))
-                .append(Component.text(" from this server!\n\n").color(NamedTextColor.RED))
-                .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
-                .append(Component.text(reason + "\n").color(NamedTextColor.WHITE))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date + "\n").color(NamedTextColor.WHITE));
+    @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName);
 
-    }
-
-    /**
-     * Generates a player termination announcement message component.
-     *
-     * @param targetName The name to be displayed as the target.
-     * @return The combined and generated component.
-     */
-    @Override
-    public @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName) {
-        String output = StringCombiner.combine(plugin.getConfig().getStringList("broadcast-ban-message.termination").toArray(), "\n");
-        output = output.replaceAll("\\[player]", targetName);
-        output = ChatColor.translateAlternateColorCodes('&', output);
-        return output;
-    }
-
-    /**
-     * Generates a player AFK kicked announcement message component.
-     *
-     * @param targetName The name to be displayed as the target.
-     * @return The combined and generated component.
-     */
-    @Override
-    public @NotNull String getAfkKickAnnouncementMessage(final @NotNull String targetName) {
-        String output = StringCombiner.combine(plugin.getConfig().getStringList("broadcast-ban-message.afk-kick").toArray(), "\n");
-        output = output.replaceAll("\\[player]", targetName);
-        output = ChatColor.translateAlternateColorCodes('&', output);
-        return output;
-    }
+    @NotNull String getAfkKickAnnouncementMessage(final @NotNull String targetName);
 }
