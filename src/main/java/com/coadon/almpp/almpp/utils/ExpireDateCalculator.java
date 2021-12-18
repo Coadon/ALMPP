@@ -21,8 +21,13 @@ package com.coadon.almpp.almpp.utils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class ExpireDateCalculator {
+
+    // A pattern used to find any non-digit character(s) in a token.
+    private static final Pattern pattern = Pattern.compile("\\D");
 
     public static Date getExpireDate(final @NotNull String duration) throws MalformedDurationFormatException {
         int seconds = 0;
@@ -81,6 +86,15 @@ public final class ExpireDateCalculator {
                 String slice = token.substring(0, token.length() - 1);
                 try {
                     int provided = Integer.parseInt(slice);
+                    seconds = seconds + provided;
+                } catch (NumberFormatException e) {
+                    throw new MalformedDurationFormatException(e);
+                }
+            } else if (!(pattern.matcher(token).find())) {
+                // There is no time-unit suffix, therefore default to second.
+                // No need to strip the suffix, since there is none.
+                try {
+                    int provided = Integer.parseInt(token);
                     seconds = seconds + provided;
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
