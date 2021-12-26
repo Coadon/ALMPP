@@ -39,16 +39,22 @@ public class Commandwarn extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.length() > 1) {
-            Player player = getPlayer(args.get(0));
-            if (!(player == null)) {
-                player.sendMessage(Component.text("[Warning!] ").color(NamedTextColor.RED).append(Component.text(args.getCombinedFrom(1)).color(NamedTextColor.GOLD)));
-            } else {
-                sender.sendMessage(ChatColor.RED + "Player does not exist or online.");
-            }
-        } else {
+        if (args.length() <= 1) {
+            // Not enough arguments
             throw new InvalidCommandArgumentsException();
         }
+
+        // Get the specified player object
+        Player player = getPlayer(args.get(0));
+        if (player == null) {
+            // Player is null
+            sender.sendMessage(ChatColor.RED + "Player '" + args.get(0) + "'does not exist or online.");
+            return;
+        }
+
+        player.sendMessage(
+                Component.text("[Warning!] ").color(NamedTextColor.RED).append(
+                        Component.text(args.getCombinedFrom(1)).color(NamedTextColor.GOLD)));
     }
 
     @Override

@@ -21,10 +21,9 @@ package com.coadon.almpp.almpp.utils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class ExpireDateCalculator {
+public final class BanDurationInterpreter {
 
     // A pattern used to find any non-digit character(s) in a token.
     private static final Pattern pattern = Pattern.compile("\\D");

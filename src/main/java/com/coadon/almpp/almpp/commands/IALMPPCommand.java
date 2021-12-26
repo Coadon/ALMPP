@@ -27,5 +27,4 @@ public interface IALMPPCommand {
 
     void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable;
 
-    void showError(@NotNull final CommandSender sender, final Throwable throwable);
 }

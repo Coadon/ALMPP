@@ -56,8 +56,7 @@ public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
         } catch (InvalidCommandArgumentsException e) {
             return false;
         } catch (Throwable e) {
-            showError(sender, e);
-            return false;
+            sender.sendMessage(Component.text("An error occurred while performing this command.").color(NamedTextColor.RED));
         }
         return true;
     }
@@ -68,15 +67,6 @@ public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
         return null;
-    }
-
-    @Override
-    public void showError(@NotNull final CommandSender sender, final Throwable throwable) {
-        Component output = Component.text()
-                .append(Component.text("An error occurred while performing this command").color(NamedTextColor.RED))
-                .append(Component.text(throwable != null ? (throwable.getMessage() != null ? ":\n" + throwable.getMessage() : ".") : ".").color(NamedTextColor.RED))
-                .build();
-        sender.sendMessage(output);
     }
 
     protected @Nullable Player getPlayer(final String playerName) {

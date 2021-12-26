@@ -19,7 +19,7 @@
 package com.coadon.almpp.almpp.commands;
 
 import com.coadon.almpp.almpp.ALMPP;
-import com.coadon.almpp.almpp.utils.ExpireDateCalculator;
+import com.coadon.almpp.almpp.utils.BanDurationInterpreter;
 import com.coadon.almpp.almpp.utils.MalformedDurationFormatException;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.ChatColor;
@@ -44,36 +44,33 @@ public class Commandtempban extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.length() == 2) {
-            Player player = getPlayer(args.get(0));
-            if (!(player == null)) {
-                Date expireDate;
-                try {
-                    expireDate = ExpireDateCalculator.getExpireDate(args.get(1));
-                } catch (MalformedDurationFormatException e) {
-                    sender.sendMessage(ChatColor.RED + "Incorrect Argument: Invalid expiration date");
-                    return;
-                }
-                getPunisher().tempBanPlayer(player, plugin.DEFAULT_PUNISH_REASON, sender.getName(), expireDate);
-            } else {
-                sender.sendMessage(ChatColor.RED + "Player does not exist or online.");
-            }
-        } else if (args.length() > 2) {
-            Player player = getPlayer(args.get(0));
-            if (!(player == null)) {
-                Date expireDate;
-                try {
-                    expireDate = ExpireDateCalculator.getExpireDate(args.get(1));
-                } catch (MalformedDurationFormatException e) {
-                    sender.sendMessage(ChatColor.RED + "Incorrect Argument: Invalid expiration date");
-                    return;
-                }
-                getPunisher().tempBanPlayer(player, args.getCombinedFrom(2), sender.getName(), expireDate);
-            } else {
-                sender.sendMessage(ChatColor.RED + "Player does not exist or online.");
-            }
-        } else {
+        if (args.length() < 2) {
+            // Not enough arguments
             throw new InvalidCommandArgumentsException();
+        }
+
+        // Get the specified player object
+        Player player = getPlayer(args.get(0));
+        if (player == null) {
+            // Player is null
+            sender.sendMessage(ChatColor.RED + "Player '" + args.get(0) + "' does not exist or online.");
+            return;
+        }
+
+        // Interprets the ban duration
+        Date expireDate;
+        try {
+            expireDate = BanDurationInterpreter.getExpireDate(args.get(1));
+        } catch (MalformedDurationFormatException e) {
+            // Malformed ban duration
+            sender.sendMessage(ChatColor.RED + "Error: Invalid ban duration");
+            return;
+        }
+
+        if (args.length() == 2) {
+            getPunisher().tempBanPlayer(player, plugin.DEFAULT_PUNISH_REASON, sender.getName(), expireDate);
+        } else if (args.length() > 2) {
+            getPunisher().tempBanPlayer(player, args.getCombinedFrom(2), sender.getName(), expireDate);
         }
     }
 

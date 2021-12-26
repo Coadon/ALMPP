@@ -37,23 +37,23 @@ public class Commandban extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.length() == 1) {
-            Player player = getPlayer(args.get(0));
-            if (!(player == null)) {
-                getPunisher().permBanPlayer(player, plugin.DEFAULT_PUNISH_REASON, sender.getName());
-            } else {
-                sender.sendMessage(ChatColor.RED + "Player does not exist or online.");
-            }
-        } else if (args.length() > 1) {
-            Player player = getPlayer(args.get(0));
-            if (!(player == null)) {
-                getPunisher().permBanPlayer(
-                        player, args.getCombinedFrom(1), sender.getName());
-            } else {
-                sender.sendMessage(ChatColor.RED + "Player does not exist or online.");
-            }
-        } else {
+        if (args.length() < 1) {
+            // Not enough arguments
             throw new InvalidCommandArgumentsException();
+        }
+
+        // Get the specified player object
+        Player player = getPlayer(args.get(0));
+        if (player == null) {
+            // Player is null
+            sender.sendMessage(ChatColor.RED + "Player '" + args.get(0) + "'does not exist or online.");
+            return;
+        }
+
+        if (args.length() == 1) {
+            getPunisher().permBanPlayer(player, plugin.DEFAULT_PUNISH_REASON, sender.getName());
+        } else if (args.length() > 1) {
+            getPunisher().permBanPlayer(player, args.getCombinedFrom(1), sender.getName());
         }
     }
 
