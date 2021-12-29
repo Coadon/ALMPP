@@ -28,6 +28,14 @@ public final class BanDurationInterpreter {
     // A pattern used to find any non-digit character(s) in a token.
     private static final Pattern pattern = Pattern.compile("\\D");
 
+    /**
+     * Converts a ban duration string into a date object.
+     * Used in temporary punish.
+     *
+     * @param duration the ban duration string
+     * @return the converted date object
+     * @throws MalformedDurationFormatException if the duration is malformed
+     */
     public static Date getExpireDate(final @NotNull String duration) throws MalformedDurationFormatException {
         int seconds = 0;
         String[] tokens = duration.split(",");

@@ -35,9 +35,9 @@ public final class ComponentProviderImpl implements ComponentProvider {
     /**
      * Generates a kick message component with provided arguments.
      *
-     * @param reason The text to be displayed as the reason.
-     * @param date The text to be displayed as the date.
-     * @return The combined and generated component.
+     * @param reason the text to be displayed as the reason
+     * @param date the text to be displayed as the date
+     * @return the combined and generated component
      */
     @Override
     public @NotNull Component generateKickMessage(final @NotNull String reason, final @NotNull String date) {
@@ -52,8 +52,8 @@ public final class ComponentProviderImpl implements ComponentProvider {
     /**
      * Generates an AFK kick message component with provided arguments.
      *
-     * @param date The text to be displayed as the date.
-     * @return The combined and generated component.
+     * @param date the text to be displayed as the date
+     * @return the combined and generated component
      */
     @Override
     public @NotNull Component generateAfkKickMessage(final @NotNull String date) {
@@ -66,9 +66,9 @@ public final class ComponentProviderImpl implements ComponentProvider {
     /**
      * Generates a permanently banned message component with provided arguments.
      *
-     * @param reason The text to be displayed as the reason.
-     * @param date The text to be displayed as the date.
-     * @return The combined and generated component.
+     * @param reason the text to be displayed as the reason
+     * @param date the text to be displayed as the date
+     * @return the combined and generated component
      */
     @Override
     public @NotNull Component generateKickPermBanMessage(final @NotNull String reason, final @NotNull String date) {
@@ -83,10 +83,10 @@ public final class ComponentProviderImpl implements ComponentProvider {
     /**
      * Generates a temporarily banned message component with provided arguments.
      *
-     * @param reason The text to be displayed as the reason.
-     * @param date The text to be displayed as the date.
-     * @param expires The text to be displayed as the expires date.
-     * @return The combined and generated component.
+     * @param reason the text to be displayed as the reason
+     * @param date the text to be displayed as the date
+     * @param expires the text to be displayed as the expires date
+     * @return the combined and generated component
      */
     @Override
     public @NotNull Component generateKickTempBanMessage(final @NotNull String reason, final @NotNull String date, final @NotNull String expires) {
@@ -104,8 +104,8 @@ public final class ComponentProviderImpl implements ComponentProvider {
     /**
      * Generates a player termination announcement message component.
      *
-     * @param targetName The name to be displayed as the target.
-     * @return The combined and generated component.
+     * @param targetName the name to be displayed as the target
+     * @return the combined and generated component
      */
     @Override
     public @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName) {
@@ -118,8 +118,8 @@ public final class ComponentProviderImpl implements ComponentProvider {
     /**
      * Generates a player AFK kicked announcement message component.
      *
-     * @param targetName The name to be displayed as the target.
-     * @return The combined and generated component.
+     * @param targetName the name to be displayed as the target
+     * @return the combined and generated component
      */
     @Override
     public @NotNull String getAfkKickAnnouncementMessage(final @NotNull String targetName) {

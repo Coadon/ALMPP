@@ -39,8 +39,8 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
     /**
      * Kicks a player out of the server.
      *
-     * @param player The player to be punished.
-     * @param reason The reason to be punished.
+     * @param player the player to be punished
+     * @param reason the reason to be punished
      */
     @Override
     public void kickPlayer(final @NotNull Player player, final @NotNull String reason) {
@@ -52,7 +52,7 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
     /**
      * AFK Kicks a player out of the server.
      *
-     * @param player The player to be punished.
+     * @param player the player to be punished
      */
     @Override
     public void afkKickPlayer(final @NotNull Player player) {
@@ -62,11 +62,11 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
     }
 
     /**
-     * Permanently bans a player out of the server.
+     * Permanently bans a player out of the server
      *
-     * @param player The player to be punished.
-     * @param reason The reason to be punished.
-     * @param source The operator.
+     * @param player the player to be punished
+     * @param reason the reason to be punished
+     * @param source the operator
      */
     @Override
     public void permBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source) {
@@ -79,10 +79,10 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
     /**
      * Temporarily bans a player out of the server.
      *
-     * @param player The player to be punished.
-     * @param reason The reason to be punished.
-     * @param source The executor.
-     * @param expires The expiration date.
+     * @param player the player to be punished
+     * @param reason the reason to be punished
+     * @param source the operator
+     * @param expires the expiration date
      */
     @Override
     public void tempBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source, final @NotNull Date expires) {
@@ -93,9 +93,9 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
     }
 
     /**
-     * Kicks all online players out of the server
+     * Kicks all online players out of the server.
      *
-     * @param reason The reason to be punished.
+     * @param reason the reason to be punished
      */
     @Override
     public void kickAllPlayer(final @NotNull String reason) {
@@ -106,6 +106,8 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
 
     /**
      * Broadcast the server a player is terminated, only if BroadcastBan is enabled.
+     *
+     * @param target the player to broadcast
      */
     private void broadcastBan(Player target) {
         if (plugin.willBroadcastBan()) {
@@ -117,6 +119,8 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
 
     /**
      * Broadcast the server a player is afk kicked, only if BroadcastBan is enabled.
+     *
+     * @param target the player to broadcast
      */
     private void broadcastAfk(Player target) {
         if (plugin.willBroadcastBan()) {
