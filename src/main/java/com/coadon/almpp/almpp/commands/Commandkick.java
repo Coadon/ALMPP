@@ -62,6 +62,9 @@ public class Commandkick extends ALMPPCommand {
         if (args.length == 1)
             return getListOfOnlinePlayers();
 
+        if (args.length == 2)
+            return cfg.getCommonPunishReasons();
+
         return null;
     }
 }

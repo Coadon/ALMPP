@@ -27,3 +27,12 @@ broadcast-ban-message:
   # The message that will be sent when a player is kicked with /afkkick
   afk-kick:
     - "&ePlayer [player] has been AFK-kicked from this server."
+
+# Common punish reasons
+# Make a list of your commonly used punishment reasons.
+# These reasons will be displayed as tab completion when specifying a reason in a command.
+common-punish-reasons:
+  - "CHEAT DETECTION."
+  - "Spamming in chat."
+  - "Bullying players."
+  - "Abusing server exploits."

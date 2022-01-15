@@ -82,6 +82,9 @@ public class Commandtempban extends ALMPPCommand {
         if (args.length == 2)
             return COMMON_DURATIONS;
 
+        if (args.length == 3)
+            return cfg.getCommonPunishReasons();
+
         return null;
     }
 }
