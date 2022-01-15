@@ -32,8 +32,4 @@ public interface IALMPP {
     ComponentProvider getFormatter();
 
     PunishmentExecutor getPunisher();
-
-    boolean willBroadcastBan();
-
-    void setWillBroadcastBan(boolean bool);
 }

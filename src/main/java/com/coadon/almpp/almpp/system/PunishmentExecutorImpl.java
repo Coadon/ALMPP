@@ -110,11 +110,9 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
      * @param target the player to broadcast
      */
     private void broadcastBan(Player target) {
-        if (plugin.willBroadcastBan()) {
-            plugin.getServer().getOnlinePlayers().forEach(
-                    player -> player.sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()))
-            );
-        }
+        plugin.getServer().getOnlinePlayers().forEach(
+                player -> player.sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()))
+        );
     }
 
     /**
@@ -123,10 +121,8 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
      * @param target the player to broadcast
      */
     private void broadcastAfk(Player target) {
-        if (plugin.willBroadcastBan()) {
-            plugin.getServer().getOnlinePlayers().forEach(
-                    player -> player.sendMessage(formatter.getAfkKickAnnouncementMessage(target.getName()))
-            );
-        }
+        plugin.getServer().getOnlinePlayers().forEach(
+                player -> player.sendMessage(formatter.getAfkKickAnnouncementMessage(target.getName()))
+        );
     }
 }

@@ -9,12 +9,6 @@
 # When a player got punished without specifying a reason, this reason will be used.
 default-punish-reason: "The Ban Hammer had spoken."
 
-# Will broadcast punishment by default.
-# When a player got punished, a broadcast will be made for all online players.
-# This feature is toggleable in game by players with permission "almpp.brdcstban" using the /brdcstban command.
-# This option determines weather or not this feature is automatically enabled or disable upon plugin restart or start.
-will-broadcast-ban-by-default: true
-
 # Broadcast ban messages
 # When a player got punished, a broadcast will be made for all online players.
 # The below options determines the broadcast message.

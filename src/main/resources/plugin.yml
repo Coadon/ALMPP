@@ -41,11 +41,6 @@ commands:
     permission: almpp.notice
     aliases: [ note, infop, ntice, nt ]
     usage: /<command> <player> <message>
-  brdcstban:
-    description: Toggle weather to broadcast when a player gets terminated or afk kicked.
-    permission: almpp.brdcstban
-    aliases: [ broadcastban, bcb ]
-    usage: /<command> [on|off]
   almpp:
     description: Displays information about this plugin.
     permission: almpp.plugininfo
@@ -62,7 +57,7 @@ permissions:
       almpp.afkkick: true
       almpp.warn: true
       almpp.notice: true
-      almpp.brdcstban: true
+      almpp.plugininfo: true
   almpp.ban:
     description: Permission to use the /ban command.
   almpp.tempban:
@@ -77,7 +72,5 @@ permissions:
     description: Permission to use the /warn command.
   almpp.notice:
     description: Permission to use the /notice command.
-  almpp.brdcstban:
-    description: Permission to use the /brdcstban command.
   almpp.plugininfo:
     description: Permission to use the /almpp command.

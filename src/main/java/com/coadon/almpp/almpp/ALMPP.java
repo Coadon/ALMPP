@@ -34,17 +34,17 @@ import java.util.Objects;
 
 public final class ALMPP extends JavaPlugin implements IALMPP{
     private final Logger logger = getSLF4JLogger();
+    public final String VERSION = getDescription().getVersion();
 
     public final String DEFAULT_PUNISH_REASON = getConfig().getString("default-punish-reason");
-    private boolean willBroadcastBan = getConfig().getBoolean("will-broadcast-ban-by-default");
 
     private final ComponentProvider componentGenerator = new ComponentProviderImpl(this);
     private final PunishmentExecutor punishmentExecutor = new PunishmentExecutorImpl(this);
 
     @Override
     public void onEnable() {
-        logger.info("Advanced Lightweight Minecraft Punish Plugin");
-        logger.info("Version ALMPP " + getDescription().getVersion());
+        logger.info("Advanced Lightweight Minecraft Punishment Plugin");
+        logger.info("Version ALMPP " + VERSION);
 
         // Save config
         saveDefaultConfig();
@@ -65,7 +65,6 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
         registerCommand("afkkick", new Commandafkkick(this));
         registerCommand("warn", new Commandwarn(this));
         registerCommand("notice", new Commandnotice(this));
-        registerCommand("brdcstban", new Commandbrdcstban(this));
         registerCommand("tempban", new Commandtempban(this));
         registerCommand("almpp", new Commandalmpp(this));
 
@@ -75,8 +74,12 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
 
     @Override
     public void registerCommand(String commandLabel, TabExecutor commandExe) {
-        Objects.requireNonNull(getCommand(commandLabel)).setExecutor(commandExe);
-        Objects.requireNonNull(getCommand(commandLabel)).setTabCompleter(commandExe);
+        try {
+            Objects.requireNonNull(getCommand(commandLabel)).setExecutor(commandExe);
+            Objects.requireNonNull(getCommand(commandLabel)).setTabCompleter(commandExe);
+        } catch (NullPointerException e) {
+            logger.error("Command '" + commandLabel + "' failed to load properly.");
+        }
     }
 
     @Override
@@ -92,15 +95,5 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
     @Override
     public PunishmentExecutor getPunisher() {
         return punishmentExecutor;
-    }
-
-    @Override
-    public boolean willBroadcastBan() {
-        return willBroadcastBan;
-    }
-
-    @Override
-    public void setWillBroadcastBan(boolean bool) {
-        this.willBroadcastBan = bool;
     }
 }
