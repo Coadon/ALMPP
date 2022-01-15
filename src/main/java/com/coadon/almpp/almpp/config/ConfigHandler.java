@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.system;
+package com.coadon.almpp.almpp.config;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -27,6 +27,8 @@ public interface ConfigHandler {
     @NotNull String getDefaultPunishReason();
 
     @NotNull List<String> getTerminationMessage();
+
+    @NotNull List<String> getRemovalMessage();
 
     @NotNull List<String> getAfkKickMessage();
 }

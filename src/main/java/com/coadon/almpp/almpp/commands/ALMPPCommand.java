@@ -20,7 +20,7 @@ package com.coadon.almpp.almpp.commands;
 
 import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.system.ComponentProvider;
-import com.coadon.almpp.almpp.system.ConfigHandler;
+import com.coadon.almpp.almpp.config.ConfigHandler;
 import com.coadon.almpp.almpp.system.PunishmentExecutor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;

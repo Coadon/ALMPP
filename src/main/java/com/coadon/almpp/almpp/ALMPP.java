@@ -19,6 +19,8 @@
 package com.coadon.almpp.almpp;
 
 import com.coadon.almpp.almpp.commands.*;
+import com.coadon.almpp.almpp.config.ConfigHandler;
+import com.coadon.almpp.almpp.config.ConfigHandlerImpl;
 import com.coadon.almpp.almpp.listeners.PlayerLoginListeners;
 import com.coadon.almpp.almpp.system.*;
 import org.bukkit.Bukkit;

@@ -44,7 +44,7 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
      */
     @Override
     public void kickPlayer(final @NotNull Player player, final @NotNull String reason) {
-        broadcastBan(player);
+        broadcastKick(player);
         player.kick(formatter.generateKickMessage(reason, new Date().toString()));
         logger.info("Kicked " + player.getName() + " from the server");
     }
@@ -105,7 +105,7 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
     }
 
     /**
-     * Broadcast the server a player is terminated, only if BroadcastBan is enabled.
+     * Broadcast the server a player is terminated.
      *
      * @param target the player to broadcast
      */
@@ -116,7 +116,18 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
     }
 
     /**
-     * Broadcast the server a player is afk kicked, only if BroadcastBan is enabled.
+     * Broadcast the server a player is removed.
+     *
+     * @param target the player to broadcast
+     */
+    private void broadcastKick(Player target) {
+        plugin.getServer().getOnlinePlayers().forEach(
+                player -> player.sendMessage(formatter.getRemovalAnnouncementMessage(target.getName()))
+        );
+    }
+
+    /**
+     * Broadcast the server a player is afk kicked.
      *
      * @param target the player to broadcast
      */

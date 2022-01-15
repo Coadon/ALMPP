@@ -19,7 +19,7 @@
 package com.coadon.almpp.almpp;
 
 import com.coadon.almpp.almpp.system.ComponentProvider;
-import com.coadon.almpp.almpp.system.ConfigHandler;
+import com.coadon.almpp.almpp.config.ConfigHandler;
 import com.coadon.almpp.almpp.system.PunishmentExecutor;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;

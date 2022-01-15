@@ -14,10 +14,16 @@ default-punish-reason: "The Ban Hammer had spoken."
 # Broadcast ban messages
 # When a player got punished, a broadcast will be made for all online players. The below options determines the broadcast message.
 # You can use color codes with the prefix "&".
-# termination - the message that will be sent when a player is punished with /ban /tempban or /kick
-# afk-kick - the message that will be sent when a player is kicked with /afkkick
 broadcast-ban-message:
+
+  # The message that will be sent when a player is punished with /ban or /tempban
   termination:
-    - "&l&cPlayer [player] has been terminated from this server due to hacking, griefing, spamming, or abuse."
+    - "&l&cPlayer [player] has been terminated from this server."
+
+  # The message that will be sent when a player is kicked with /kick
+  removal:
+    - "&l&cPlayer [player] has been removed from this server."
+
+  # The message that will be sent when a player is kicked with /afkkick
   afk-kick:
     - "&ePlayer [player] has been AFK-kicked from this server."

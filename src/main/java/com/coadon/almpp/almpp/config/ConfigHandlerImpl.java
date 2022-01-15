@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.system;
+package com.coadon.almpp.almpp.config;
 
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -29,11 +29,13 @@ import java.util.Objects;
 public class ConfigHandlerImpl implements ConfigHandler {
     private final @NotNull String DEFAULT_PUNISH_REASON;
     private final @NotNull List<String> TERMINATION_BROADCAST_MSG;
+    private final @NotNull List<String> REMOVAL_BROADCAST_MSG;
     private final @NotNull List<String> AFKKICK_BROADCAST_MSG;
 
     public ConfigHandlerImpl(FileConfiguration cfg, Logger logger) {
         this.DEFAULT_PUNISH_REASON = cfg.getString("default-punish-reason") == null ? noNull(getDefaults(cfg).getString("default-punish-reason")) : "";
         this.TERMINATION_BROADCAST_MSG = cfg.getStringList("broadcast-ban-message.termination");
+        this.REMOVAL_BROADCAST_MSG = cfg.getStringList("broadcast-ban-message.removal");
         this.AFKKICK_BROADCAST_MSG = cfg.getStringList("broadcast-ban-message.afk-kick");
     }
 
@@ -45,6 +47,11 @@ public class ConfigHandlerImpl implements ConfigHandler {
     @Override
     public @NotNull List<String> getTerminationMessage() {
         return TERMINATION_BROADCAST_MSG;
+    }
+
+    @Override
+    public @NotNull List<String> getRemovalMessage() {
+        return REMOVAL_BROADCAST_MSG;
     }
 
     @Override

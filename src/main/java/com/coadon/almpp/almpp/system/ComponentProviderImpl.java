@@ -19,6 +19,7 @@
 package com.coadon.almpp.almpp.system;
 
 import com.coadon.almpp.almpp.ALMPP;
+import com.coadon.almpp.almpp.config.ConfigHandler;
 import com.coadon.almpp.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -110,6 +111,20 @@ public final class ComponentProviderImpl implements ComponentProvider {
     @Override
     public @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName) {
         String output = StringCombiner.combine(cfg.getTerminationMessage().toArray(), "\n");
+        output = output.replaceAll("\\[player]", targetName);
+        output = ChatColor.translateAlternateColorCodes('&', output);
+        return output;
+    }
+
+    /**
+     * Generates a player removal announcement message component.
+     *
+     * @param targetName the name to be displayed as the target
+     * @return the combined and generated component
+     */
+    @Override
+    public @NotNull String getRemovalAnnouncementMessage(final @NotNull String targetName) {
+        String output = StringCombiner.combine(cfg.getRemovalMessage().toArray(), "\n");
         output = output.replaceAll("\\[player]", targetName);
         output = ChatColor.translateAlternateColorCodes('&', output);
         return output;

@@ -33,5 +33,7 @@ public interface ComponentProvider {
 
     @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName);
 
+    @NotNull String getRemovalAnnouncementMessage(final @NotNull String targetName);
+
     @NotNull String getAfkKickAnnouncementMessage(final @NotNull String targetName);
 }

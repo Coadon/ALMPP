@@ -20,7 +20,7 @@ package com.coadon.almpp.almpp.listeners;
 
 import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.system.ComponentProvider;
-import com.coadon.almpp.almpp.system.ConfigHandler;
+import com.coadon.almpp.almpp.config.ConfigHandler;
 import com.coadon.almpp.almpp.system.PunishmentExecutor;
 import org.bukkit.BanList;
 import org.bukkit.Server;
