@@ -34,7 +34,7 @@ public class ConfigHandlerImpl implements ConfigHandler {
     private final @NotNull List<String> COMMON_PUNISH_REASONS;
 
     public ConfigHandlerImpl(FileConfiguration cfg, Logger logger) {
-        this.DEFAULT_PUNISH_REASON = cfg.getString("default-punish-reason") == null ? noNull(getDefaults(cfg).getString("default-punish-reason")) : "";
+        this.DEFAULT_PUNISH_REASON = !cfg.contains("default-punish-reason", true) ? noNull(getDefaults(cfg).getString("default-punish-reason")) : noNull(cfg.getString("default-punish-reason"));
         this.TERMINATION_BROADCAST_MSG = cfg.getStringList("broadcast-ban-message.termination");
         this.REMOVAL_BROADCAST_MSG = cfg.getStringList("broadcast-ban-message.removal");
         this.AFKKICK_BROADCAST_MSG = cfg.getStringList("broadcast-ban-message.afk-kick");

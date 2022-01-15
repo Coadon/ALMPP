@@ -19,6 +19,7 @@
 package com.coadon.almpp.almpp.system;
 
 import com.coadon.almpp.almpp.ALMPP;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -113,6 +114,7 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()))
         );
+        Bukkit.getConsoleSender().sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()));
     }
 
     /**
@@ -124,6 +126,7 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.sendMessage(formatter.getRemovalAnnouncementMessage(target.getName()))
         );
+        Bukkit.getConsoleSender().sendMessage(formatter.getRemovalAnnouncementMessage(target.getName()));
     }
 
     /**
@@ -135,5 +138,6 @@ public final class PunishmentExecutorImpl implements PunishmentExecutor {
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.sendMessage(formatter.getAfkKickAnnouncementMessage(target.getName()))
         );
+        Bukkit.getConsoleSender().sendMessage(formatter.getAfkKickAnnouncementMessage(target.getName()));
     }
 }

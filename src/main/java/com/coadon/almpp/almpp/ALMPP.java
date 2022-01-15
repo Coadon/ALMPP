@@ -36,8 +36,8 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
     private final String VERSION = getDescription().getVersion();
 
     private ConfigHandler configHandler;
-    private final ComponentProvider componentGenerator = new ComponentProviderImpl(this);
-    private final PunishmentExecutor punishmentExecutor = new PunishmentExecutorImpl(this);
+    private ComponentProvider componentGenerator;
+    private PunishmentExecutor punishmentExecutor;
 
     @Override
     public void onEnable() {
@@ -46,7 +46,10 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
 
         // Save config
         saveDefaultConfig();
+
         configHandler = new ConfigHandlerImpl(getConfig(), logger);
+        componentGenerator = new ComponentProviderImpl(this);
+        punishmentExecutor = new PunishmentExecutorImpl(this);
 
         registerAllCommandsAndListeners();
     }

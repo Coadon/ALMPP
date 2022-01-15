@@ -32,7 +32,7 @@ broadcast-ban-message:
 # Make a list of your commonly used punishment reasons.
 # These reasons will be displayed as tab completion when specifying a reason in a command.
 common-punish-reasons:
-  - "CHEAT DETECTION."
+  - "Cheat Detection."
   - "Spamming in chat."
   - "Bullying players."
   - "Abusing server exploits."
