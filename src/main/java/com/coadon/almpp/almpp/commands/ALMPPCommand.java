@@ -20,6 +20,7 @@ package com.coadon.almpp.almpp.commands;
 
 import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.system.ComponentProvider;
+import com.coadon.almpp.almpp.system.ConfigHandler;
 import com.coadon.almpp.almpp.system.PunishmentExecutor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -43,10 +44,12 @@ import java.util.stream.Collectors;
 public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
     protected final ALMPP plugin;
     protected final Logger logger;
+    protected final ConfigHandler cfg;
 
     public ALMPPCommand(ALMPP plugin) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
+        this.cfg = plugin.getConfigHandler();
     }
 
     @Override

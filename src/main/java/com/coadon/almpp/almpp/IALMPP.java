@@ -19,6 +19,7 @@
 package com.coadon.almpp.almpp;
 
 import com.coadon.almpp.almpp.system.ComponentProvider;
+import com.coadon.almpp.almpp.system.ConfigHandler;
 import com.coadon.almpp.almpp.system.PunishmentExecutor;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
@@ -32,4 +33,10 @@ public interface IALMPP {
     ComponentProvider getFormatter();
 
     PunishmentExecutor getPunisher();
+
+    ConfigHandler getConfigHandler();
+
+    String getVersion();
+
+    void terminate();
 }

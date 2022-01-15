@@ -43,13 +43,14 @@ public class PlayerLoginListeners extends PluginEventListener {
 
             String banReason;
             if (entry.getReason() == null) {
-                banReason = plugin.DEFAULT_PUNISH_REASON;
+                banReason = cfg.getDefaultPunishReason();
                 // This condition is currently impossible to be met because the ban reason is automatically set,
                 // only in situation when the ban is triggered by vanilla Minecraft or other plugin(s).
                 // We will be working on a feature that supports no reason punishment.
             } else {
                 banReason = entry.getReason();
             }
+
             if (entry.getExpiration() == null) {
                 event.disallow(PlayerLoginEvent.Result.KICK_BANNED, plugin.getFormatter().generateKickPermBanMessage(
                         banReason, entry.getCreated().toString()));

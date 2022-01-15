@@ -26,10 +26,10 @@ import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
 
 public final class ComponentProviderImpl implements ComponentProvider {
-    private final ALMPP plugin;
+    private final ConfigHandler cfg;
 
     public ComponentProviderImpl(ALMPP plugin) {
-        this.plugin = plugin;
+        this.cfg = plugin.getConfigHandler();
     }
 
     /**
@@ -109,7 +109,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      */
     @Override
     public @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName) {
-        String output = StringCombiner.combine(plugin.getConfig().getStringList("broadcast-ban-message.termination").toArray(), "\n");
+        String output = StringCombiner.combine(cfg.getTerminationMessage().toArray(), "\n");
         output = output.replaceAll("\\[player]", targetName);
         output = ChatColor.translateAlternateColorCodes('&', output);
         return output;
@@ -123,7 +123,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      */
     @Override
     public @NotNull String getAfkKickAnnouncementMessage(final @NotNull String targetName) {
-        String output = StringCombiner.combine(plugin.getConfig().getStringList("broadcast-ban-message.afk-kick").toArray(), "\n");
+        String output = StringCombiner.combine(cfg.getAfkKickMessage().toArray(), "\n");
         output = output.replaceAll("\\[player]", targetName);
         output = ChatColor.translateAlternateColorCodes('&', output);
         return output;

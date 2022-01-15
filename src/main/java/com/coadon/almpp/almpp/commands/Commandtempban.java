@@ -68,7 +68,7 @@ public class Commandtempban extends ALMPPCommand {
         }
 
         if (args.length() == 2) {
-            getPunisher().tempBanPlayer(player, plugin.DEFAULT_PUNISH_REASON, sender.getName(), expireDate);
+            getPunisher().tempBanPlayer(player, cfg.getDefaultPunishReason(), sender.getName(), expireDate);
         } else if (args.length() > 2) {
             getPunisher().tempBanPlayer(player, args.getCombinedFrom(2), sender.getName(), expireDate);
         }

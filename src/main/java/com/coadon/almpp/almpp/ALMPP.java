@@ -20,10 +20,7 @@ package com.coadon.almpp.almpp;
 
 import com.coadon.almpp.almpp.commands.*;
 import com.coadon.almpp.almpp.listeners.PlayerLoginListeners;
-import com.coadon.almpp.almpp.system.ComponentProviderImpl;
-import com.coadon.almpp.almpp.system.ComponentProvider;
-import com.coadon.almpp.almpp.system.PunishmentExecutor;
-import com.coadon.almpp.almpp.system.PunishmentExecutorImpl;
+import com.coadon.almpp.almpp.system.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
@@ -34,10 +31,9 @@ import java.util.Objects;
 
 public final class ALMPP extends JavaPlugin implements IALMPP{
     private final Logger logger = getSLF4JLogger();
-    public final String VERSION = getDescription().getVersion();
+    private final String VERSION = getDescription().getVersion();
 
-    public final String DEFAULT_PUNISH_REASON = getConfig().getString("default-punish-reason");
-
+    private ConfigHandler configHandler;
     private final ComponentProvider componentGenerator = new ComponentProviderImpl(this);
     private final PunishmentExecutor punishmentExecutor = new PunishmentExecutorImpl(this);
 
@@ -48,13 +44,14 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
 
         // Save config
         saveDefaultConfig();
+        configHandler = new ConfigHandlerImpl(getConfig(), logger);
 
         registerAllCommandsAndListeners();
     }
 
     @Override
     public void onDisable() {
-
+        logger.info("Goodbye!");
     }
 
     private void registerAllCommandsAndListeners() {
@@ -95,5 +92,22 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
     @Override
     public PunishmentExecutor getPunisher() {
         return punishmentExecutor;
+    }
+
+    @Override
+    public ConfigHandler getConfigHandler() {
+        return configHandler;
+    }
+
+    @Override
+    public String getVersion() {
+        return VERSION;
+    }
+
+    @Override
+    public void terminate() {
+        logger.info("ALMPP has been issued to be terminated.");
+        logger.info("Self destructing.");
+        Bukkit.getPluginManager().disablePlugin(this);
     }
 }

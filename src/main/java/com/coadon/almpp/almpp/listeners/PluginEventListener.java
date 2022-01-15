@@ -20,18 +20,17 @@ package com.coadon.almpp.almpp.listeners;
 
 import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.system.ComponentProvider;
+import com.coadon.almpp.almpp.system.ConfigHandler;
 import com.coadon.almpp.almpp.system.PunishmentExecutor;
 import org.bukkit.BanList;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -39,10 +38,12 @@ import java.util.UUID;
 public abstract class PluginEventListener implements Listener {
     protected final ALMPP plugin;
     protected final Logger logger;
+    protected final ConfigHandler cfg;
 
     public PluginEventListener(ALMPP plugin) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
+        this.cfg = plugin.getConfigHandler();
     }
 
     public void registerItself() {
@@ -102,19 +103,5 @@ public abstract class PluginEventListener implements Listener {
      */
     protected BanList getBanList() {
         return plugin.getServer().getBanList(BanList.Type.NAME);
-    }
-
-    /**
-     * Lists all plugin names.
-     *
-     * @param server Server instance
-     * @return List of plugin names
-     */
-    protected final List<String> getPlugins(final Server server) {
-        final List<String> plugins = new ArrayList<>();
-        for (final Plugin p : server.getPluginManager().getPlugins()) {
-            plugins.add(p.getName());
-        }
-        return plugins;
     }
 }
