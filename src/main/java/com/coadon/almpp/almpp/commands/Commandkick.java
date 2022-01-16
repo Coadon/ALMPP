@@ -46,7 +46,7 @@ public class Commandkick extends ALMPPCommand {
         Player player = getPlayer(args.get(0));
         if (player == null) {
             // Player is null
-            sender.sendMessage(ChatColor.RED + "Player '" + args.get(0) + "'does not exist or online.");
+            sender.sendMessage(ChatColor.RED + "Player '" + args.get(0) + "' does not exist or online.");
             return;
         }
 
