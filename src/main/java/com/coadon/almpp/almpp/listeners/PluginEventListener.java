@@ -46,10 +46,6 @@ public abstract class PluginEventListener implements Listener {
         this.cfg = plugin.getConfigHandler();
     }
 
-    public void registerItself() {
-        plugin.registerListeners(this);
-    }
-
     protected @Nullable Player getPlayer(final String playerName) {
         return plugin.getServer().getPlayer(playerName);
     }
