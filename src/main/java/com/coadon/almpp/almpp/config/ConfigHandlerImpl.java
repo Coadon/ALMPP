@@ -18,66 +18,49 @@
 
 package com.coadon.almpp.almpp.config;
 
-import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ConfigHandlerImpl implements ConfigHandler {
-    private final @NotNull String DEFAULT_PUNISH_REASON;
-    private final @NotNull List<String> TERMINATION_BROADCAST_MSG;
-    private final @NotNull List<String> REMOVAL_BROADCAST_MSG;
-    private final @NotNull List<String> AFKKICK_BROADCAST_MSG;
-    private final @NotNull List<String> COMMON_PUNISH_REASONS;
+    private final String defaultPunishReason;
+    private final List<String> terminationBroadcastMsg;
+    private final List<String> removalBroadcastMsg;
+    private final List<String> afkkickBroadcastMsg;
+    private final List<String> commonPunishReasons;
 
     public ConfigHandlerImpl(FileConfiguration cfg, Logger logger) {
-        this.DEFAULT_PUNISH_REASON = !cfg.contains("default-punish-reason", true) ? noNull(getDefaults(cfg).getString("default-punish-reason")) : noNull(cfg.getString("default-punish-reason"));
-        this.TERMINATION_BROADCAST_MSG = cfg.getStringList("broadcast-ban-message.termination");
-        this.REMOVAL_BROADCAST_MSG = cfg.getStringList("broadcast-ban-message.removal");
-        this.AFKKICK_BROADCAST_MSG = cfg.getStringList("broadcast-ban-message.afk-kick");
-        this.COMMON_PUNISH_REASONS = cfg.getStringList("common-punish-reasons");
+        this.defaultPunishReason = cfg.getString("default-punish-reason");
+        this.terminationBroadcastMsg = cfg.getStringList("broadcast-ban-message.termination");
+        this.removalBroadcastMsg = cfg.getStringList("broadcast-ban-message.removal");
+        this.afkkickBroadcastMsg = cfg.getStringList("broadcast-ban-message.afk-kick");
+        this.commonPunishReasons = cfg.getStringList("common-punish-reasons");
     }
 
     @Override
     public @NotNull String getDefaultPunishReason() {
-        return DEFAULT_PUNISH_REASON;
+        return defaultPunishReason;
     }
 
     @Override
     public @NotNull List<String> getTerminationMessage() {
-        return TERMINATION_BROADCAST_MSG;
+        return terminationBroadcastMsg;
     }
 
     @Override
     public @NotNull List<String> getRemovalMessage() {
-        return REMOVAL_BROADCAST_MSG;
+        return removalBroadcastMsg;
     }
 
     @Override
     public @NotNull List<String> getAfkKickMessage() {
-        return AFKKICK_BROADCAST_MSG;
+        return afkkickBroadcastMsg;
     }
 
     @Override
     public @NotNull List<String> getCommonPunishReasons() {
-        return COMMON_PUNISH_REASONS;
-    }
-
-    private Configuration getDefaults(FileConfiguration cfg) {
-        return noNull(cfg.getDefaults());
-    }
-
-    /**
-     * A shorter and more convenient way of doing Objects.requireNonNull();
-     *
-     * @param obj the object reference to check for nullity
-     * @return obj if not null
-     * @throws NullPointerException – if obj is null
-     */
-    private <T> T noNull(T obj) {
-        return Objects.requireNonNull(obj);
+        return commonPunishReasons;
     }
 }
