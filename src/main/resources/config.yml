@@ -11,7 +11,7 @@
 # When a player got punished without specifying a reason, this reason will be used.
 default-punish-reason: "The Ban Hammer had spoken."
 
-# Broadcast ban messages
+# Broadcast ban messages.
 # When a player got punished, a broadcast will be made for all online players. The below options determines the broadcast message.
 # You can use color codes with the prefix "&".
 broadcast-ban-message:
@@ -28,11 +28,18 @@ broadcast-ban-message:
   afk-kick:
     - "&ePlayer [player] has been AFK-kicked from this server."
 
-# Common punish reasons
+# Common punish reasons.
 # Make a list of your commonly used punishment reasons.
 # These reasons will be displayed as tab completion when specifying a reason in a command.
+# The default entries is commented out, if you want to use this feature, please uncomment it.
 common-punish-reasons:
-  - "Cheat Detection."
-  - "Spamming in chat."
-  - "Bullying players."
-  - "Abusing server exploits."
+  #- "Cheat Detection."
+  #- "Spamming in chat."
+  #- "Bullying players."
+  #- "Abusing server exploits."
+
+# Debug mode.
+# This feature is disabled by default to minimize verbose information that was sent to the console, enable it if you need to.
+# This setting determines weather or not to print the stacktrace to the console when an error occurred while executing a command.
+# This can be useful when you are trying to submit a bug report, and needs to provide information about the error log.
+debug-mode: false

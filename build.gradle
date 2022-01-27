@@ -8,13 +8,6 @@ plugins {
 group = 'com.coadon.almpp'
 version = '0.0.5-SNAPSHOT'
 
-project.ext {
-    GIT_COMMIT = !indraGit.isPresent() ? "unknown" : indraGit.commit().abbreviate(7).name()
-    GIT_DEPTH = GitUtil.commitsSinceLastTag(project)
-
-    FULL_VERSION = "${version}".replace("-SNAPSHOT", "-dev+${GIT_DEPTH}-${GIT_COMMIT}")
-}
-
 repositories {
     mavenCentral()
     maven {
@@ -40,6 +33,13 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+project.ext {
+    GIT_COMMIT = !indraGit.isPresent() ? "unknown" : indraGit.commit().abbreviate(7).name()
+    GIT_DEPTH = GitUtil.commitsSinceLastTag(project)
+
+    FULL_VERSION = "${version}".replace("-SNAPSHOT", "-dev+${GIT_DEPTH}-${GIT_COMMIT}")
 }
 
 def targetJavaVersion = 8

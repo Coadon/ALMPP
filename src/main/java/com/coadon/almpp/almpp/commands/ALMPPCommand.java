@@ -60,6 +60,8 @@ public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
             return false;
         } catch (Throwable e) {
             sender.sendMessage(Component.text("An error occurred while performing this command.").color(NamedTextColor.RED));
+            if (cfg.getDebugMode())
+                e.printStackTrace();
         }
         return true;
     }
