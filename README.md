@@ -15,8 +15,11 @@ To install the plugin to your server, put the Jar file into your server plugins 
 
 Then, if your server is running, reload your server.
 
-Currently, this plugin only supports bukkit, spigot, or paper (recommended) servers.
-Other server software are not tested and won't guarantee plugin performance.
+### Compatibility
+
+Since this plugin is using the PaperAPI for minecraft 1.16, this plugin only supports paper servers with a minecraft version above 1.16.1.
+
+Other server software including bukkit, spigot is not tested and therefore, won't guarantee plugin performance.
 
 ## Features
 

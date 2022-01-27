@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
-public interface PunishmentExecutor {
+public interface BanManager {
 
     void kickPlayer(final @NotNull Player player, final @NotNull String reason);
 

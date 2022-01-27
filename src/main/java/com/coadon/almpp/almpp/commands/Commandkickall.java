@@ -33,8 +33,8 @@ public class Commandkickall extends ALMPPCommand {
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) {
         if (args.length() > 0)
-            getPunisher().kickAllPlayer(args.getCombined());
+            getBanManager().kickAllPlayer(args.getCombined());
         else
-            getPunisher().kickAllPlayer(cfg.getDefaultPunishReason());
+            getBanManager().kickAllPlayer(cfg.getDefaultPunishReason());
     }
 }

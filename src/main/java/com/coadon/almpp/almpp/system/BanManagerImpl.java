@@ -26,15 +26,15 @@ import org.slf4j.Logger;
 
 import java.util.Date;
 
-public final class PunishmentExecutorImpl implements PunishmentExecutor {
+public final class BanManagerImpl implements BanManager {
     private final ALMPP plugin;
     private final Logger logger;
     private final ComponentProvider formatter;
 
-    public PunishmentExecutorImpl(ALMPP plugin) {
+    public BanManagerImpl(ALMPP plugin) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
-        this.formatter = plugin.getFormatter();
+        this.formatter = plugin.getComponentProvider();
     }
 
     /**

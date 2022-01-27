@@ -54,10 +54,10 @@ public class PlayerLoginListeners extends PluginEventListener {
             banReason = entry.getReason();
 
         if (entry.getExpiration() == null) {
-            event.disallow(PlayerLoginEvent.Result.KICK_BANNED, plugin.getFormatter().generateKickPermBanMessage(
+            event.disallow(PlayerLoginEvent.Result.KICK_BANNED, plugin.getComponentProvider().generateKickPermBanMessage(
                     banReason, entry.getCreated().toString()));
         } else {
-            event.disallow(PlayerLoginEvent.Result.KICK_BANNED, plugin.getFormatter().generateKickTempBanMessage(
+            event.disallow(PlayerLoginEvent.Result.KICK_BANNED, plugin.getComponentProvider().generateKickTempBanMessage(
                     banReason, entry.getCreated().toString(), entry.getExpiration().toString()));
         }
     }

@@ -50,7 +50,7 @@ public class Commandafkkick extends ALMPPCommand {
             return;
         }
 
-        getPunisher().afkKickPlayer(player);
+        getBanManager().afkKickPlayer(player);
     }
 
     @Override

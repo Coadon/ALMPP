@@ -21,7 +21,7 @@ package com.coadon.almpp.almpp.commands;
 import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.system.ComponentProvider;
 import com.coadon.almpp.almpp.config.ConfigHandler;
-import com.coadon.almpp.almpp.system.PunishmentExecutor;
+import com.coadon.almpp.almpp.system.BanManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Server;
@@ -102,12 +102,12 @@ public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
         return plugin.getServer().getScheduler();
     }
 
-    protected PunishmentExecutor getPunisher() {
-        return plugin.getPunisher();
+    protected BanManager getBanManager() {
+        return plugin.getBanManager();
     }
 
-    protected ComponentProvider getFormatter() {
-        return plugin.getFormatter();
+    protected ComponentProvider getComponentProvider() {
+        return plugin.getComponentProvider();
     }
 
     protected List<String> getListOfOnlinePlayers() {
