@@ -34,5 +34,5 @@ public interface ConfigHandler {
 
     @NotNull List<String> getCommonPunishReasons();
 
-    boolean getDebugMode();
+    boolean isDebugMode();
 }

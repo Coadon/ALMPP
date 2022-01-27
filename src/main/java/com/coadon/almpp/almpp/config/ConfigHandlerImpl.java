@@ -67,7 +67,7 @@ public class ConfigHandlerImpl implements ConfigHandler {
     }
 
     @Override
-    public boolean getDebugMode() {
+    public boolean isDebugMode() {
         return debugMode;
     }
 }

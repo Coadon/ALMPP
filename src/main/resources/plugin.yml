@@ -48,7 +48,7 @@ commands:
 
 permissions:
   almpp.*:
-    description: Root permission for ALMPP.
+    description: Wildcard permission for ALMPP.
     children:
       almpp.ban: true
       almpp.tempban: true
