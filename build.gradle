@@ -1,8 +1,5 @@
 plugins {
-    id 'java'
     id 'almpp.parent-build-logic'
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
-    id 'net.kyori.indra.git' version '2.0.0'
 }
 
 group = 'com.coadon.almpp'
@@ -23,7 +20,7 @@ repositories {
 dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
 
-    implementation "net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT"
+    implementation 'net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT'
 
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.32'
