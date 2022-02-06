@@ -34,4 +34,8 @@ public interface BanManager {
     void tempBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source, final @NotNull Date expires);
 
     void kickAllPlayer(final @NotNull String reason);
+
+    void pardon(final @NotNull String player);
+
+    boolean isBanned(@NotNull String player);
 }

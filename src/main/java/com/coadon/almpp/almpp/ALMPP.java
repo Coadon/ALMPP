@@ -65,6 +65,7 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
         registerCommand("ban", new Commandban(this));
         registerCommand("kickall", new Commandkickall(this));
         registerCommand("afkkick", new Commandafkkick(this));
+        registerCommand("unban", new Commandunban(this));
         registerCommand("warn", new Commandwarn(this));
         registerCommand("notice", new Commandnotice(this));
         registerCommand("tempban", new Commandtempban(this));

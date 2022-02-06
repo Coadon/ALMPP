@@ -22,7 +22,7 @@ import com.coadon.almpp.almpp.utils.StringCombiner;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.*;
 
 public final class Arguments {
     private final String[] content;
@@ -47,6 +47,14 @@ public final class Arguments {
         if (skipCount > content.length)
             throw new IndexOutOfBoundsException();
         return StringCombiner.combine(Arrays.stream(content).skip(skipCount).toArray());
+    }
+
+    public List<String> getContentAsList() {
+        return Arrays.asList(content);
+    }
+
+    public Set<String> getContentAsSet() {
+        return new HashSet<>(Arrays.asList(content));
     }
 
     public int length() {

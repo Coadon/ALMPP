@@ -19,6 +19,7 @@
 package com.coadon.almpp.almpp.system;
 
 import com.coadon.almpp.almpp.ALMPP;
+import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -103,6 +104,16 @@ public final class BanManagerImpl implements BanManager {
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.kick(formatter.generateKickMessage(reason, new Date().toString())));
         logger.info("Kicked everyone from the server");
+    }
+
+    @Override
+    public void pardon(@NotNull String player) {
+        plugin.getServer().getBanList(BanList.Type.NAME).pardon(player);
+    }
+
+    @Override
+    public boolean isBanned(@NotNull String player) {
+        return plugin.getServer().getBanList(BanList.Type.NAME).isBanned(player);
     }
 
     /**

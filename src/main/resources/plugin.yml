@@ -31,6 +31,11 @@ commands:
     permission: almpp.afkkick
     aliases: [ afkk ]
     usage: /<command> <player>
+  unban:
+    description: Unbans player(s) from the blacklist.
+    permission: almpp.pardon
+    aliases: [ pardon ]
+    usage: /<command> <player...>
   warn:
     description: Warn a player with a message.
     permission: almpp.warn
@@ -55,22 +60,25 @@ permissions:
       almpp.kick: true
       almpp.kickall: true
       almpp.afkkick: true
+      almpp.pardon: true
       almpp.warn: true
       almpp.notice: true
       almpp.plugininfo: true
   almpp.ban:
-    description: Permission to use the /ban command.
+    description: Allow access to /ban command.
   almpp.tempban:
-    description: Permission to use the /tempban command.
+    description: Allow access to /tempban command.
   almpp.kick:
-    description: Permission to use the /kick command.
+    description: Allow access to /kick command.
   almpp.kickall:
-    description: Permission to use the /kickall command.
+    description: Allow access to /kickall command.
   almpp.afkkick:
-    description: Permission to use the /afkkick command.
+    description: Allow access to /afkkick command.
+  almpp.pardon:
+    description: Allow access to /unban command.
   almpp.warn:
-    description: Permission to use the /warn command.
+    description: Allow access to /warn command.
   almpp.notice:
-    description: Permission to use the /notice command.
+    description: Allow access to /notice command.
   almpp.plugininfo:
-    description: Permission to use the /almpp command.
+    description: Allow access to /almpp command.

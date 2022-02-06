@@ -24,6 +24,7 @@ import com.coadon.almpp.almpp.config.ConfigHandler;
 import com.coadon.almpp.almpp.system.BanManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.BanList;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -53,7 +54,7 @@ public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public final boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         try {
             run(sender.getServer(), sender, command, label, new Arguments(args));
         } catch (InvalidCommandArgumentsException e) {
@@ -74,43 +75,51 @@ public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
         return null;
     }
 
-    protected @Nullable Player getPlayer(final String playerName) {
+    protected final @Nullable Player getPlayer(final String playerName) {
         return plugin.getServer().getPlayer(playerName);
     }
 
-    protected @Nullable Player getPlayer(final UUID id) {
+    protected final BanList getBanList(BanList.Type type) {
+        return plugin.getServer().getBanList(type);
+    }
+
+    protected final BanList getBanList() {
+        return plugin.getServer().getBanList(BanList.Type.NAME);
+    }
+
+    protected final @Nullable Player getPlayer(final UUID id) {
         return plugin.getServer().getPlayer(id);
     }
 
-    protected Collection<? extends Player> getOnlinePlayers() {
+    protected final Collection<? extends Player> getOnlinePlayers() {
         return plugin.getServer().getOnlinePlayers();
     }
 
-    protected Server getServer() {
+    protected final Server getServer() {
         return plugin.getServer();
     }
 
-    protected World getWorld(String name) {
+    protected final World getWorld(String name) {
         return plugin.getServer().getWorld(name);
     }
 
-    protected List<World> getWorlds() {
+    protected final List<World> getWorlds() {
         return plugin.getServer().getWorlds();
     }
 
-    protected BukkitScheduler getBukkitScheduler() {
+    protected final BukkitScheduler getBukkitScheduler() {
         return plugin.getServer().getScheduler();
     }
 
-    protected BanManager getBanManager() {
+    protected final BanManager getBanManager() {
         return plugin.getBanManager();
     }
 
-    protected ComponentProvider getComponentProvider() {
+    protected final ComponentProvider getComponentProvider() {
         return plugin.getComponentProvider();
     }
 
-    protected List<String> getListOfOnlinePlayers() {
+    protected final List<String> getListOfOnlinePlayers() {
         return getOnlinePlayers().stream().map(HumanEntity::getName).collect(Collectors.toList());
     }
 }
