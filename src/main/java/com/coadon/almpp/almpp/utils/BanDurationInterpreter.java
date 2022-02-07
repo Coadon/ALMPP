@@ -25,6 +25,14 @@ import java.util.regex.Pattern;
 
 public final class BanDurationInterpreter {
 
+    private static final int MINUTE = 60;
+    private static final int HOUR = MINUTE * 60;
+    private static final int DAY = HOUR * 24;
+    private static final int WEEK = DAY * 7;
+    private static final int MONTH = DAY * 30;
+    private static final int QUARTER = MONTH * 3;
+    private static final int YEAR = DAY * 365;
+
     // A pattern used to find any non-digit character(s) in a token.
     private static final Pattern pattern = Pattern.compile("\\D");
 
@@ -44,7 +52,15 @@ public final class BanDurationInterpreter {
                 String slice = token.substring(0, token.length() - 1);
                 try {
                     int provided = Integer.parseInt(slice);
-                    seconds = seconds + (31_536_000 * provided);
+                    seconds = seconds + (YEAR * provided);
+                } catch (NumberFormatException e) {
+                    throw new MalformedDurationFormatException(e);
+                }
+            } else if (token.endsWith("q")) {
+                String slice = token.substring(0, token.length() - 1);
+                try {
+                    int provided = Integer.parseInt(slice);
+                    seconds = seconds + (QUARTER * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
                 }
@@ -52,7 +68,7 @@ public final class BanDurationInterpreter {
                 String slice = token.substring(0, token.length() - 2);
                 try {
                     int provided = Integer.parseInt(slice);
-                    seconds = seconds + (2_592_000 * provided);
+                    seconds = seconds + (MONTH * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
                 }
@@ -60,7 +76,7 @@ public final class BanDurationInterpreter {
                 String slice = token.substring(0, token.length() - 1);
                 try {
                     int provided = Integer.parseInt(slice);
-                    seconds = seconds + (604_800 * provided);
+                    seconds = seconds + (WEEK * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
                 }
@@ -69,7 +85,7 @@ public final class BanDurationInterpreter {
                 String slice = token.substring(0, token.length() - 1);
                 try {
                     int provided = Integer.parseInt(slice);
-                    seconds = seconds + (86_400 * provided);
+                    seconds = seconds + (DAY * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
                 }
@@ -77,7 +93,7 @@ public final class BanDurationInterpreter {
                 String slice = token.substring(0, token.length() - 1);
                 try {
                     int provided = Integer.parseInt(slice);
-                    seconds = seconds + (3_600 * provided);
+                    seconds = seconds + (HOUR * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
                 }
@@ -85,7 +101,7 @@ public final class BanDurationInterpreter {
                 String slice = token.substring(0, token.length() - 1);
                 try {
                     int provided = Integer.parseInt(slice);
-                    seconds = seconds + (60 * provided);
+                    seconds = seconds + (MINUTE * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
                 }
