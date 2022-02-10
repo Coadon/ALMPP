@@ -46,19 +46,33 @@ public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
     protected final ALMPP plugin;
     protected final Logger logger;
     protected final ConfigHandler cfg;
+    private final @Nullable Component usage;
+
+    public ALMPPCommand(ALMPP plugin, @Nullable Component usage) {
+        this.plugin = plugin;
+        this.logger = plugin.getSLF4JLogger();
+        this.cfg = plugin.getConfigHandler();
+        this.usage = usage;
+    }
 
     public ALMPPCommand(ALMPP plugin) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
         this.cfg = plugin.getConfigHandler();
+        this.usage = null;
     }
+
 
     @Override
     public final boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         try {
             run(sender.getServer(), sender, command, label, new Arguments(args));
         } catch (InvalidCommandArgumentsException e) {
-            return false;
+            if (usage == null)
+                return false;
+
+            sender.sendMessage(usage);
+            return true;
         } catch (Throwable e) {
             sender.sendMessage(Component.text("An error occurred while performing this command.").color(NamedTextColor.RED));
             if (cfg.isDebugMode())

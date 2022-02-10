@@ -22,6 +22,8 @@ import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.utils.BanDurationInterpreter;
 import com.coadon.almpp.almpp.utils.MalformedDurationFormatException;
 import com.google.common.collect.ImmutableList;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
@@ -36,12 +38,12 @@ import java.util.List;
 
 public class Commandtempban extends ALMPPCommand {
 
-    public Commandtempban(ALMPP plugin) {
-        super(plugin);
-    }
-
     // Common time durations, for use in tab completion
     private static final List<String> COMMON_DURATIONS = ImmutableList.of("1m", "15m", "1h", "3h", "12h", "1d", "1w", "1mo", "3mo", "6mo", "1y");
+
+    public Commandtempban(ALMPP plugin) {
+        super(plugin, Component.text("Usage: /ban <player> <duration> [reason]").color(NamedTextColor.RED));
+    }
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
@@ -62,7 +64,7 @@ public class Commandtempban extends ALMPPCommand {
         if (player.hasPermission("almpp.immune")) {
             // Target is immune
             sender.sendMessage(ChatColor.DARK_RED + "Forbidden! " + ChatColor.RED + "You may not ban this player.");
-            logger.info("'" + sender.getName() + "' was forbidden to punish immune player '" + player.getName() + "'.");
+            logger.info("'" + sender.getName() + "' was forbidden to punish immune player '" + player.getName() + "'");
             return;
         }
 

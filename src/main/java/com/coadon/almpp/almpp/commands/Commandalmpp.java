@@ -21,10 +21,13 @@ package com.coadon.almpp.almpp.commands;
 import com.coadon.almpp.almpp.ALMPP;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
+
+import java.time.LocalDate;
 
 public class Commandalmpp extends ALMPPCommand {
 
@@ -34,7 +37,9 @@ public class Commandalmpp extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        sender.sendMessage(Component.text("ALMPP ").color(NamedTextColor.DARK_AQUA)
-                .append(Component.text("v" + plugin.getVersion() + "\n").color(NamedTextColor.LIGHT_PURPLE)));
+        sender.sendMessage(Component.text("")
+                .append(Component.text("ALMPP ").color(NamedTextColor.AQUA).decorate(TextDecoration.BOLD))
+                .append(Component.text("v" + plugin.getVersion() + "\n").color(NamedTextColor.LIGHT_PURPLE).decorate(TextDecoration.BOLD))
+                .append(Component.text("Copyright (C) 2020-" + LocalDate.now().getYear() + " Coadon.").color(NamedTextColor.GRAY)));
     }
 }

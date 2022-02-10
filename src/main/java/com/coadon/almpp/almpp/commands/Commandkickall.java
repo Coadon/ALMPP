@@ -19,6 +19,8 @@
 package com.coadon.almpp.almpp.commands;
 
 import com.coadon.almpp.almpp.ALMPP;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -27,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 public class Commandkickall extends ALMPPCommand {
 
     public Commandkickall(ALMPP plugin) {
-        super(plugin);
+        super(plugin, Component.text("Usage: /kickall [reason]").color(NamedTextColor.RED));
     }
 
     @Override
