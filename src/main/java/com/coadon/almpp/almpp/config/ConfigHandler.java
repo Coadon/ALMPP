@@ -30,8 +30,6 @@ public interface ConfigHandler {
 
     @NotNull List<String> getRemovalMessage();
 
-    @NotNull List<String> getAfkKickMessage();
-
     @NotNull List<String> getCommonPunishReasons();
 
     boolean isDebugMode();

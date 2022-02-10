@@ -27,8 +27,6 @@ public interface BanManager {
 
     void kickPlayer(final @NotNull Player player, final @NotNull String reason);
 
-    void afkKickPlayer(final @NotNull Player player);
-
     void permBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source);
 
     void tempBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source, final @NotNull Date expires);

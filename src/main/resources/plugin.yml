@@ -26,26 +26,11 @@ commands:
     permission: almpp.kickall
     aliases: [ kall, kap, ka ]
     usage: /<command> [reason]
-  afkkick:
-    description: Kicks a player from the server in an afk kick manner.
-    permission: almpp.afkkick
-    aliases: [ afkk ]
-    usage: /<command> <player>
   unban:
     description: Unbans player(s) from the blacklist.
     permission: almpp.pardon
     aliases: [ pardon ]
     usage: /<command> <player...>
-  warn:
-    description: Warn a player with a message.
-    permission: almpp.warn
-    aliases: [ wrn, wr ]
-    usage: /<command> <player> <message>
-  notice:
-    description: Notice a player with a message.
-    permission: almpp.notice
-    aliases: [ note, infop, ntice, nt ]
-    usage: /<command> <player> <message>
   almpp:
     description: Displays information about this plugin.
     permission: almpp.plugininfo
@@ -59,10 +44,7 @@ permissions:
       almpp.tempban: true
       almpp.kick: true
       almpp.kickall: true
-      almpp.afkkick: true
       almpp.pardon: true
-      almpp.warn: true
-      almpp.notice: true
       almpp.plugininfo: true
   almpp.ban:
     description: Allow access to /ban command.
@@ -72,15 +54,9 @@ permissions:
     description: Allow access to /kick command.
   almpp.kickall:
     description: Allow access to /kickall command.
-  almpp.afkkick:
-    description: Allow access to /afkkick command.
   almpp.pardon:
     description: Allow access to /unban command.
   almpp.immune:
     description: Immune to all punishments except for kickall.
-  almpp.warn:
-    description: Allow access to /warn command.
-  almpp.notice:
-    description: Allow access to /notice command.
   almpp.plugininfo:
     description: Allow access to /almpp command.

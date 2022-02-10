@@ -51,20 +51,6 @@ public final class ComponentProviderImpl implements ComponentProvider {
     }
 
     /**
-     * Generates an AFK kick message component with provided arguments.
-     *
-     * @param date the text to be displayed as the date
-     * @return the combined and generated component
-     */
-    @Override
-    public @NotNull Component generateAfkKickMessage(final @NotNull String date) {
-        return Component.text("")
-                .append(Component.text("You are AFK kicked from this server!\n\n").color(NamedTextColor.GOLD))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date).color(NamedTextColor.WHITE));
-    }
-
-    /**
      * Generates a permanently banned message component with provided arguments.
      *
      * @param reason the text to be displayed as the reason
@@ -125,20 +111,6 @@ public final class ComponentProviderImpl implements ComponentProvider {
     @Override
     public @NotNull String getRemovalAnnouncementMessage(final @NotNull String targetName) {
         String output = StringCombiner.combine(cfg.getRemovalMessage().toArray(), "\n");
-        output = output.replaceAll("\\[player]", targetName);
-        output = ChatColor.translateAlternateColorCodes('&', output);
-        return output;
-    }
-
-    /**
-     * Generates a player AFK kicked announcement message component.
-     *
-     * @param targetName the name to be displayed as the target
-     * @return the combined and generated component
-     */
-    @Override
-    public @NotNull String getAfkKickAnnouncementMessage(final @NotNull String targetName) {
-        String output = StringCombiner.combine(cfg.getAfkKickMessage().toArray(), "\n");
         output = output.replaceAll("\\[player]", targetName);
         output = ChatColor.translateAlternateColorCodes('&', output);
         return output;

@@ -46,21 +46,9 @@ public final class BanManagerImpl implements BanManager {
      */
     @Override
     public void kickPlayer(final @NotNull Player player, final @NotNull String reason) {
-        broadcastKick(player);
+        broadcastRemoval(player);
         player.kick(formatter.generateKickMessage(reason, new Date().toString()));
         logger.info("Kicked " + player.getName() + " from the server");
-    }
-
-    /**
-     * AFK Kicks a player out of the server.
-     *
-     * @param player the player to be punished
-     */
-    @Override
-    public void afkKickPlayer(final @NotNull Player player) {
-        broadcastAfk(player);
-        player.kick(formatter.generateAfkKickMessage(new Date().toString()));
-        logger.info("AFK Kicked " + player.getName() + " from the server");
     }
 
     /**
@@ -72,7 +60,7 @@ public final class BanManagerImpl implements BanManager {
      */
     @Override
     public void permBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source) {
-        broadcastBan(player);
+        broadcastTermination(player);
         player.kick(formatter.generateKickPermBanMessage(reason, new Date().toString()));
         player.banPlayer(reason, source);
         logger.info("Permanently banned " + player.getName() + " from the server");
@@ -88,7 +76,7 @@ public final class BanManagerImpl implements BanManager {
      */
     @Override
     public void tempBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source, final @NotNull Date expires) {
-        broadcastBan(player);
+        broadcastTermination(player);
         player.kick(formatter.generateKickTempBanMessage(reason, new Date().toString(), expires.toString()));
         player.banPlayer(reason, expires, source);
         logger.info("Temporarily banned " + player.getName() + " from the server");
@@ -121,7 +109,7 @@ public final class BanManagerImpl implements BanManager {
      *
      * @param target the player to broadcast
      */
-    private void broadcastBan(Player target) {
+    private void broadcastTermination(Player target) {
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()))
         );
@@ -133,22 +121,10 @@ public final class BanManagerImpl implements BanManager {
      *
      * @param target the player to broadcast
      */
-    private void broadcastKick(Player target) {
+    private void broadcastRemoval(Player target) {
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.sendMessage(formatter.getRemovalAnnouncementMessage(target.getName()))
         );
         Bukkit.getConsoleSender().sendMessage(formatter.getRemovalAnnouncementMessage(target.getName()));
-    }
-
-    /**
-     * Broadcast the server a player is afk kicked.
-     *
-     * @param target the player to broadcast
-     */
-    private void broadcastAfk(Player target) {
-        plugin.getServer().getOnlinePlayers().forEach(
-                player -> player.sendMessage(formatter.getAfkKickAnnouncementMessage(target.getName()))
-        );
-        Bukkit.getConsoleSender().sendMessage(formatter.getAfkKickAnnouncementMessage(target.getName()));
     }
 }
