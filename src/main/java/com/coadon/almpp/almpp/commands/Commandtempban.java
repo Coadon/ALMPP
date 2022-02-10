@@ -22,6 +22,7 @@ import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.utils.BanDurationInterpreter;
 import com.coadon.almpp.almpp.utils.MalformedDurationFormatException;
 import com.google.common.collect.ImmutableList;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -54,6 +55,14 @@ public class Commandtempban extends ALMPPCommand {
         if (player == null) {
             // Player is null
             sender.sendMessage(ChatColor.RED + "Player '" + args.get(0) + "' does not exist or online.");
+            return;
+        }
+
+        // See if the player is immune
+        if (player.hasPermission("almpp.immune")) {
+            // Target is immune
+            sender.sendMessage(ChatColor.DARK_RED + "Forbidden! " + ChatColor.RED + "You may not ban this player.");
+            logger.info("'" + sender.getName() + "' was forbidden to punish immune player '" + player.getName() + "'.");
             return;
         }
 

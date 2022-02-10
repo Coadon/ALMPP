@@ -50,6 +50,14 @@ public class Commandban extends ALMPPCommand {
             return;
         }
 
+        // See if the player is immune
+        if (player.hasPermission("almpp.immune")) {
+            // Target is immune
+            sender.sendMessage(ChatColor.DARK_RED + "Forbidden! " + ChatColor.RED + "You may not ban this player.");
+            logger.info("'" + sender.getName() + "' was forbidden to punish immune player '" + player.getName() + "'.");
+            return;
+        }
+
         if (args.length() == 1) {
             getBanManager().permBanPlayer(player, cfg.getDefaultPunishReason(), sender.getName());
         } else if (args.length() > 1) {

@@ -50,6 +50,14 @@ public class Commandkick extends ALMPPCommand {
             return;
         }
 
+        // See if the player is immune
+        if (player.hasPermission("almpp.immune")) {
+            // Target is immune
+            sender.sendMessage(ChatColor.DARK_RED + "Forbidden! " + ChatColor.RED + "You may not kick this player.");
+            logger.info("'" + sender.getName() + "' was forbidden to punish immune player '" + player.getName() + "'.");
+            return;
+        }
+
         if (args.length() == 1) {
             getBanManager().kickPlayer(player, cfg.getDefaultPunishReason());
         } else if (args.length() > 1) {

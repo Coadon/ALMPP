@@ -76,6 +76,8 @@ permissions:
     description: Allow access to /afkkick command.
   almpp.pardon:
     description: Allow access to /unban command.
+  almpp.immune:
+    description: Immune to all punishments except for kickall.
   almpp.warn:
     description: Allow access to /warn command.
   almpp.notice:
