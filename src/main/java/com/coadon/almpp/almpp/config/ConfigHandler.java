@@ -32,5 +32,7 @@ public interface ConfigHandler {
 
     @NotNull List<String> getCommonPunishReasons();
 
+    @NotNull String getNoReasonAlt();
+
     boolean isDebugMode();
 }

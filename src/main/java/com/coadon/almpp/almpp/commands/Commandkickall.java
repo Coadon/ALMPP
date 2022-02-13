@@ -25,6 +25,9 @@ import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class Commandkickall extends ALMPPCommand {
 
@@ -34,9 +37,21 @@ public class Commandkickall extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) {
-        if (args.length() > 0)
-            getBanManager().kickAllPlayer(args.getCombined());
-        else
-            getBanManager().kickAllPlayer(cfg.getDefaultPunishReason());
+        // Obtaining the reason
+        String reason = cfg.getDefaultPunishReason();
+        if (args.length() > 0 && !(args.getCombined().equals(cfg.getNoReasonAlt())))
+            reason = args.getCombined();
+
+        getBanManager().kickAllPlayer(reason);
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
+        List<String> tmp = cfg.getCommonPunishReasons();
+
+        if (!cfg.getNoReasonAlt().equals(""))
+            tmp.add(0, cfg.getNoReasonAlt());
+
+        return tmp;
     }
 }

@@ -77,11 +77,12 @@ public class Commandtempban extends ALMPPCommand {
             return;
         }
 
-        if (args.length() == 2) {
-            getBanManager().tempBanPlayer(player, cfg.getDefaultPunishReason(), sender.getName(), expireDate, true);
-        } else if (args.length() > 2) {
-            getBanManager().tempBanPlayer(player, args.getCombinedFrom(2), sender.getName(), expireDate, true);
-        }
+        // Obtaining the reason
+        String reason = cfg.getDefaultPunishReason();
+        if (args.length() > 2 && !(args.getCombinedFrom(2).equals(cfg.getNoReasonAlt())))
+            reason = args.getCombinedFrom(2);
+
+        getBanManager().tempBanPlayer(player, reason, sender.getName(), expireDate, true);
     }
 
     @Override
@@ -92,8 +93,14 @@ public class Commandtempban extends ALMPPCommand {
         if (args.length == 2)
             return COMMON_DURATIONS;
 
-        if (args.length == 3)
-            return cfg.getCommonPunishReasons();
+        if (args.length == 3) {
+            List<String> tmp = cfg.getCommonPunishReasons();
+
+            if (!cfg.getNoReasonAlt().equals(""))
+                tmp.add(0, cfg.getNoReasonAlt());
+
+            return tmp;
+        }
 
         return null;
     }

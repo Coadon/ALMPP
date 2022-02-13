@@ -34,7 +34,7 @@ public final class StringCombiner {
             else
                 combined.append(s.toString()).append(" ");
         }
-        return combined.toString();
+        return combined.toString().trim();
     }
 
     /**

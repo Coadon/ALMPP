@@ -60,11 +60,12 @@ public class Commandkick extends ALMPPCommand {
             return;
         }
 
-        if (args.length() == 1) {
-            getBanManager().kickPlayer(player, cfg.getDefaultPunishReason(), true);
-        } else if (args.length() > 1) {
-            getBanManager().kickPlayer(player, args.getCombinedFrom(1), true);
-        }
+        // Obtaining the reason
+        String reason = cfg.getDefaultPunishReason();
+        if (args.length() > 1 && !(args.getCombinedFrom(1).equals(cfg.getNoReasonAlt())))
+            reason = args.getCombinedFrom(1);
+
+        getBanManager().kickPlayer(player, reason, true);
     }
 
     @Override
@@ -72,8 +73,14 @@ public class Commandkick extends ALMPPCommand {
         if (args.length == 1)
             return getListOfOnlinePlayers();
 
-        if (args.length == 2)
-            return cfg.getCommonPunishReasons();
+        if (args.length == 2) {
+            List<String> tmp = cfg.getCommonPunishReasons();
+
+            if (!cfg.getNoReasonAlt().equals(""))
+                tmp.add(0, cfg.getNoReasonAlt());
+
+            return tmp;
+        }
 
         return null;
     }

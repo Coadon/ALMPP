@@ -29,6 +29,7 @@ public class ConfigHandlerImpl implements ConfigHandler {
     private final List<String> terminationBroadcastMsg;
     private final List<String> removalBroadcastMsg;
     private final List<String> commonPunishReasons;
+    private final String noReasonAlt;
     private final boolean debugMode;
 
     public ConfigHandlerImpl(FileConfiguration cfg, Logger logger) {
@@ -36,6 +37,7 @@ public class ConfigHandlerImpl implements ConfigHandler {
         this.terminationBroadcastMsg = cfg.getStringList("broadcast-ban-message.termination");
         this.removalBroadcastMsg = cfg.getStringList("broadcast-ban-message.removal");
         this.commonPunishReasons = cfg.getStringList("common-punish-reasons");
+        this.noReasonAlt = cfg.getString("no-reason-alt");
         this.debugMode = cfg.getBoolean("debug-mode");
     }
 
@@ -57,6 +59,11 @@ public class ConfigHandlerImpl implements ConfigHandler {
     @Override
     public @NotNull List<String> getCommonPunishReasons() {
         return commonPunishReasons;
+    }
+
+    @Override
+    public @NotNull String getNoReasonAlt() {
+        return noReasonAlt;
     }
 
     @Override
