@@ -24,7 +24,6 @@ import com.coadon.almpp.almpp.utils.MalformedDurationFormatException;
 import com.google.common.collect.ImmutableList;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -79,9 +78,9 @@ public class Commandtempban extends ALMPPCommand {
         }
 
         if (args.length() == 2) {
-            getBanManager().tempBanPlayer(player, cfg.getDefaultPunishReason(), sender.getName(), expireDate);
+            getBanManager().tempBanPlayer(player, cfg.getDefaultPunishReason(), sender.getName(), expireDate, true);
         } else if (args.length() > 2) {
-            getBanManager().tempBanPlayer(player, args.getCombinedFrom(2), sender.getName(), expireDate);
+            getBanManager().tempBanPlayer(player, args.getCombinedFrom(2), sender.getName(), expireDate, true);
         }
     }
 

@@ -7,17 +7,17 @@ description: The Advanced Lightweight Minecraft Punish Plugin
 
 commands:
   ban:
-    description: Permanently bans a player from the server.
+    description: Permanently bans a specified player from the server.
     permission: almpp.ban
     aliases: [ permban, pbn, bn, expel ]
     usage: /<command> <player> [reason]
   tempban:
-    description: Temporarily bans a player from the server.
+    description: Temporarily bans a specified player from the server.
     permission: almpp.tempban
     aliases: [ tmpban, tbn, tb, texpel ]
     usage: /<command> <player> <duration> [reason]
   kick:
-    description: Kicks a player from the server.
+    description: Kicks a specified player from the server.
     permission: almpp.kick
     aliases: [ k, kp, ck, remove, rm ]
     usage: /<command> <player> [reason]
@@ -27,7 +27,7 @@ commands:
     aliases: [ kall, kap, ka ]
     usage: /<command> [reason]
   unban:
-    description: Unbans player(s) from the blacklist.
+    description: Unbans specified player(s) from the blacklist.
     permission: almpp.pardon
     aliases: [ pardon ]
     usage: /<command> <player...>

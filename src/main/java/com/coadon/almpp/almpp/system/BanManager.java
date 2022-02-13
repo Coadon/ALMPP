@@ -25,15 +25,15 @@ import java.util.Date;
 
 public interface BanManager {
 
-    void kickPlayer(final @NotNull Player player, final @NotNull String reason);
+    void kickPlayer(@NotNull Player player, @NotNull String reason, boolean broadcast);
 
-    void permBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source);
+    void permBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast);
 
-    void tempBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source, final @NotNull Date expires);
+    void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast);
 
-    void kickAllPlayer(final @NotNull String reason);
+    void kickAllPlayer(@NotNull String reason);
 
-    void pardon(final @NotNull String player);
+    void pardon(@NotNull String player);
 
     boolean isBanned(@NotNull String player);
 }

@@ -39,56 +39,65 @@ public final class BanManagerImpl implements BanManager {
     }
 
     /**
-     * Kicks a player out of the server.
+     * Kicks a specified player from the server.
      *
      * @param player the player to be punished
      * @param reason the reason to be punished
+     * @param broadcast whether to broadcast punishment
      */
     @Override
-    public void kickPlayer(final @NotNull Player player, final @NotNull String reason) {
-        broadcastRemoval(player);
+    public void kickPlayer(@NotNull Player player, @NotNull String reason, boolean broadcast) {
+        if (broadcast)
+            broadcastRemoval(player);
+
         player.kick(formatter.generateKickMessage(reason, new Date().toString()));
         logger.info("Kicked " + player.getName() + " from the server");
     }
 
     /**
-     * Permanently bans a player out of the server
+     * Permanently bans a specified player from the server.
      *
      * @param player the player to be punished
      * @param reason the reason to be punished
      * @param source the operator
+     * @param broadcast whether to broadcast punishment
      */
     @Override
-    public void permBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source) {
-        broadcastTermination(player);
+    public void permBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast) {
+        if (broadcast)
+            broadcastTermination(player);
+
         player.kick(formatter.generateKickPermBanMessage(reason, new Date().toString()));
         player.banPlayer(reason, source);
         logger.info("Permanently banned " + player.getName() + " from the server");
     }
 
     /**
-     * Temporarily bans a player out of the server.
+     * Temporarily bans a specified player from the server.
      *
      * @param player the player to be punished
      * @param reason the reason to be punished
      * @param source the operator
      * @param expires the expiration date
+     * @param broadcast whether to broadcast punishment
      */
     @Override
-    public void tempBanPlayer(final @NotNull Player player, final @NotNull String reason, final @NotNull String source, final @NotNull Date expires) {
-        broadcastTermination(player);
+    public void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast) {
+        if (broadcast)
+            broadcastTermination(player);
+
         player.kick(formatter.generateKickTempBanMessage(reason, new Date().toString(), expires.toString()));
         player.banPlayer(reason, expires, source);
         logger.info("Temporarily banned " + player.getName() + " from the server");
     }
 
     /**
-     * Kicks all online players out of the server.
+     * Kicks all online players from the server.
      *
      * @param reason the reason to be punished
      */
     @Override
-    public void kickAllPlayer(final @NotNull String reason) {
+    public void kickAllPlayer(@NotNull String reason) {
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.kick(formatter.generateKickMessage(reason, new Date().toString())));
         logger.info("Kicked everyone from the server");

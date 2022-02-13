@@ -61,9 +61,9 @@ public class Commandban extends ALMPPCommand {
         }
 
         if (args.length() == 1) {
-            getBanManager().permBanPlayer(player, cfg.getDefaultPunishReason(), sender.getName());
+            getBanManager().permBanPlayer(player, cfg.getDefaultPunishReason(), sender.getName(), true);
         } else if (args.length() > 1) {
-            getBanManager().permBanPlayer(player, args.getCombinedFrom(1), sender.getName());
+            getBanManager().permBanPlayer(player, args.getCombinedFrom(1), sender.getName(), true);
         }
     }
 

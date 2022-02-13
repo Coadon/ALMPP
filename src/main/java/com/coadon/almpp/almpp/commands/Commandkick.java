@@ -61,9 +61,9 @@ public class Commandkick extends ALMPPCommand {
         }
 
         if (args.length() == 1) {
-            getBanManager().kickPlayer(player, cfg.getDefaultPunishReason());
+            getBanManager().kickPlayer(player, cfg.getDefaultPunishReason(), true);
         } else if (args.length() > 1) {
-            getBanManager().kickPlayer(player, args.getCombinedFrom(1));
+            getBanManager().kickPlayer(player, args.getCombinedFrom(1), true);
         }
     }
 

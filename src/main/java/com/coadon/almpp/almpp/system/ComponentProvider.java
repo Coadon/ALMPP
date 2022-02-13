@@ -23,13 +23,13 @@ import org.jetbrains.annotations.NotNull;
 
 public interface ComponentProvider {
 
-    @NotNull Component generateKickMessage(final @NotNull String reason, final @NotNull String date);
+    @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date);
 
-    @NotNull Component generateKickPermBanMessage(final @NotNull String reason, final @NotNull String date);
+    @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date);
 
-    @NotNull Component generateKickTempBanMessage(final @NotNull String reason, final @NotNull String date, final @NotNull String expires);
+    @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expires);
 
-    @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName);
+    @NotNull String getTerminationAnnouncementMessage(@NotNull String targetName);
 
-    @NotNull String getRemovalAnnouncementMessage(final @NotNull String targetName);
+    @NotNull String getRemovalAnnouncementMessage(@NotNull String targetName);
 }

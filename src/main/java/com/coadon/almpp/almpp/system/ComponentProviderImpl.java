@@ -41,7 +41,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      * @return the combined and generated component
      */
     @Override
-    public @NotNull Component generateKickMessage(final @NotNull String reason, final @NotNull String date) {
+    public @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date) {
         return Component.text("")
                 .append(Component.text("You are kicked from this server!\n\n").color(NamedTextColor.RED))
                 .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
@@ -58,7 +58,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      * @return the combined and generated component
      */
     @Override
-    public @NotNull Component generateKickPermBanMessage(final @NotNull String reason, final @NotNull String date) {
+    public @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date) {
         return Component.text("")
                 .append(Component.text("You are permanently banned from this server!\n\n").color(NamedTextColor.RED))
                 .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
@@ -76,7 +76,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      * @return the combined and generated component
      */
     @Override
-    public @NotNull Component generateKickTempBanMessage(final @NotNull String reason, final @NotNull String date, final @NotNull String expires) {
+    public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expires) {
         return Component.text("")
                 .append(Component.text("You are temporarily banned until ").color(NamedTextColor.RED))
                 .append(Component.text(expires).color(NamedTextColor.WHITE))
@@ -95,7 +95,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      * @return the combined and generated component
      */
     @Override
-    public @NotNull String getTerminationAnnouncementMessage(final @NotNull String targetName) {
+    public @NotNull String getTerminationAnnouncementMessage(@NotNull String targetName) {
         String output = StringCombiner.combine(cfg.getTerminationMessage().toArray(), "\n");
         output = output.replaceAll("\\[player]", targetName);
         output = ChatColor.translateAlternateColorCodes('&', output);
@@ -109,7 +109,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      * @return the combined and generated component
      */
     @Override
-    public @NotNull String getRemovalAnnouncementMessage(final @NotNull String targetName) {
+    public @NotNull String getRemovalAnnouncementMessage(@NotNull String targetName) {
         String output = StringCombiner.combine(cfg.getRemovalMessage().toArray(), "\n");
         output = output.replaceAll("\\[player]", targetName);
         output = ChatColor.translateAlternateColorCodes('&', output);
