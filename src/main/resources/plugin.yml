@@ -45,6 +45,7 @@ permissions:
       almpp.kick: true
       almpp.kickall: true
       almpp.pardon: true
+      almpp.immune: true
       almpp.plugininfo: true
   almpp.ban:
     description: Allow access to /ban command.
