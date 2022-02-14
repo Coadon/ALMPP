@@ -21,6 +21,7 @@ package com.coadon.almpp.almpp.commands;
 import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.utils.BanDurationInterpreter;
 import com.coadon.almpp.almpp.utils.MalformedDurationFormatException;
+import com.coadon.almpp.almpp.utils.StringCombiner;
 import com.google.common.collect.ImmutableList;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -32,6 +33,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -77,12 +79,21 @@ public class Commandtempban extends ALMPPCommand {
             return;
         }
 
+        String[] rawReason = args.getFrom(2);
+        boolean broadcast = true;
+
+        // See if the silence flag is present
+        if (rawReason[rawReason.length - 1].equals("-s")) {
+            rawReason[rawReason.length - 1] = "";
+            broadcast = false;
+        }
+
         // Obtaining the reason
         String reason = cfg.getDefaultPunishReason();
-        if (args.length() > 2 && !(args.getCombinedFrom(2).equals(cfg.getNoReasonAlt())))
-            reason = args.getCombinedFrom(2);
+        if (args.length() > 2 && !(StringCombiner.combine(rawReason).equals(cfg.getNoReasonAlt())))
+            reason = StringCombiner.combine(rawReason);
 
-        getBanManager().tempBanPlayer(player, reason, sender.getName(), expireDate, true);
+        getBanManager().tempBanPlayer(player, reason, sender.getName(), expireDate, broadcast);
     }
 
     @Override
@@ -101,6 +112,9 @@ public class Commandtempban extends ALMPPCommand {
 
             return tmp;
         }
+
+        if (args.length > 3)
+            return Collections.singletonList("-s");
 
         return null;
     }

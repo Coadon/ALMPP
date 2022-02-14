@@ -39,6 +39,12 @@ public final class Arguments {
         return (String) Array.get(content, index);
     }
 
+    public String[] getFrom(int skipCount) throws IndexOutOfBoundsException{
+        if (skipCount > content.length)
+            throw new IndexOutOfBoundsException();
+        return Arrays.stream(content).skip(skipCount).toArray(String[]::new);
+    }
+
     public String getCombined() {
         return StringCombiner.combine(content);
     }
