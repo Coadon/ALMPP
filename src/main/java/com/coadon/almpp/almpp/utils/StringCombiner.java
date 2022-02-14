@@ -22,6 +22,7 @@ public final class StringCombiner {
 
     /**
      * Combines an array of strings into a single string object with a space in between two strings.
+     * All spaces leading a backslash ("\ ") will be replaced with a single space character (" ").
      *
      * @param strings the array of strings to be combined
      * @return the combined string
@@ -34,11 +35,12 @@ public final class StringCombiner {
             else
                 combined.append(s.toString()).append(" ");
         }
-        return combined.toString().trim();
+        return combined.toString().replace("\\ ", " ").trim();
     }
 
     /**
      * Combines an array of strings into a single string object with a custom string in between two strings.
+     * All spaces leading a backslash ("\ ") will be replaced with a single space character (" ").
      *
      * @param strings the array of strings to be combined
      * @param inBetween the custom string to but between two strings
@@ -52,6 +54,6 @@ public final class StringCombiner {
             else
                 combined.append(s.toString()).append(inBetween);
         }
-        return combined.toString();
+        return combined.toString().replace("\\ ", " ").trim();
     }
 }
