@@ -18,15 +18,24 @@
 
 package com.coadon.almpp.almpp.config;
 
-import org.jetbrains.annotations.NotNull;
+public enum ConfigOptions {
+    DEFAULT_PUNISH_REASON("default-punish-reason"),
+    ANNOUNCE_TERMINATION("punish-announcement.termination"),
+    ANNOUNCE_REMOVAL("punish-announcement.removal"),
+    COMMON_PUNISH_REASONS("common-punish-reasons"),
+    NO_REASON_ALT("no-reason-alt"),
+    SCREEN_PERM_TERM("ban-screens.permanent-termination"),
+    SCREEN_TEMP_TERM("ban-screens.temporary-termination"),
+    SCREEN_REMOVAL("ban-screens.removal"),
+    DEBUG_MODE("debug-mode");
 
-import java.util.List;
+    private final String path;
 
-public interface ConfigHandler {
+    ConfigOptions(String node) {
+        this.path = node;
+    }
 
-    @NotNull String getString(ConfigOptions option);
-
-    @NotNull List<String> getStringList(ConfigOptions option);
-
-    boolean getBoolean(ConfigOptions option);
+    public String getPath() {
+        return path;
+    }
 }

@@ -32,84 +32,26 @@ public class ConfigHandlerImpl implements ConfigHandler {
     }
 
     @Override
-    public @NotNull String getDefaultPunishReason() {
-        return getNoNullString("default-punish-reason");
+    public @NotNull String getString(ConfigOptions option) {
+        // Get the current value of a specified option
+        String value = cfg.getString(option.getPath());
+
+        // If the current value does not exist, get the default one
+        if (value == null) {
+            value = Objects.requireNonNull(cfg.getDefaults()).getString(option.getPath());
+        }
+
+        // Return
+        return Objects.requireNonNull(value);
     }
 
     @Override
-    public @NotNull List<String> getTerminationMessage() {
-        return cfg.getStringList("broadcast-ban-message.termination");
+    public @NotNull List<String> getStringList(ConfigOptions option) {
+        return cfg.getStringList(option.getPath());
     }
 
     @Override
-    public @NotNull List<String> getRemovalMessage() {
-        return cfg.getStringList("broadcast-ban-message.removal");
-    }
-
-    @Override
-    public @NotNull List<String> getCommonPunishReasons() {
-        return cfg.getStringList("common-punish-reasons");
-    }
-
-    @Override
-    public @NotNull String getNoReasonAlt() {
-        return getNoNullString("no-reason-alt");
-    }
-
-    // Ban Screens
-
-    @Override
-    public @NotNull List<String> getPermanentTerminationScreen() {
-        return cfg.getStringList("ban-screens.permanent-termination");
-    }
-
-    @Override
-    public @NotNull List<String> getTemporaryTerminationScreen() {
-        return cfg.getStringList("ban-screens.temporary-termination");
-    }
-
-    @Override
-    public @NotNull List<String> getRemovalScreen() {
-        return cfg.getStringList("ban-screens.removal");
-    }
-
-    // Debug mode
-    @Override
-    public boolean isDebugMode() {
-        return cfg.getBoolean("debug-mode");
-    }
-
-    // ------------
-    // Other Things
-    // ------------
-
-    // Get FileConfiguration
-
-    @Override
-    public @NotNull FileConfiguration getFileCfg() {
-        return cfg;
-    }
-
-    // NotNull Utilities
-
-    private String getNoNullString(String path) {
-        return noNull(
-                ifNullThen(cfg.getString(path),
-                        noNull(cfg.getDefaults(), "Configuration source does not exist.").getString(path)),
-                "Missing default configuration option: '" + path + "'.");
-    }
-
-    private <T> T ifNullThen(T object, T fallback) {
-        if (object == null)
-            return fallback;
-        return object;
-    }
-
-    private <T> T noNull(T obj) {
-        return Objects.requireNonNull(obj);
-    }
-
-    private <T> T noNull(T obj, String message) {
-        return Objects.requireNonNull(obj, message);
+    public boolean getBoolean(ConfigOptions option) {
+        return cfg.getBoolean(option.getPath());
     }
 }

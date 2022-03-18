@@ -19,6 +19,7 @@
 package com.coadon.almpp.almpp.commands;
 
 import com.coadon.almpp.almpp.ALMPP;
+import com.coadon.almpp.almpp.config.ConfigOptions;
 import com.coadon.almpp.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -72,8 +73,8 @@ public class Commandban extends ALMPPCommand {
         }
 
         // Obtaining the reason
-        String reason = cfg.getDefaultPunishReason();
-        if (args.length() > 1 && !(StringCombiner.combine(rawReason).equals(cfg.getNoReasonAlt())))
+        String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
+        if (args.length() > 1 && !(StringCombiner.combine(rawReason).equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = StringCombiner.combine(rawReason);
 
         getBanManager().permBanPlayer(player, reason, sender.getName(), broadcast);
@@ -85,10 +86,10 @@ public class Commandban extends ALMPPCommand {
             return getListOfOnlinePlayers();
 
         if (args.length == 2) {
-            List<String> tmp = cfg.getCommonPunishReasons();
+            List<String> tmp = cfg.getStringList(ConfigOptions.COMMON_PUNISH_REASONS);
 
-            if (!cfg.getNoReasonAlt().equals(""))
-                tmp.add(0, cfg.getNoReasonAlt());
+            if (!cfg.getString(ConfigOptions.NO_REASON_ALT).equals(""))
+                tmp.add(0, cfg.getString(ConfigOptions.NO_REASON_ALT));
 
             return tmp;
         }

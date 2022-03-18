@@ -20,6 +20,7 @@ package com.coadon.almpp.almpp.system;
 
 import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.config.ConfigHandler;
+import com.coadon.almpp.almpp.config.ConfigOptions;
 import com.coadon.almpp.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -44,7 +45,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      */
     @Override
     public @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date) {
-        String source = StringCombiner.combine(cfg.getRemovalScreen().toArray(), "\n");
+        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_REMOVAL).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[date]", date);
         return mm.deserialize(source);
@@ -59,7 +60,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      */
     @Override
     public @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date) {
-        String source = StringCombiner.combine(cfg.getPermanentTerminationScreen().toArray(), "\n");
+        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_PERM_TERM).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[date]", date);
         return mm.deserialize(source);
@@ -75,7 +76,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      */
     @Override
     public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expiry) {
-        String source = StringCombiner.combine(cfg.getTemporaryTerminationScreen().toArray(), "\n");
+        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_TEMP_TERM).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[expiry]", expiry);
         source = source.replaceAll("\\[date]", date);
@@ -90,7 +91,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      */
     @Override
     public @NotNull String getTerminationAnnouncementMessage(@NotNull String targetName) {
-        String output = StringCombiner.combine(cfg.getTerminationMessage().toArray(), "\n");
+        String output = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).toArray(), "\n");
         output = output.replaceAll("\\[player]", targetName);
         output = ChatColor.translateAlternateColorCodes('&', output);
         return output;
@@ -104,7 +105,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
      */
     @Override
     public @NotNull String getRemovalAnnouncementMessage(@NotNull String targetName) {
-        String output = StringCombiner.combine(cfg.getRemovalMessage().toArray(), "\n");
+        String output = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_REMOVAL).toArray(), "\n");
         output = output.replaceAll("\\[player]", targetName);
         output = ChatColor.translateAlternateColorCodes('&', output);
         return output;

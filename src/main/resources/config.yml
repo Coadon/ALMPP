@@ -16,11 +16,11 @@
 # When a player got punished without specifying a reason, this reason will be used.
 default-punish-reason: "The Ban Hammer had spoken."
 
-# Broadcast ban messages.
+# Punish announcement messages.
 # When a player got punished, a broadcast will be made for all online players. The below options determines the broadcast message.
 # You can use color codes with the prefix "&".
 # Use the [player] placeholder for the punished player's name.
-broadcast-ban-message:
+punish-announcement:
 
   # The message that will be sent when a player is punished with /ban or /tempban
   termination:

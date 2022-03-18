@@ -19,6 +19,7 @@
 package com.coadon.almpp.almpp.commands;
 
 import com.coadon.almpp.almpp.ALMPP;
+import com.coadon.almpp.almpp.config.ConfigOptions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Server;
@@ -38,8 +39,8 @@ public class Commandkickall extends ALMPPCommand {
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) {
         // Obtaining the reason
-        String reason = cfg.getDefaultPunishReason();
-        if (args.length() > 0 && !(args.getCombined().equals(cfg.getNoReasonAlt())))
+        String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
+        if (args.length() > 0 && !(args.getCombined().equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = args.getCombined();
 
         getBanManager().kickAllPlayer(reason);
@@ -47,10 +48,10 @@ public class Commandkickall extends ALMPPCommand {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
-        List<String> tmp = cfg.getCommonPunishReasons();
+        List<String> tmp = cfg.getStringList(ConfigOptions.COMMON_PUNISH_REASONS);
 
-        if (!cfg.getNoReasonAlt().equals(""))
-            tmp.add(0, cfg.getNoReasonAlt());
+        if (!cfg.getString(ConfigOptions.NO_REASON_ALT).equals(""))
+            tmp.add(0, cfg.getString(ConfigOptions.NO_REASON_ALT));
 
         return tmp;
     }
