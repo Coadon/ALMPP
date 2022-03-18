@@ -47,7 +47,7 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
         // Save config
         saveDefaultConfig();
 
-        configHandler = new ConfigHandlerImpl(getConfig(), logger);
+        configHandler = new ConfigHandlerImpl(getConfig());
         componentProvider = new ComponentProviderImpl(this);
         banManager = new BanManagerImpl(this);
 

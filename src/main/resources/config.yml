@@ -6,11 +6,11 @@
 # ALMPP - Copyright (c) 2020-2022 Coadon.
 
 # NOTICE:
-# This config file will not update on its own, and once it was generated, it is fixed.
+# This config file will not update on its own. Once it was generated, it is fixed.
 # Any new options introduced into the configuration file needs to be manually added, or regenerated.
 # If an option in this configuration file missing, the plugin may start to go haywire,
-# therefore, do NOT delete any settings in this configuration file, doing so may cause problems,
-# if you happen to update this plugin, please make sure that all new options in here is present.
+# therefore, do NOT delete any settings in this configuration file, doing so may cause problems.
+# If you happen to update this plugin, please make sure that all new options in here are present.
 
 # The default punishment reason.
 # When a player got punished without specifying a reason, this reason will be used.
@@ -19,6 +19,7 @@ default-punish-reason: "The Ban Hammer had spoken."
 # Broadcast ban messages.
 # When a player got punished, a broadcast will be made for all online players. The below options determines the broadcast message.
 # You can use color codes with the prefix "&".
+# Use the [player] placeholder for the punished player's name.
 broadcast-ban-message:
 
   # The message that will be sent when a player is punished with /ban or /tempban
@@ -44,6 +45,40 @@ common-punish-reasons:
 # Entering "/ban 'somebody' <THE VALUE>" is equivalent to entering "/ban 'somebody'" which automatically defaults the reason to default-punish-reason.
 # Leaving this empty disables this feature.
 no-reason-alt: "#"
+
+# ----------- BAN SCREENS ----------
+# Customize the contents of ban screens below -- things that displays when a player is banned.
+# This feature uses the Kyori adventure-api MiniMessage API. You can find formatting docs on https://docs.adventure.kyori.net/minimessage/format
+ban-screens:
+
+  # Permanent Ban with /ban
+  # [reason] - The punishment reason
+  # [date] - The execution date
+  permanent-termination:
+    - "<color:red>You are permanently banned from this server!"
+    - ""
+    - "<color:gray>Reason: <color:white>[reason]"
+    - "<color:gray>Date: <color:white>[date]"
+
+  # Temporary Ban with /tempban
+  # [reason] - The punishment reason
+  # [date] - The execution date
+  # [expiry] - The expire date
+  temporary-termination:
+    - "<color:red>You are temporarily banned until <color:white>[expiry]<color:red> from this server!"
+    - ""
+    - "<color:gray>Reason: <color:white>[reason]"
+    - "<color:gray>Date: <color:white>[date]"
+
+  # Kick with /kick
+  # [reason] - The punishment reason
+  # [date] - The execution date
+  removal:
+    - "<color:red>You are kicked from this server!"
+    - ""
+    - "<color:gray>Reason: <color:white>[reason]"
+    - "<color:gray>Date: <color:white>[date]"
+
 
 # Debug mode.
 # This feature is disabled by default to minimize verbose information that was sent to the console, enable it if you need to.

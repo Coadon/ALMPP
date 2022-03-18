@@ -18,6 +18,7 @@
 
 package com.coadon.almpp.almpp.config;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -34,5 +35,13 @@ public interface ConfigHandler {
 
     @NotNull String getNoReasonAlt();
 
+    @NotNull List<String> getPermanentTerminationScreen();
+
+    @NotNull List<String> getTemporaryTerminationScreen();
+
+    @NotNull List<String> getRemovalScreen();
+
     boolean isDebugMode();
+
+    @NotNull FileConfiguration getFileCfg();
 }

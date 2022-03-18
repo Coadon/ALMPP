@@ -22,14 +22,16 @@ import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.config.ConfigHandler;
 import com.coadon.almpp.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
 
 public final class ComponentProviderImpl implements ComponentProvider {
     private final ConfigHandler cfg;
+    private final MiniMessage mm;
 
     public ComponentProviderImpl(ALMPP plugin) {
+        this.mm = MiniMessage.miniMessage();
         this.cfg = plugin.getConfigHandler();
     }
 
@@ -42,12 +44,10 @@ public final class ComponentProviderImpl implements ComponentProvider {
      */
     @Override
     public @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date) {
-        return Component.text("")
-                .append(Component.text("You are kicked from this server!\n\n").color(NamedTextColor.RED))
-                .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
-                .append(Component.text(reason + "\n").color(NamedTextColor.WHITE))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date).color(NamedTextColor.WHITE));
+        String source = StringCombiner.combine(cfg.getRemovalScreen().toArray(), "\n");
+        source = source.replaceAll("\\[reason]", reason);
+        source = source.replaceAll("\\[date]", date);
+        return mm.deserialize(source);
     }
 
     /**
@@ -59,12 +59,10 @@ public final class ComponentProviderImpl implements ComponentProvider {
      */
     @Override
     public @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date) {
-        return Component.text("")
-                .append(Component.text("You are permanently banned from this server!\n\n").color(NamedTextColor.RED))
-                .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
-                .append(Component.text(reason + "\n").color(NamedTextColor.WHITE))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date + "\n").color(NamedTextColor.WHITE));
+        String source = StringCombiner.combine(cfg.getPermanentTerminationScreen().toArray(), "\n");
+        source = source.replaceAll("\\[reason]", reason);
+        source = source.replaceAll("\\[date]", date);
+        return mm.deserialize(source);
     }
 
     /**
@@ -72,20 +70,16 @@ public final class ComponentProviderImpl implements ComponentProvider {
      *
      * @param reason the text to be displayed as the reason
      * @param date the text to be displayed as the date
-     * @param expires the text to be displayed as the expires date
+     * @param expiry the text to be displayed as the expires date
      * @return the combined and generated component
      */
     @Override
-    public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expires) {
-        return Component.text("")
-                .append(Component.text("You are temporarily banned until ").color(NamedTextColor.RED))
-                .append(Component.text(expires).color(NamedTextColor.WHITE))
-                .append(Component.text(" from this server!\n\n").color(NamedTextColor.RED))
-                .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
-                .append(Component.text(reason + "\n").color(NamedTextColor.WHITE))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date + "\n").color(NamedTextColor.WHITE));
-
+    public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expiry) {
+        String source = StringCombiner.combine(cfg.getTemporaryTerminationScreen().toArray(), "\n");
+        source = source.replaceAll("\\[reason]", reason);
+        source = source.replaceAll("\\[expiry]", expiry);
+        source = source.replaceAll("\\[date]", date);
+        return mm.deserialize(source);
     }
 
     /**
