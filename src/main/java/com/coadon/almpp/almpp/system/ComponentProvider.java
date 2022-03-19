@@ -20,6 +20,7 @@ package com.coadon.almpp.almpp.system;
 
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface ComponentProvider {
 
@@ -29,7 +30,7 @@ public interface ComponentProvider {
 
     @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expires);
 
-    @NotNull String getTerminationAnnouncementMessage(@NotNull String targetName);
+    @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName);
 
-    @NotNull String getRemovalAnnouncementMessage(@NotNull String targetName);
+    @Nullable Component getRemovalAnnouncementMessage(@NotNull String targetName);
 }
