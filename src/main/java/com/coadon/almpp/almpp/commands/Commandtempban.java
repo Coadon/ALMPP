@@ -91,7 +91,7 @@ public class Commandtempban extends ALMPPCommand {
 
         // Obtaining the reason
         String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
-        if (args.length() >= 3 && !(StringCombiner.combine(rawReason).equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
+        if (args.length() > 2 && !(StringCombiner.combine(rawReason).equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = StringCombiner.combine(rawReason);
 
         getBanManager().tempBanPlayer(player, reason, sender.getName(), expireDate, broadcast);

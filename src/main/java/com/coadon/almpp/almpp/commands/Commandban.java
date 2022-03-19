@@ -68,13 +68,13 @@ public class Commandban extends ALMPPCommand {
 
         // See if the silence flag is present
         if (rawReason.length >= 2 && rawReason[rawReason.length - 1].equals("-s")) {
-            rawReason[rawReason.length - 1] = null;
+            rawReason[rawReason.length - 1] = "";
             broadcast = false;
         }
 
         // Obtaining the reason
         String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
-        if (rawReason.length >= 2 && !(StringCombiner.combine(rawReason).equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
+        if (args.length() > 1 && !(StringCombiner.combine(rawReason).equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = StringCombiner.combine(rawReason);
 
         getBanManager().permBanPlayer(player, reason, sender.getName(), broadcast);
