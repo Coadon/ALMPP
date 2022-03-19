@@ -24,15 +24,9 @@ import java.util.List;
 
 public interface ConfigHandler {
 
-    @NotNull String getDefaultPunishReason();
+    @NotNull String getString(ConfigOptions option);
 
-    @NotNull List<String> getTerminationMessage();
+    @NotNull List<String> getStringList(ConfigOptions option);
 
-    @NotNull List<String> getRemovalMessage();
-
-    @NotNull List<String> getCommonPunishReasons();
-
-    @NotNull String getNoReasonAlt();
-
-    boolean isDebugMode();
+    boolean getBoolean(ConfigOptions option);
 }

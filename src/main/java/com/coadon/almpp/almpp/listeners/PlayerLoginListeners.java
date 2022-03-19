@@ -19,6 +19,7 @@
 package com.coadon.almpp.almpp.listeners;
 
 import com.coadon.almpp.almpp.ALMPP;
+import com.coadon.almpp.almpp.config.ConfigOptions;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.event.EventHandler;
@@ -29,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 public class PlayerLoginListeners extends PluginEventListener {
+
     public PlayerLoginListeners(ALMPP plugin) {
         super(plugin);
     }
@@ -47,7 +49,7 @@ public class PlayerLoginListeners extends PluginEventListener {
 
         String banReason;
         if (entry.getReason() == null) {
-            banReason = cfg.getDefaultPunishReason();
+            banReason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
             // Only in situation where the ban is triggered by vanilla Minecraft or another plugin with no reason.
             // We will be working on a feature that supports no reason punishment.
         } else

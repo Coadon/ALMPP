@@ -20,54 +20,38 @@ package com.coadon.almpp.almpp.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ConfigHandlerImpl implements ConfigHandler {
-    private final String defaultPunishReason;
-    private final List<String> terminationBroadcastMsg;
-    private final List<String> removalBroadcastMsg;
-    private final List<String> commonPunishReasons;
-    private final String noReasonAlt;
-    private final boolean debugMode;
+    private final FileConfiguration cfg;
 
-    public ConfigHandlerImpl(FileConfiguration cfg, Logger logger) {
-        this.defaultPunishReason = cfg.getString("default-punish-reason");
-        this.terminationBroadcastMsg = cfg.getStringList("broadcast-ban-message.termination");
-        this.removalBroadcastMsg = cfg.getStringList("broadcast-ban-message.removal");
-        this.commonPunishReasons = cfg.getStringList("common-punish-reasons");
-        this.noReasonAlt = cfg.getString("no-reason-alt");
-        this.debugMode = cfg.getBoolean("debug-mode");
+    public ConfigHandlerImpl(@NotNull FileConfiguration cfg) {
+        this.cfg = cfg;
     }
 
     @Override
-    public @NotNull String getDefaultPunishReason() {
-        return defaultPunishReason;
+    public @NotNull String getString(ConfigOptions option) {
+        // Get the current value of a specified option
+        String value = cfg.getString(option.getPath());
+
+        // If the current value does not exist, get the default one
+        if (value == null) {
+            value = Objects.requireNonNull(cfg.getDefaults()).getString(option.getPath());
+        }
+
+        // Return
+        return Objects.requireNonNull(value);
     }
 
     @Override
-    public @NotNull List<String> getTerminationMessage() {
-        return terminationBroadcastMsg;
+    public @NotNull List<String> getStringList(ConfigOptions option) {
+        return cfg.getStringList(option.getPath());
     }
 
     @Override
-    public @NotNull List<String> getRemovalMessage() {
-        return removalBroadcastMsg;
-    }
-
-    @Override
-    public @NotNull List<String> getCommonPunishReasons() {
-        return commonPunishReasons;
-    }
-
-    @Override
-    public @NotNull String getNoReasonAlt() {
-        return noReasonAlt;
-    }
-
-    @Override
-    public boolean isDebugMode() {
-        return debugMode;
+    public boolean getBoolean(ConfigOptions option) {
+        return cfg.getBoolean(option.getPath());
     }
 }

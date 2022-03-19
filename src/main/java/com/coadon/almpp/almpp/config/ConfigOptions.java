@@ -1,6 +1,6 @@
 /*
  * ALMPP - The advanced lightweight punishment plugin for Minecraft servers
- * Copyright (C) 2021 Coadon
+ * Copyright (C) 2022 Coadon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,21 +16,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.system;
+package com.coadon.almpp.almpp.config;
 
-import net.kyori.adventure.text.Component;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+public enum ConfigOptions {
+    DEFAULT_PUNISH_REASON("default-punish-reason"),
+    ANNOUNCE_TERMINATION("punish-announcement.termination"),
+    ANNOUNCE_REMOVAL("punish-announcement.removal"),
+    COMMON_PUNISH_REASONS("common-punish-reasons"),
+    NO_REASON_ALT("no-reason-alt"),
+    SCREEN_PERM_TERM("ban-screens.permanent-termination"),
+    SCREEN_TEMP_TERM("ban-screens.temporary-termination"),
+    SCREEN_REMOVAL("ban-screens.removal"),
+    DEBUG_MODE("debug-mode");
 
-public interface ComponentProvider {
+    private final String path;
 
-    @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date);
+    ConfigOptions(String node) {
+        this.path = node;
+    }
 
-    @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date);
-
-    @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expires);
-
-    @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName);
-
-    @Nullable Component getRemovalAnnouncementMessage(@NotNull String targetName);
+    public String getPath() {
+        return path;
+    }
 }

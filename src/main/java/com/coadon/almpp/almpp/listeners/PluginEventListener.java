@@ -74,7 +74,7 @@ public abstract class PluginEventListener implements Listener {
         return plugin.getServer().getScheduler();
     }
 
-    protected BanManager getPunisher() {
+    protected BanManager getBanManager() {
         return plugin.getBanManager();
     }
 

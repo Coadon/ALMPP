@@ -19,6 +19,7 @@
 package com.coadon.almpp.almpp.commands;
 
 import com.coadon.almpp.almpp.ALMPP;
+import com.coadon.almpp.almpp.config.ConfigOptions;
 import com.coadon.almpp.almpp.system.ComponentProvider;
 import com.coadon.almpp.almpp.config.ConfigHandler;
 import com.coadon.almpp.almpp.system.BanManager;
@@ -75,7 +76,7 @@ public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
             return true;
         } catch (Throwable e) {
             sender.sendMessage(Component.text("An error occurred while performing this command.").color(NamedTextColor.RED));
-            if (cfg.isDebugMode())
+            if (cfg.getBoolean(ConfigOptions.DEBUG_MODE))
                 e.printStackTrace();
         }
         return true;

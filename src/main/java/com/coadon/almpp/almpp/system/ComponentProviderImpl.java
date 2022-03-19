@@ -20,99 +20,66 @@ package com.coadon.almpp.almpp.system;
 
 import com.coadon.almpp.almpp.ALMPP;
 import com.coadon.almpp.almpp.config.ConfigHandler;
+import com.coadon.almpp.almpp.config.ConfigOptions;
 import com.coadon.almpp.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class ComponentProviderImpl implements ComponentProvider {
     private final ConfigHandler cfg;
+    private final MiniMessage mm;
 
     public ComponentProviderImpl(ALMPP plugin) {
+        this.mm = MiniMessage.miniMessage();
         this.cfg = plugin.getConfigHandler();
     }
 
-    /**
-     * Generates a kick message component with provided arguments.
-     *
-     * @param reason the text to be displayed as the reason
-     * @param date the text to be displayed as the date
-     * @return the combined and generated component
-     */
     @Override
     public @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date) {
-        return Component.text("")
-                .append(Component.text("You are kicked from this server!\n\n").color(NamedTextColor.RED))
-                .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
-                .append(Component.text(reason + "\n").color(NamedTextColor.WHITE))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date).color(NamedTextColor.WHITE));
+        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_REMOVAL).toArray(), "\n");
+        source = source.replaceAll("\\[reason]", reason);
+        source = source.replaceAll("\\[date]", date);
+        return mm.deserialize(source);
     }
 
-    /**
-     * Generates a permanently banned message component with provided arguments.
-     *
-     * @param reason the text to be displayed as the reason
-     * @param date the text to be displayed as the date
-     * @return the combined and generated component
-     */
     @Override
     public @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date) {
-        return Component.text("")
-                .append(Component.text("You are permanently banned from this server!\n\n").color(NamedTextColor.RED))
-                .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
-                .append(Component.text(reason + "\n").color(NamedTextColor.WHITE))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date + "\n").color(NamedTextColor.WHITE));
+        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_PERM_TERM).toArray(), "\n");
+        source = source.replaceAll("\\[reason]", reason);
+        source = source.replaceAll("\\[date]", date);
+        return mm.deserialize(source);
     }
 
-    /**
-     * Generates a temporarily banned message component with provided arguments.
-     *
-     * @param reason the text to be displayed as the reason
-     * @param date the text to be displayed as the date
-     * @param expires the text to be displayed as the expires date
-     * @return the combined and generated component
-     */
     @Override
-    public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expires) {
-        return Component.text("")
-                .append(Component.text("You are temporarily banned until ").color(NamedTextColor.RED))
-                .append(Component.text(expires).color(NamedTextColor.WHITE))
-                .append(Component.text(" from this server!\n\n").color(NamedTextColor.RED))
-                .append(Component.text("Reason: ").color(NamedTextColor.GRAY))
-                .append(Component.text(reason + "\n").color(NamedTextColor.WHITE))
-                .append(Component.text("Date: ").color(NamedTextColor.GRAY))
-                .append(Component.text(date + "\n").color(NamedTextColor.WHITE));
-
+    public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expiry) {
+        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_TEMP_TERM).toArray(), "\n");
+        source = source.replaceAll("\\[reason]", reason);
+        source = source.replaceAll("\\[expiry]", expiry);
+        source = source.replaceAll("\\[date]", date);
+        return mm.deserialize(source);
     }
 
-    /**
-     * Generates a player termination announcement message component.
-     *
-     * @param targetName the name to be displayed as the target
-     * @return the combined and generated component
-     */
     @Override
-    public @NotNull String getTerminationAnnouncementMessage(@NotNull String targetName) {
-        String output = StringCombiner.combine(cfg.getTerminationMessage().toArray(), "\n");
-        output = output.replaceAll("\\[player]", targetName);
-        output = ChatColor.translateAlternateColorCodes('&', output);
-        return output;
+    public @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName) {
+        // Check if the option is left empty, if it is, return null
+        if (cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).isEmpty())
+            return null;
+
+        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).toArray(), "\n");
+        source = source.replaceAll("\\[player]", targetName);
+        return mm.deserialize(source);
     }
 
-    /**
-     * Generates a player removal announcement message component.
-     *
-     * @param targetName the name to be displayed as the target
-     * @return the combined and generated component
-     */
     @Override
-    public @NotNull String getRemovalAnnouncementMessage(@NotNull String targetName) {
-        String output = StringCombiner.combine(cfg.getRemovalMessage().toArray(), "\n");
-        output = output.replaceAll("\\[player]", targetName);
-        output = ChatColor.translateAlternateColorCodes('&', output);
-        return output;
+    public @Nullable Component getRemovalAnnouncementMessage(@NotNull String targetName) {
+        // Check if the option is left empty, if it is, return null
+        if (cfg.getStringList(ConfigOptions.ANNOUNCE_REMOVAL).isEmpty())
+            return null;
+
+        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_REMOVAL).toArray(), "\n");
+        source = source.replaceAll("\\[player]", targetName);
+        return mm.deserialize(source);
     }
 }
