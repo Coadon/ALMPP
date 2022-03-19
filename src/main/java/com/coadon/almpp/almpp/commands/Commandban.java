@@ -42,7 +42,7 @@ public class Commandban extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.length() < 1) {
+        if (args.length() == 0) {
             // Not enough arguments
             throw new InvalidCommandArgumentsException();
         }
@@ -67,7 +67,7 @@ public class Commandban extends ALMPPCommand {
         boolean broadcast = true;
 
         // See if the silence flag is present
-        if (rawReason[rawReason.length - 1].equals("-s")) {
+        if (rawReason.length >= 2 && rawReason[rawReason.length - 1].equals("-s")) {
             rawReason[rawReason.length - 1] = "";
             broadcast = false;
         }

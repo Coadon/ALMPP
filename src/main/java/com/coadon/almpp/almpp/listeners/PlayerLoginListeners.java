@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 public class PlayerLoginListeners extends PluginEventListener {
+
     public PlayerLoginListeners(ALMPP plugin) {
         super(plugin);
     }

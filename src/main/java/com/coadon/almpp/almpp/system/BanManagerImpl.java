@@ -38,68 +38,54 @@ public final class BanManagerImpl implements BanManager {
         this.formatter = plugin.getComponentProvider();
     }
 
-    /**
-     * Kicks a specified player from the server.
-     *
-     * @param player the player to be punished
-     * @param reason the reason to be punished
-     * @param broadcast whether to broadcast punishment
-     */
     @Override
     public void kickPlayer(@NotNull Player player, @NotNull String reason, boolean broadcast) {
+        // Broadcast if punish announcement is enabled
         if (broadcast)
             broadcastRemoval(player);
 
+        // Execute
         player.kick(formatter.generateKickMessage(reason, new Date().toString()));
+
+        // Log
         logger.info("Kicked " + player.getName() + " from the server");
     }
 
-    /**
-     * Permanently bans a specified player from the server.
-     *
-     * @param player the player to be punished
-     * @param reason the reason to be punished
-     * @param source the operator
-     * @param broadcast whether to broadcast punishment
-     */
     @Override
     public void permBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast) {
+        // Broadcast if punish announcement is enabled
         if (broadcast)
             broadcastTermination(player);
 
+        // Execute
         player.kick(formatter.generateKickPermBanMessage(reason, new Date().toString()));
         player.banPlayer(reason, source);
+
+        // Log
         logger.info("Permanently banned " + player.getName() + " from the server");
     }
 
-    /**
-     * Temporarily bans a specified player from the server.
-     *
-     * @param player the player to be punished
-     * @param reason the reason to be punished
-     * @param source the operator
-     * @param expires the expiration date
-     * @param broadcast whether to broadcast punishment
-     */
     @Override
     public void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast) {
+        // Broadcast if punish announcement is enabled
         if (broadcast)
             broadcastTermination(player);
 
+        // Execute
         player.kick(formatter.generateKickTempBanMessage(reason, new Date().toString(), expires.toString()));
         player.banPlayer(reason, expires, source);
+
+        // Log
         logger.info("Temporarily banned " + player.getName() + " from the server");
     }
 
-    /**
-     * Kicks all online players from the server.
-     *
-     * @param reason the reason to be punished
-     */
     @Override
     public void kickAllPlayer(@NotNull String reason) {
+        // Execute for each player online
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.kick(formatter.generateKickMessage(reason, new Date().toString())));
+
+        // Log
         logger.info("Kicked everyone from the server");
     }
 
@@ -113,27 +99,23 @@ public final class BanManagerImpl implements BanManager {
         return plugin.getServer().getBanList(BanList.Type.NAME).isBanned(player);
     }
 
-    /**
-     * Broadcast the server a player is terminated.
-     *
-     * @param target the player to broadcast
-     */
     private void broadcastTermination(Player target) {
+        // Send a message to every player online
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()))
         );
+
+        // Send a message to the console
         Bukkit.getConsoleSender().sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()));
     }
 
-    /**
-     * Broadcast the server a player is removed.
-     *
-     * @param target the player to broadcast
-     */
     private void broadcastRemoval(Player target) {
+        // Send a message to every player online
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.sendMessage(formatter.getRemovalAnnouncementMessage(target.getName()))
         );
+
+        // Send a message to the console
         Bukkit.getConsoleSender().sendMessage(formatter.getRemovalAnnouncementMessage(target.getName()));
     }
 }

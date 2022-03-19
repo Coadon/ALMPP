@@ -36,13 +36,6 @@ public final class ComponentProviderImpl implements ComponentProvider {
         this.cfg = plugin.getConfigHandler();
     }
 
-    /**
-     * Generates a kick message component with provided arguments.
-     *
-     * @param reason the text to be displayed as the reason
-     * @param date the text to be displayed as the date
-     * @return the combined and generated component
-     */
     @Override
     public @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date) {
         String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_REMOVAL).toArray(), "\n");
@@ -51,13 +44,6 @@ public final class ComponentProviderImpl implements ComponentProvider {
         return mm.deserialize(source);
     }
 
-    /**
-     * Generates a permanently banned message component with provided arguments.
-     *
-     * @param reason the text to be displayed as the reason
-     * @param date the text to be displayed as the date
-     * @return the combined and generated component
-     */
     @Override
     public @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date) {
         String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_PERM_TERM).toArray(), "\n");
@@ -66,14 +52,6 @@ public final class ComponentProviderImpl implements ComponentProvider {
         return mm.deserialize(source);
     }
 
-    /**
-     * Generates a temporarily banned message component with provided arguments.
-     *
-     * @param reason the text to be displayed as the reason
-     * @param date the text to be displayed as the date
-     * @param expiry the text to be displayed as the expires date
-     * @return the combined and generated component
-     */
     @Override
     public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expiry) {
         String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_TEMP_TERM).toArray(), "\n");
@@ -83,12 +61,6 @@ public final class ComponentProviderImpl implements ComponentProvider {
         return mm.deserialize(source);
     }
 
-    /**
-     * Generates a player termination announcement message component.
-     *
-     * @param targetName the name to be displayed as the target
-     * @return the combined and generated component
-     */
     @Override
     public @NotNull String getTerminationAnnouncementMessage(@NotNull String targetName) {
         String output = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).toArray(), "\n");
@@ -97,12 +69,6 @@ public final class ComponentProviderImpl implements ComponentProvider {
         return output;
     }
 
-    /**
-     * Generates a player removal announcement message component.
-     *
-     * @param targetName the name to be displayed as the target
-     * @return the combined and generated component
-     */
     @Override
     public @NotNull String getRemovalAnnouncementMessage(@NotNull String targetName) {
         String output = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_REMOVAL).toArray(), "\n");

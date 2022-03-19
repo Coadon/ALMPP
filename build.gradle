@@ -1,5 +1,9 @@
+import org.eclipse.jgit.revwalk.RevWalk
+
 plugins {
-    id 'almpp.parent-build-logic'
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'net.kyori.indra.git' version '2.1.1'
 }
 
 group = 'com.coadon.almpp'
@@ -29,10 +33,7 @@ dependencies {
 }
 
 project.ext {
-    GIT_COMMIT = !indraGit.isPresent() ? "unknown" : indraGit.commit().abbreviate(7).name()
-    GIT_DEPTH = GitUtil.commitsSinceLastTag(project)
-
-    FULL_VERSION = "${version}".replace("-SNAPSHOT", "-dev+${GIT_DEPTH}-${GIT_COMMIT}")
+    FULL_VERSION = "${version}".replace("-SNAPSHOT", "-dev+${commitsSinceLastTag()}-${!indraGit.isPresent() ? "unknown" : indraGit.commit().abbreviate(7).name()}")
 }
 
 def targetJavaVersion = 8
@@ -41,13 +42,13 @@ java {
     sourceCompatibility = javaVersion
     targetCompatibility = javaVersion
     if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+        toolchain.languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        options.release = targetJavaVersion
+        options.release.set(targetJavaVersion)
     }
 }
 
@@ -60,12 +61,45 @@ processResources {
     }
 }
 
-shadowJar {
-    archiveBaseName.set(project.name)
-    archiveClassifier.set('')
-    archiveVersion.set(project.ext.FULL_VERSION)
+tasks.shadowJar {
+    tasks.shadowJar.archiveBaseName.set(project.name)
+    tasks.shadowJar.archiveVersion.set(project.ext.FULL_VERSION)
+    tasks.shadowJar.archiveClassifier.set('')
+}
+
+build {
+    dependsOn(tasks.shadowJar)
 }
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    // Disable jar task
+    enabled = false
+}
+
+def commitsSinceLastTag() {
+    def indraGit = project.extensions.findByName("IndraGit")
+
+    if (indraGit == null || !indraGit.isPresent() || indraGit.tags().isEmpty()) {
+        return -1
+    }
+
+    def tags = indraGit.tags()
+    def depth = 0
+    def walk = new RevWalk(indraGit.git().getRepository())
+    def commit = walk.parseCommit(indraGit.commit())
+    while (true) {
+        for (tag in tags) {
+            if (walk.parseCommit(tag.getLeaf().getObjectId()) == commit) {
+                walk.dispose()
+                indraGit.git().close()
+                return depth
+            }
+        }
+        depth++
+        commit = walk.parseCommit(commit.getParents()[0])
+    }
 }

@@ -84,7 +84,7 @@ public class Commandtempban extends ALMPPCommand {
         boolean broadcast = true;
 
         // See if the silence flag is present
-        if (rawReason[rawReason.length - 1].equals("-s")) {
+        if (rawReason.length >= 3 && rawReason[rawReason.length - 1].equals("-s")) {
             rawReason[rawReason.length - 1] = "";
             broadcast = false;
         }
