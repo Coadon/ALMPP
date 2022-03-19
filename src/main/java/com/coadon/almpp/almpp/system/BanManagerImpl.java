@@ -19,6 +19,7 @@
 package com.coadon.almpp.almpp.system;
 
 import com.coadon.almpp.almpp.ALMPP;
+import net.kyori.adventure.text.Component;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -100,22 +101,36 @@ public final class BanManagerImpl implements BanManager {
     }
 
     private void broadcastTermination(Player target) {
+        Component msg = formatter.getTerminationAnnouncementMessage(target.getName());
+
+        if (msg == null) {
+            // Disabled
+            return;
+        }
+
         // Send a message to every player online
         plugin.getServer().getOnlinePlayers().forEach(
-                player -> player.sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()))
+                player -> player.sendMessage(msg)
         );
 
         // Send a message to the console
-        Bukkit.getConsoleSender().sendMessage(formatter.getTerminationAnnouncementMessage(target.getName()));
+        Bukkit.getConsoleSender().sendMessage(msg);
     }
 
     private void broadcastRemoval(Player target) {
+        Component msg = formatter.getRemovalAnnouncementMessage(target.getName());
+
+        if (msg == null) {
+            // Disabled
+            return;
+        }
+
         // Send a message to every player online
         plugin.getServer().getOnlinePlayers().forEach(
-                player -> player.sendMessage(formatter.getRemovalAnnouncementMessage(target.getName()))
+                player -> player.sendMessage(msg)
         );
 
         // Send a message to the console
-        Bukkit.getConsoleSender().sendMessage(formatter.getRemovalAnnouncementMessage(target.getName()));
+        Bukkit.getConsoleSender().sendMessage(msg);
     }
 }

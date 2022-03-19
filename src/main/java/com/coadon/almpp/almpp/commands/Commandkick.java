@@ -42,7 +42,7 @@ public class Commandkick extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.length() < 1) {
+        if (args.length() == 0) {
             // Not enough arguments
             throw new InvalidCommandArgumentsException();
         }
@@ -74,7 +74,7 @@ public class Commandkick extends ALMPPCommand {
 
         // Obtaining the reason
         String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
-        if (args.length() > 1 && !(StringCombiner.combine(rawReason).equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
+        if (args.length() >= 2 && !(StringCombiner.combine(rawReason).equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = StringCombiner.combine(rawReason);
 
         getBanManager().kickPlayer(player, reason, broadcast);

@@ -24,8 +24,8 @@ import com.coadon.almpp.almpp.config.ConfigOptions;
 import com.coadon.almpp.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.ChatColor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class ComponentProviderImpl implements ComponentProvider {
     private final ConfigHandler cfg;
@@ -62,18 +62,24 @@ public final class ComponentProviderImpl implements ComponentProvider {
     }
 
     @Override
-    public @NotNull String getTerminationAnnouncementMessage(@NotNull String targetName) {
-        String output = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).toArray(), "\n");
-        output = output.replaceAll("\\[player]", targetName);
-        output = ChatColor.translateAlternateColorCodes('&', output);
-        return output;
+    public @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName) {
+        // Check if the option is left empty, if it is, return null
+        if (cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).isEmpty())
+            return null;
+
+        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).toArray(), "\n");
+        source = source.replaceAll("\\[player]", targetName);
+        return mm.deserialize(source);
     }
 
     @Override
-    public @NotNull String getRemovalAnnouncementMessage(@NotNull String targetName) {
-        String output = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_REMOVAL).toArray(), "\n");
-        output = output.replaceAll("\\[player]", targetName);
-        output = ChatColor.translateAlternateColorCodes('&', output);
-        return output;
+    public @Nullable Component getRemovalAnnouncementMessage(@NotNull String targetName) {
+        // Check if the option is left empty, if it is, return null
+        if (cfg.getStringList(ConfigOptions.ANNOUNCE_REMOVAL).isEmpty())
+            return null;
+
+        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_REMOVAL).toArray(), "\n");
+        source = source.replaceAll("\\[player]", targetName);
+        return mm.deserialize(source);
     }
 }
