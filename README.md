@@ -10,11 +10,9 @@ To install the plugin to your server, put the Jar file into your server plugins 
 
 Then, if your server is running, reload your server.
 
-### Compatibility
-
 Since this plugin is using the PaperAPI for minecraft 1.16, this plugin only supports paper servers with a minecraft version above 1.16.1.
 
-Other server software including bukkit, spigot is not tested and therefore, won't guarantee plugin performance.
+Other server software including bukkit and spigot is not tested and may not guarantee plugin performance.
 
 ## Usage
 
@@ -22,3 +20,5 @@ This plugin improves the Punishment features in vanilla Minecraft. It introduces
 It also includes an improved, cleaner ban gui.
 
 For in-depth documentation on how to use this plugin, please refer to the [wiki.](https://github.com/Coadon/ALMPP/wiki)
+
+If you found a bug, please consider reporting it to us [here](https://github.com/Coadon/ALMPP/issues/new/choose).
