@@ -81,7 +81,7 @@ jar {
 }
 
 def commitsSinceLastTag() {
-    def indraGit = project.extensions.findByName("IndraGit")
+    def indraGit = project.extensions.findByName("indraGit")
 
     if (indraGit == null || !indraGit.isPresent() || indraGit.tags().isEmpty()) {
         return -1
