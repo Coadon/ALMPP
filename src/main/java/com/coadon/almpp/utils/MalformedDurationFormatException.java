@@ -1,6 +1,6 @@
 /*
  * ALMPP - The advanced lightweight punishment plugin for Minecraft servers
- * Copyright (C) 2021 Coadon
+ * Copyright (C) 2021-2022 Coadon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,24 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.system;
+package com.coadon.almpp.utils;
 
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+public class MalformedDurationFormatException extends Exception {
 
-import java.util.Date;
+    public MalformedDurationFormatException() {
+        super();
+    }
 
-public interface BanManager {
+    public MalformedDurationFormatException(String message) {
+        super(message);
+    }
 
-    void kickPlayer(@NotNull Player player, @NotNull String reason, boolean broadcast);
+    public MalformedDurationFormatException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-    void permBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast);
-
-    void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast);
-
-    void kickAllPlayer(@NotNull String reason);
-
-    void pardon(@NotNull String player);
-
-    boolean isBanned(@NotNull String player);
+    public MalformedDurationFormatException(Throwable cause) {
+        super(cause);
+    }
 }

@@ -1,6 +1,6 @@
 /*
  * ALMPP - The advanced lightweight punishment plugin for Minecraft servers
- * Copyright (C) 2021 Coadon
+ * Copyright (C) 2022 Coadon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,27 +16,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp;
+package com.coadon.almpp.config;
 
-import com.coadon.almpp.almpp.system.ComponentProvider;
-import com.coadon.almpp.almpp.config.ConfigHandler;
-import com.coadon.almpp.almpp.system.BanManager;
-import org.bukkit.command.TabExecutor;
-import org.bukkit.event.Listener;
+public enum ConfigOptions {
+    DEFAULT_PUNISH_REASON("default-punish-reason"),
+    ANNOUNCE_TERMINATION("punish-announcement.termination"),
+    ANNOUNCE_REMOVAL("punish-announcement.removal"),
+    COMMON_PUNISH_REASONS("common-punish-reasons"),
+    NO_REASON_ALT("no-reason-alt"),
+    SCREEN_PERM_TERM("ban-screens.permanent-termination"),
+    SCREEN_TEMP_TERM("ban-screens.temporary-termination"),
+    SCREEN_REMOVAL("ban-screens.removal"),
+    DEBUG_MODE("debug-mode");
 
-public interface IALMPP {
+    private final String path;
 
-    void registerCommand(final String commandLabel, final TabExecutor commandExe);
+    ConfigOptions(String node) {
+        this.path = node;
+    }
 
-    void registerListeners(final Listener listener);
-
-    ComponentProvider getComponentProvider();
-
-    BanManager getBanManager();
-
-    ConfigHandler getConfigHandler();
-
-    String getVersion();
-
-    void terminate();
+    public String getPath() {
+        return path;
+    }
 }

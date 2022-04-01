@@ -1,6 +1,6 @@
 /*
  * ALMPP - The advanced lightweight punishment plugin for Minecraft servers
- * Copyright (C) 2021 Coadon
+ * Copyright (C) 2021-2022 Coadon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,23 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.commands;
+package com.coadon.almpp.system;
 
-public class InvalidCommandArgumentsException extends Exception {
+import net.kyori.adventure.text.Component;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-    public InvalidCommandArgumentsException() {
-        super();
-    }
+public interface ComponentProvider {
 
-    public InvalidCommandArgumentsException(String message) {
-        super(message);
-    }
+    @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date);
 
-    public InvalidCommandArgumentsException(String message, Throwable cause) {
-        super(message, cause);
-    }
+    @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date);
 
-    public InvalidCommandArgumentsException(Throwable cause) {
-        super(cause);
-    }
+    @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expires);
+
+    @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName);
+
+    @Nullable Component getRemovalAnnouncementMessage(@NotNull String targetName);
 }

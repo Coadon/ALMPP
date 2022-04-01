@@ -1,6 +1,6 @@
 /*
  * ALMPP - The advanced lightweight punishment plugin for Minecraft servers
- * Copyright (C) 2021 Coadon
+ * Copyright (C) 2021-2022 Coadon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.commands;
+package com.coadon.almpp.commands;
 
-import com.coadon.almpp.almpp.ALMPP;
-import com.coadon.almpp.almpp.config.ConfigOptions;
-import com.coadon.almpp.almpp.utils.StringCombiner;
+import com.coadon.almpp.ALMPP;
+import com.coadon.almpp.config.ConfigOptions;
+import com.coadon.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.ChatColor;
@@ -34,10 +34,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class Commandkick extends ALMPPCommand {
+public class Commandban extends ALMPPCommand {
 
-    public Commandkick(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /kick <player> [reason]").color(NamedTextColor.RED));
+    public Commandban(ALMPP plugin) {
+        super(plugin, Component.text("Usage: /ban <player> [reason]").color(NamedTextColor.RED));
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Commandkick extends ALMPPCommand {
         // See if the player is immune
         if (player.hasPermission("almpp.immune")) {
             // Target is immune
-            sender.sendMessage(ChatColor.DARK_RED + "Forbidden! " + ChatColor.RED + "You may not kick this player.");
+            sender.sendMessage(ChatColor.DARK_RED + "Forbidden! " + ChatColor.RED + "You may not ban this player.");
             logger.info("'" + sender.getName() + "' was forbidden to punish immune player '" + player.getName() + "'");
             return;
         }
@@ -77,7 +77,7 @@ public class Commandkick extends ALMPPCommand {
         if (args.length() > 1 && !(StringCombiner.combine(rawReason).equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = StringCombiner.combine(rawReason);
 
-        getBanManager().kickPlayer(player, reason, broadcast);
+        getBanManager().permBanPlayer(player, reason, sender.getName(), broadcast);
     }
 
     @Override

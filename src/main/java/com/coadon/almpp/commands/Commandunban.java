@@ -16,9 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.commands;
+package com.coadon.almpp.commands;
 
-import com.coadon.almpp.almpp.ALMPP;
+import com.coadon.almpp.ALMPP;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.BanEntry;

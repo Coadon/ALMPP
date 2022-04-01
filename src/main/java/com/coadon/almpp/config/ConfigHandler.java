@@ -1,6 +1,6 @@
 /*
  * ALMPP - The advanced lightweight punishment plugin for Minecraft servers
- * Copyright (C) 2021 Coadon
+ * Copyright (C) 2022 Coadon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,21 +16,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.system;
+package com.coadon.almpp.config;
 
-import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public interface ComponentProvider {
+import java.util.List;
 
-    @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date);
+public interface ConfigHandler {
 
-    @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date);
+    @NotNull String getString(ConfigOptions option);
 
-    @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expires);
+    @NotNull List<String> getStringList(ConfigOptions option);
 
-    @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName);
-
-    @Nullable Component getRemovalAnnouncementMessage(@NotNull String targetName);
+    boolean getBoolean(ConfigOptions option);
 }

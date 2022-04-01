@@ -1,6 +1,6 @@
 /*
  * ALMPP - The advanced lightweight punishment plugin for Minecraft servers
- * Copyright (C) 2021 Coadon
+ * Copyright (C) 2021-2022 Coadon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,13 +16,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp;
+package com.coadon.almpp;
 
-import com.coadon.almpp.almpp.commands.*;
-import com.coadon.almpp.almpp.config.ConfigHandler;
-import com.coadon.almpp.almpp.config.ConfigHandlerImpl;
-import com.coadon.almpp.almpp.listeners.PlayerLoginListeners;
-import com.coadon.almpp.almpp.system.*;
+import com.coadon.almpp.commands.*;
+import com.coadon.almpp.config.ConfigHandler;
+import com.coadon.almpp.config.ConfigHandlerImpl;
+import com.coadon.almpp.listeners.PlayerLoginListeners;
+import com.coadon.almpp.system.BanManager;
+import com.coadon.almpp.system.BanManagerImpl;
+import com.coadon.almpp.system.ComponentProvider;
+import com.coadon.almpp.system.ComponentProviderImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;

@@ -1,6 +1,6 @@
 /*
  * ALMPP - The advanced lightweight punishment plugin for Minecraft servers
- * Copyright (C) 2021 Coadon
+ * Copyright (C) 2021-2022 Coadon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,15 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.commands;
+package com.coadon.almpp.commands;
 
-import org.bukkit.Server;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.jetbrains.annotations.NotNull;
+public class InvalidCommandArgumentsException extends Exception {
 
-public interface IALMPPCommand {
+    public InvalidCommandArgumentsException() {
+        super();
+    }
 
-    void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable;
+    public InvalidCommandArgumentsException(String message) {
+        super(message);
+    }
 
+    public InvalidCommandArgumentsException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public InvalidCommandArgumentsException(Throwable cause) {
+        super(cause);
+    }
 }

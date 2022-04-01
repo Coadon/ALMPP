@@ -1,6 +1,6 @@
 /*
  * ALMPP - The advanced lightweight punishment plugin for Minecraft servers
- * Copyright (C) 2022 Coadon
+ * Copyright (C) 2021-2022 Coadon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,26 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.almpp.config;
+package com.coadon.almpp.commands;
 
-public enum ConfigOptions {
-    DEFAULT_PUNISH_REASON("default-punish-reason"),
-    ANNOUNCE_TERMINATION("punish-announcement.termination"),
-    ANNOUNCE_REMOVAL("punish-announcement.removal"),
-    COMMON_PUNISH_REASONS("common-punish-reasons"),
-    NO_REASON_ALT("no-reason-alt"),
-    SCREEN_PERM_TERM("ban-screens.permanent-termination"),
-    SCREEN_TEMP_TERM("ban-screens.temporary-termination"),
-    SCREEN_REMOVAL("ban-screens.removal"),
-    DEBUG_MODE("debug-mode");
+import org.bukkit.Server;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
-    private final String path;
+public interface IALMPPCommand {
 
-    ConfigOptions(String node) {
-        this.path = node;
-    }
+    void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable;
 
-    public String getPath() {
-        return path;
-    }
 }

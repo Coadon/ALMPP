@@ -1,43 +1,44 @@
 name: ALMPP
 version: '${version}'
-main: com.coadon.almpp.almpp.ALMPP
+main: com.coadon.almpp.ALMPP
 api-version: 1.16
-authors: [ Coadon ]
+authors: [Coadon]
 description: The Advanced Lightweight Minecraft Punish Plugin
 
 commands:
-  ban:
-    description: Permanently bans a specified player from the server.
-    permission: almpp.ban
-    aliases: [ permban, pbn, bn, expel ]
-    usage: /<command> <player> [reason]
-  tempban:
-    description: Temporarily bans a specified player from the server.
-    permission: almpp.tempban
-    aliases: [ tmpban, tbn, tb, texpel ]
-    usage: /<command> <player> <duration> [reason]
-  kick:
-    description: Kicks a specified player from the server.
-    permission: almpp.kick
-    aliases: [ k, kp, ck, remove, rm ]
-    usage: /<command> <player> [reason]
-  kickall:
-    description: Kicks every player from the server.
-    permission: almpp.kickall
-    aliases: [ kall, kap, ka ]
-    usage: /<command> [reason]
-  unban:
-    description: Unbans specified player(s) from the blacklist.
-    permission: almpp.pardon
-    aliases: [ pardon ]
-    usage: /<command> <player...>
   almpp:
     description: Displays information about this plugin.
-    permission: almpp.plugininfo
     usage: /<command>
+    permission: almpp.almpp
+  ban:
+    description: Permanently bans a specified player.
+    usage: /<command> <player> [reason]
+    permission: almpp.ban
+    aliases: [permban, bn, expel]
+  kick:
+    description: Kicks a specified player.
+    usage: /<command> <player> [reason]
+    permission: almpp.kick
+    aliases: [k, remove, rm]
+  kickall:
+    description: Kicks all players.
+    usage: /<command> [reason]
+    permission: almpp.kickall
+    aliases: [kall]
+  tempban:
+    description: Temporarily bans a specified player.
+    usage: /<command> <player> <duration> [reason]
+    permission: almpp.tempban
+    aliases: [tbn]
+  unban:
+    description: Unbans specified player(s) from the blacklist.
+    usage: /<command> <player...>
+    permission: almpp.pardon
+    aliases: [pardon]
 
 permissions:
   almpp.*:
+    default: op
     description: Wildcard permission for ALMPP.
     children:
       almpp.ban: true
@@ -47,17 +48,17 @@ permissions:
       almpp.pardon: true
       almpp.immune: true
       almpp.plugininfo: true
+  almpp.almpp:
+    description: Allow access to /almpp command.
   almpp.ban:
     description: Allow access to /ban command.
-  almpp.tempban:
-    description: Allow access to /tempban command.
+  almpp.immune:
+    description: Immune to all punishments except for kickall.
   almpp.kick:
     description: Allow access to /kick command.
   almpp.kickall:
     description: Allow access to /kickall command.
-  almpp.pardon:
+  almpp.tempban:
+    description: Allow access to /tempban command.
+  almpp.unban:
     description: Allow access to /unban command.
-  almpp.immune:
-    description: Immune to all punishments except for kickall.
-  almpp.plugininfo:
-    description: Allow access to /almpp command.
