@@ -128,4 +128,75 @@ public final class BanDurationInterpreter {
         }
         return new Date(System.currentTimeMillis() + (seconds * 1000L));
     }
+
+    /**
+     * Converts a date to a String of duration in compare to the time when the method is called.
+     *
+     * @param date the date.
+     * @return the duration string.
+     */
+    public static String getDurationString(final @NotNull Date date) {
+        // The difference between the current time and the date in seconds
+        int diff = (int) ((date.getTime() - System.currentTimeMillis()) / 1000);
+
+        int years;
+        int months;
+        int days;
+        int hours;
+        int minutes;
+        int seconds;
+
+        int[] yrAr = modularDivide(diff, YEAR);
+        if (yrAr[0] == 0) {
+            return "this instant";
+        }
+        years = yrAr[0];
+        if (yrAr[1] == 0) {
+            return years + "y";
+        }
+
+        int[] moAr = modularDivide(yrAr[1], MONTH);
+        months = moAr[0];
+        if (moAr[1] == 0) {
+            return years + "y," + months + "mo";
+        }
+
+        int[] dyAr = modularDivide(moAr[1], DAY);
+        days = dyAr[0];
+        if (dyAr[1] == 0) {
+            return years + "y," + months + "mo," + days + "d";
+        }
+
+        int[] hrAr = modularDivide(dyAr[1], HOUR);
+        hours = hrAr[0];
+        if (hrAr[1] == 0) {
+            return years + "y," + months + "mo," + days + "d," + hours + "h";
+        }
+
+        int[] miAr = modularDivide(hrAr[1], MINUTE);
+        minutes = miAr[0];
+        if (miAr[1] == 0) {
+            return years + "y," + months + "mo," + days + "d," + hours + "h," + minutes + "m";
+        }
+
+        seconds = miAr[1];
+
+        return years + "y," + months + "mo," + days + "d," + hours + "h," + minutes + "m," + seconds + "s";
+    }
+
+    /**
+     * Modular divide 2 numbers.
+     *
+     * @param dividend the dividend
+     * @param divider the divider
+     * @return An array of integers. The first one is the quotient, and the second one is the remainder.
+     */
+    private static int[] modularDivide(int dividend, int divider) {
+        int remainder = dividend % divider;
+        if (remainder == 0) {
+            return new int[] {dividend / divider, 0};
+        } else {
+            return new int[] {(dividend - remainder) / divider, remainder};
+        }
+    }
 }
