@@ -36,7 +36,7 @@ public class Commandalmpp extends ALMPPCommand {
     }
 
     @Override
-    public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
+    public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) {
         sender.sendMessage(Component.text("")
                 .append(Component.text("ALMPP ").color(NamedTextColor.AQUA).decorate(TextDecoration.BOLD))
                 .append(Component.text("v" + plugin.getVersion() + "\n").color(NamedTextColor.LIGHT_PURPLE).decorate(TextDecoration.BOLD))

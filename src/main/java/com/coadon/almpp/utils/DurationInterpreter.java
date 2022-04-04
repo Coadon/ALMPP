@@ -20,10 +20,12 @@ package com.coadon.almpp.utils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
-public final class BanDurationInterpreter {
+public final class DurationInterpreter {
 
     private static final int MINUTE = 60;
     private static final int HOUR = MINUTE * 60;
@@ -44,7 +46,7 @@ public final class BanDurationInterpreter {
      * @return the converted date object
      * @throws MalformedDurationFormatException if the duration is malformed
      */
-    public static Date getExpireDate(final @NotNull String duration) throws MalformedDurationFormatException {
+    public static Date compileExpireDate(final @NotNull String duration) throws MalformedDurationFormatException {
         int seconds = 0;
         String[] tokens = duration.split(",");
         for (String token : tokens) {
@@ -139,49 +141,56 @@ public final class BanDurationInterpreter {
         // The difference between the current time and the date in seconds
         int diff = (int) ((date.getTime() - System.currentTimeMillis()) / 1000);
 
-        int years;
-        int months;
         int days;
         int hours;
         int minutes;
         int seconds;
 
-        int[] yrAr = modularDivide(diff, YEAR);
-        if (yrAr[0] == 0) {
-            return "this instant";
-        }
-        years = yrAr[0];
-        if (yrAr[1] == 0) {
-            return years + "y";
-        }
+        // ============================================================
+        // Calculate
+        // ============================================================
 
-        int[] moAr = modularDivide(yrAr[1], MONTH);
-        months = moAr[0];
-        if (moAr[1] == 0) {
-            return years + "y," + months + "mo";
-        }
-
-        int[] dyAr = modularDivide(moAr[1], DAY);
+        // Calculate days
+        int[] dyAr = modularDivide(diff, DAY);
+        if (dyAr[0] == 0 && dyAr[1] == 0)
+            return "this instant"; // No difference
         days = dyAr[0];
-        if (dyAr[1] == 0) {
-            return years + "y," + months + "mo," + days + "d";
-        }
 
+        // Calculate hours
         int[] hrAr = modularDivide(dyAr[1], HOUR);
         hours = hrAr[0];
-        if (hrAr[1] == 0) {
-            return years + "y," + months + "mo," + days + "d," + hours + "h";
-        }
 
+        // Calculate minutes
         int[] miAr = modularDivide(hrAr[1], MINUTE);
         minutes = miAr[0];
-        if (miAr[1] == 0) {
-            return years + "y," + months + "mo," + days + "d," + hours + "h," + minutes + "m";
-        }
 
+        // Consider the remaining as seconds
         seconds = miAr[1];
 
-        return years + "y," + months + "mo," + days + "d," + hours + "h," + minutes + "m," + seconds + "s";
+        // ============================================================
+        // Generate the String
+        // ============================================================
+
+        List<String> buffer = new ArrayList<>();
+
+        if (days != 0 )
+            buffer.add(days + "d");
+
+        if (hours != 0 )
+            buffer.add(hours + "h");
+
+        if (minutes != 0 )
+            buffer.add(minutes + "m");
+
+        if (seconds != 0 )
+            buffer.add(seconds + "s");
+
+        StringBuilder sb = new StringBuilder();
+
+        buffer.forEach(s -> sb.append(s).append(" "));
+
+        // Return
+        return sb.toString().trim();
     }
 
     /**

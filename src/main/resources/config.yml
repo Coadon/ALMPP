@@ -70,31 +70,29 @@ ban-screens:
 
   # Permanent Ban with /ban
   # [reason] - The punishment reason
-  # [date] - The execution date
+  # [date] - The date of issue
   permanent-termination:
     - "<color:red>You are permanently banned from this server!"
     - ""
     - "<color:gray>Reason: <color:white>[reason]"
-    - "<color:gray>Date: <color:white>[date]"
 
   # Temporary Ban with /tempban
   # [reason] - The punishment reason
-  # [date] - The execution date
+  # [date] - The date of issue
   # [expiry] - The expire date
+  # [duration] - The remaining duration of the ban
   temporary-termination:
-    - "<color:red>You are temporarily banned until <color:white>[expiry]<color:red> from this server!"
+    - "<color:red>You are temporarily banned for <color:white>[duration]<color:red> from this server!"
     - ""
     - "<color:gray>Reason: <color:white>[reason]"
-    - "<color:gray>Date: <color:white>[date]"
 
   # Kick with /kick
   # [reason] - The punishment reason
-  # [date] - The execution date
+  # [date] - The date of issue
   removal:
     - "<color:red>You are kicked from this server!"
     - ""
     - "<color:gray>Reason: <color:white>[reason]"
-    - "<color:gray>Date: <color:white>[date]"
 
 
 # Debug mode.

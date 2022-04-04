@@ -21,11 +21,14 @@ package com.coadon.almpp.system;
 import com.coadon.almpp.ALMPP;
 import com.coadon.almpp.config.ConfigHandler;
 import com.coadon.almpp.config.ConfigOptions;
+import com.coadon.almpp.utils.DurationInterpreter;
 import com.coadon.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Date;
 
 public final class ComponentProviderImpl implements ComponentProvider {
     private final ConfigHandler cfg;
@@ -37,27 +40,28 @@ public final class ComponentProviderImpl implements ComponentProvider {
     }
 
     @Override
-    public @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date) {
+    public @NotNull Component generateKickMessage(@NotNull String reason, @NotNull Date date) {
         String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_REMOVAL).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
-        source = source.replaceAll("\\[date]", date);
+        source = source.replaceAll("\\[date]", date.toString());
         return mm.deserialize(source);
     }
 
     @Override
-    public @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date) {
+    public @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull Date date) {
         String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_PERM_TERM).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
-        source = source.replaceAll("\\[date]", date);
+        source = source.replaceAll("\\[date]", date.toString());
         return mm.deserialize(source);
     }
 
     @Override
-    public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expiry) {
+    public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull Date date, @NotNull Date expiry) {
         String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_TEMP_TERM).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
-        source = source.replaceAll("\\[expiry]", expiry);
-        source = source.replaceAll("\\[date]", date);
+        source = source.replaceAll("\\[date]", date.toString());
+        source = source.replaceAll("\\[expiry]", expiry.toString());
+        source = source.replaceAll("\\[duration]", DurationInterpreter.getDurationString(expiry));
         return mm.deserialize(source);
     }
 

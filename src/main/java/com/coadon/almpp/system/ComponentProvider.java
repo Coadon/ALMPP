@@ -22,13 +22,15 @@ import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Date;
+
 public interface ComponentProvider {
 
-    @NotNull Component generateKickMessage(@NotNull String reason, @NotNull String date);
+    @NotNull Component generateKickMessage(@NotNull String reason, @NotNull Date date);
 
-    @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull String date);
+    @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull Date date);
 
-    @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull String date, @NotNull String expires);
+    @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull Date date, @NotNull Date expiry);
 
     @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName);
 

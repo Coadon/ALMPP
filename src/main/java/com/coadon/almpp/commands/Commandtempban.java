@@ -20,7 +20,7 @@ package com.coadon.almpp.commands;
 
 import com.coadon.almpp.ALMPP;
 import com.coadon.almpp.config.ConfigOptions;
-import com.coadon.almpp.utils.BanDurationInterpreter;
+import com.coadon.almpp.utils.DurationInterpreter;
 import com.coadon.almpp.utils.MalformedDurationFormatException;
 import com.coadon.almpp.utils.StringCombiner;
 import com.google.common.collect.ImmutableList;
@@ -73,7 +73,7 @@ public class Commandtempban extends ALMPPCommand {
         // Interprets the ban duration
         Date expireDate;
         try {
-            expireDate = BanDurationInterpreter.getExpireDate(args.get(1));
+            expireDate = DurationInterpreter.compileExpireDate(args.get(1));
         } catch (MalformedDurationFormatException e) {
             // Malformed ban duration
             sender.sendMessage(ChatColor.RED + "Error: Invalid ban duration");
