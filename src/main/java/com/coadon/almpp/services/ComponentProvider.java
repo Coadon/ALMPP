@@ -16,24 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.system;
+package com.coadon.almpp.services;
 
-import org.bukkit.entity.Player;
+import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
 
-public interface BanManager {
+public interface ComponentProvider {
 
-    void kickPlayer(@NotNull Player player, @NotNull String reason, boolean broadcast);
+    @NotNull Component generateKickMessage(@NotNull String reason, @NotNull Date date);
 
-    void permBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast);
+    @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull Date date);
 
-    void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast);
+    @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull Date date, @NotNull Date expiry);
 
-    void kickAllPlayer(@NotNull String reason);
+    @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName);
 
-    void pardon(@NotNull String player);
-
-    boolean isBanned(@NotNull String player);
+    @Nullable Component getRemovalAnnouncementMessage(@NotNull String targetName);
 }

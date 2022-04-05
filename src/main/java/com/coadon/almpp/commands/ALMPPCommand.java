@@ -20,9 +20,9 @@ package com.coadon.almpp.commands;
 
 import com.coadon.almpp.AbstractALMPP;
 import com.coadon.almpp.config.ConfigOptions;
-import com.coadon.almpp.system.ComponentProvider;
+import com.coadon.almpp.services.ComponentProvider;
 import com.coadon.almpp.config.ConfigHandler;
-import com.coadon.almpp.system.BanManager;
+import com.coadon.almpp.services.BanManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.BanList;

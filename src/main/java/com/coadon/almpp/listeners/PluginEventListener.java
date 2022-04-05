@@ -20,8 +20,8 @@ package com.coadon.almpp.listeners;
 
 import com.coadon.almpp.AbstractALMPP;
 import com.coadon.almpp.config.ConfigHandler;
-import com.coadon.almpp.system.BanManager;
-import com.coadon.almpp.system.ComponentProvider;
+import com.coadon.almpp.services.BanManager;
+import com.coadon.almpp.services.ComponentProvider;
 import org.bukkit.BanList;
 import org.bukkit.Server;
 import org.bukkit.World;

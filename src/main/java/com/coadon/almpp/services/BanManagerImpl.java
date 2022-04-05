@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.system;
+package com.coadon.almpp.services;
 
 import com.coadon.almpp.ALMPP;
 import net.kyori.adventure.text.Component;
