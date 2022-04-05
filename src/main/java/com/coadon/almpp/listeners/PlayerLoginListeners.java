@@ -18,7 +18,7 @@
 
 package com.coadon.almpp.listeners;
 
-import com.coadon.almpp.ALMPP;
+import com.coadon.almpp.AbstractALMPP;
 import com.coadon.almpp.config.ConfigOptions;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -31,7 +31,7 @@ import java.util.Objects;
 
 public class PlayerLoginListeners extends PluginEventListener {
 
-    public PlayerLoginListeners(ALMPP plugin) {
+    public PlayerLoginListeners(AbstractALMPP plugin) {
         super(plugin);
     }
 

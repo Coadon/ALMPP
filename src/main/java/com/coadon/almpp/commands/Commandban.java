@@ -18,7 +18,7 @@
 
 package com.coadon.almpp.commands;
 
-import com.coadon.almpp.ALMPP;
+import com.coadon.almpp.AbstractALMPP;
 import com.coadon.almpp.config.ConfigOptions;
 import com.coadon.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
@@ -36,7 +36,7 @@ import java.util.List;
 
 public class Commandban extends ALMPPCommand {
 
-    public Commandban(ALMPP plugin) {
+    public Commandban(AbstractALMPP plugin) {
         super(plugin, Component.text("Usage: /ban <player> [reason]").color(NamedTextColor.RED));
     }
 

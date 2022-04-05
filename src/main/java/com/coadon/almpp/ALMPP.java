@@ -29,12 +29,11 @@ import com.coadon.almpp.system.ComponentProviderImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
 
 import java.util.Objects;
 
-public final class ALMPP extends JavaPlugin implements IALMPP{
+public final class ALMPP extends AbstractALMPP {
     private final Logger logger = getSLF4JLogger();
     private final String VERSION = getDescription().getVersion();
 
@@ -75,8 +74,7 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
         registerListeners(new PlayerLoginListeners(this));
     }
 
-    @Override
-    public void registerCommand(String commandLabel, TabExecutor commandExe) {
+    private void registerCommand(String commandLabel, TabExecutor commandExe) {
         try {
             Objects.requireNonNull(getCommand(commandLabel)).setExecutor(commandExe);
             Objects.requireNonNull(getCommand(commandLabel)).setTabCompleter(commandExe);
@@ -85,8 +83,7 @@ public final class ALMPP extends JavaPlugin implements IALMPP{
         }
     }
 
-    @Override
-    public void registerListeners(Listener listener) {
+    private void registerListeners(Listener listener) {
         Bukkit.getPluginManager().registerEvents(listener, this);
     }
 

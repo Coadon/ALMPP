@@ -18,7 +18,7 @@
 
 package com.coadon.almpp.commands;
 
-import com.coadon.almpp.ALMPP;
+import com.coadon.almpp.AbstractALMPP;
 import com.coadon.almpp.config.ConfigOptions;
 import com.coadon.almpp.utils.DurationInterpreter;
 import com.coadon.almpp.utils.MalformedDurationFormatException;
@@ -43,7 +43,7 @@ public class Commandtempban extends ALMPPCommand {
     // Common time durations, for use in tab completion
     private static final List<String> COMMON_DURATIONS = ImmutableList.of("1m", "15m", "1h", "3h", "12h", "1d", "1w", "1mo", "3mo", "6mo", "1y");
 
-    public Commandtempban(ALMPP plugin) {
+    public Commandtempban(AbstractALMPP plugin) {
         super(plugin, Component.text("Usage: /ban <player> <duration> [reason]").color(NamedTextColor.RED));
     }
 

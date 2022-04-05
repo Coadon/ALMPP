@@ -18,7 +18,7 @@
 
 package com.coadon.almpp.commands;
 
-import com.coadon.almpp.ALMPP;
+import com.coadon.almpp.AbstractALMPP;
 import com.coadon.almpp.config.ConfigOptions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -32,7 +32,7 @@ import java.util.List;
 
 public class Commandkickall extends ALMPPCommand {
 
-    public Commandkickall(ALMPP plugin) {
+    public Commandkickall(AbstractALMPP plugin) {
         super(plugin, Component.text("Usage: /kickall [reason]").color(NamedTextColor.RED));
     }
 

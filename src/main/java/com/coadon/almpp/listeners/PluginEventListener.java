@@ -18,10 +18,10 @@
 
 package com.coadon.almpp.listeners;
 
-import com.coadon.almpp.ALMPP;
-import com.coadon.almpp.system.ComponentProvider;
+import com.coadon.almpp.AbstractALMPP;
 import com.coadon.almpp.config.ConfigHandler;
 import com.coadon.almpp.system.BanManager;
+import com.coadon.almpp.system.ComponentProvider;
 import org.bukkit.BanList;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -36,11 +36,11 @@ import java.util.List;
 import java.util.UUID;
 
 public abstract class PluginEventListener implements Listener {
-    protected final ALMPP plugin;
+    protected final AbstractALMPP plugin;
     protected final Logger logger;
     protected final ConfigHandler cfg;
 
-    public PluginEventListener(ALMPP plugin) {
+    public PluginEventListener(AbstractALMPP plugin) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
         this.cfg = plugin.getConfigHandler();
