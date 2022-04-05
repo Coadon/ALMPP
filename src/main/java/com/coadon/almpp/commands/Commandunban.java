@@ -42,7 +42,7 @@ public class Commandunban extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.length() == 0)
+        if (args.size() == 0)
             throw new InvalidCommandArgumentsException();
 
         // Iterate over all specified entries in the argument.

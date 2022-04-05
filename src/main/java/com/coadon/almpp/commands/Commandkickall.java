@@ -40,7 +40,7 @@ public class Commandkickall extends ALMPPCommand {
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) {
         // Obtaining the reason
         String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
-        if (args.length() > 0 && !(args.getCombined().equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
+        if (args.size() > 0 && !(args.getCombined().equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = args.getCombined();
 
         getBanManager().kickAllPlayer(reason);

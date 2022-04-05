@@ -21,49 +21,40 @@ package com.coadon.almpp.commands;
 import com.coadon.almpp.utils.StringCombiner;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
-public final class Arguments {
-    private final String[] content;
+public final class Arguments extends ArrayList<String> {
 
     public Arguments(@Nullable String[] args) {
-        this.content = args;
+        super(Arrays.asList(args));
     }
 
     public String[] getContent() {
-        return content;
-    }
-
-    public String get(int index) throws ArrayIndexOutOfBoundsException {
-        return (String) Array.get(content, index);
-    }
-
-    public String[] getFrom(int skipCount) throws IndexOutOfBoundsException{
-        if (skipCount > content.length)
-            throw new IndexOutOfBoundsException();
-        return Arrays.stream(content).skip(skipCount).toArray(String[]::new);
+        return this.toArray(new String[0]);
     }
 
     public String getCombined() {
-        return StringCombiner.combine(content);
+        return StringCombiner.combine(this.toArray());
     }
 
-    public String getCombinedFrom(int skipCount) throws IndexOutOfBoundsException{
-        if (skipCount > content.length)
+    public String getSkipCombined(int skipCount) throws IndexOutOfBoundsException{
+        return StringCombiner.combine(skipGetArray(skipCount));
+    }
+
+    public List<String> skipGet(int skipCount) throws IndexOutOfBoundsException{
+        if (skipCount > this.size())
             throw new IndexOutOfBoundsException();
-        return StringCombiner.combine(Arrays.stream(content).skip(skipCount).toArray());
+        return this.stream().skip(skipCount).collect(Collectors.toList());
     }
 
-    public List<String> getContentAsList() {
-        return Arrays.asList(content);
+    public String[] skipGetArray(int skipCount) throws IndexOutOfBoundsException{
+        if (skipCount > this.size())
+            throw new IndexOutOfBoundsException();
+        return this.stream().skip(skipCount).toArray(String[]::new);
     }
 
-    public Set<String> getContentAsSet() {
-        return new HashSet<>(Arrays.asList(content));
-    }
-
-    public int length() {
-        return content.length;
+    public Set<String> getAsSet() {
+        return new HashSet<>(this);
     }
 }
