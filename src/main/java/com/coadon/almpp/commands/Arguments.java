@@ -19,6 +19,7 @@
 package com.coadon.almpp.commands;
 
 import com.coadon.almpp.utils.StringCombiner;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -28,6 +29,10 @@ public final class Arguments extends ArrayList<String> {
 
     public Arguments(@Nullable String[] args) {
         super(Arrays.asList(args));
+    }
+
+    public Arguments(@NotNull Collection<String> args) {
+        super(args);
     }
 
     public String[] getContent() {
