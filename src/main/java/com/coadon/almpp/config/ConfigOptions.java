@@ -31,8 +31,8 @@ public enum ConfigOptions {
 
     private final String path;
 
-    ConfigOptions(String node) {
-        this.path = node;
+    ConfigOptions(String path) {
+        this.path = path;
     }
 
     public String getPath() {

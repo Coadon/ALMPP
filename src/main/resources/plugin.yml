@@ -40,14 +40,6 @@ permissions:
   almpp.*:
     default: op
     description: Wildcard permission for ALMPP.
-    children:
-      almpp.ban: true
-      almpp.tempban: true
-      almpp.kick: true
-      almpp.kickall: true
-      almpp.pardon: true
-      almpp.immune: true
-      almpp.plugininfo: true
   almpp.almpp:
     description: Allow access to /almpp command.
   almpp.ban:
