@@ -21,17 +21,17 @@ package com.coadon.almpp;
 import com.coadon.almpp.config.ConfigHandler;
 import com.coadon.almpp.services.BanManager;
 import com.coadon.almpp.services.ComponentProvider;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.Plugin;
 
-public abstract class AbstractALMPP extends JavaPlugin {
+public interface ALMPPInterface extends Plugin {
 
-    abstract public ComponentProvider getComponentProvider();
+    ComponentProvider getComponentProvider();
 
-    abstract public BanManager getBanManager();
+    BanManager getBanManager();
 
-    abstract public ConfigHandler getConfigHandler();
+    ConfigHandler getConfigHandler();
 
-    abstract public String getVersion();
+    String getVersion();
 
-    abstract public void terminate();
+    void terminate();
 }

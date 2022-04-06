@@ -29,11 +29,12 @@ import com.coadon.almpp.services.ComponentProviderImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
 
 import java.util.Objects;
 
-public final class ALMPP extends AbstractALMPP {
+public final class ALMPP extends JavaPlugin implements ALMPPInterface {
     private final Logger logger = getSLF4JLogger();
     private final String VERSION = getDescription().getVersion();
 

@@ -18,7 +18,7 @@
 
 package com.coadon.almpp.commands;
 
-import com.coadon.almpp.AbstractALMPP;
+import com.coadon.almpp.ALMPPInterface;
 import com.coadon.almpp.config.ConfigOptions;
 import com.coadon.almpp.services.ComponentProvider;
 import com.coadon.almpp.config.ConfigHandler;
@@ -44,19 +44,19 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
-    protected final AbstractALMPP plugin;
+    protected final ALMPPInterface plugin;
     protected final Logger logger;
     protected final ConfigHandler cfg;
     private final @Nullable Component usage;
 
-    public ALMPPCommand(AbstractALMPP plugin, @Nullable Component usage) {
+    public ALMPPCommand(ALMPPInterface plugin, @Nullable Component usage) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
         this.cfg = plugin.getConfigHandler();
         this.usage = usage;
     }
 
-    public ALMPPCommand(AbstractALMPP plugin) {
+    public ALMPPCommand(ALMPPInterface plugin) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
         this.cfg = plugin.getConfigHandler();

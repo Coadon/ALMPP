@@ -18,7 +18,7 @@
 
 package com.coadon.almpp.commands;
 
-import com.coadon.almpp.AbstractALMPP;
+import com.coadon.almpp.ALMPPInterface;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -31,7 +31,7 @@ import java.time.LocalDate;
 
 public class Commandalmpp extends ALMPPCommand {
 
-    public Commandalmpp(AbstractALMPP plugin) {
+    public Commandalmpp(ALMPPInterface plugin) {
         super(plugin);
     }
 
