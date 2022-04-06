@@ -25,7 +25,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public final class DurationInterpreter {
+/**
+ * A utility class that contains methods for interpreting and compiling durations.
+ */
+public final class DurationUtil {
 
     private static final int MINUTE = 60;
     private static final int HOUR = MINUTE * 60;
@@ -137,7 +140,7 @@ public final class DurationInterpreter {
      * @param date the date.
      * @return the duration string.
      */
-    public static String getDurationString(final @NotNull Date date) {
+    public static String compileDurationString(final @NotNull Date date) {
         // The difference between the current time and the date in seconds
         int diff = (int) ((date.getTime() - System.currentTimeMillis()) / 1000);
 

@@ -20,12 +20,12 @@ package com.coadon.almpp.commands;
 
 import com.coadon.almpp.ALMPPInterface;
 import com.coadon.almpp.config.ConfigOptions;
-import com.coadon.almpp.utils.DurationInterpreter;
+import com.coadon.almpp.utils.DurationUtil;
 import com.coadon.almpp.utils.MalformedDurationFormatException;
-import com.coadon.almpp.utils.StringCombiner;
 import com.google.common.collect.ImmutableList;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -73,7 +73,7 @@ public class Commandtempban extends ALMPPCommand {
         // Interprets the ban duration
         Date expireDate;
         try {
-            expireDate = DurationInterpreter.compileExpireDate(args.get(1));
+            expireDate = DurationUtil.compileExpireDate(args.get(1));
         } catch (MalformedDurationFormatException e) {
             // Malformed ban duration
             sender.sendMessage(ChatColor.RED + "Error: Invalid ban duration");
@@ -91,8 +91,8 @@ public class Commandtempban extends ALMPPCommand {
 
         // Obtaining the reason
         String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
-        if (args.size() > 2 && !(StringCombiner.combine(rawReason).equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
-            reason = StringCombiner.combine(rawReason);
+        if (args.size() > 2 && !(StringUtils.join(rawReason, ' ').equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
+            reason = StringUtils.join(rawReason, ' ').replace("\\ ", " ");
 
         getBanManager().tempBanPlayer(player, reason, sender.getName(), expireDate, broadcast);
     }

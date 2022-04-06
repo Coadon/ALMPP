@@ -20,9 +20,9 @@ package com.coadon.almpp.commands;
 
 import com.coadon.almpp.ALMPPInterface;
 import com.coadon.almpp.config.ConfigOptions;
-import com.coadon.almpp.utils.StringCombiner;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -74,8 +74,8 @@ public class Commandban extends ALMPPCommand {
 
         // Obtaining the reason
         String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
-        if (args.size() > 1 && !(StringCombiner.combine(rawReason).equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
-            reason = StringCombiner.combine(rawReason);
+        if (args.size() > 1 && !(StringUtils.join(rawReason, ' ').equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
+            reason = StringUtils.join(rawReason, ' ').replace("\\ ", " ");
 
         getBanManager().permBanPlayer(player, reason, sender.getName(), broadcast);
     }

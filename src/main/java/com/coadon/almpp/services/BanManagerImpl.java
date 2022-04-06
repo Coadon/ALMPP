@@ -18,7 +18,7 @@
 
 package com.coadon.almpp.services;
 
-import com.coadon.almpp.ALMPP;
+import com.coadon.almpp.ALMPPInterface;
 import net.kyori.adventure.text.Component;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -29,11 +29,11 @@ import org.slf4j.Logger;
 import java.util.Date;
 
 public final class BanManagerImpl implements BanManager {
-    private final ALMPP plugin;
+    private final ALMPPInterface plugin;
     private final Logger logger;
     private final ComponentProvider formatter;
 
-    public BanManagerImpl(ALMPP plugin) {
+    public BanManagerImpl(ALMPPInterface plugin) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
         this.formatter = plugin.getComponentProvider();

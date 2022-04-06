@@ -21,10 +21,10 @@ package com.coadon.almpp.services;
 import com.coadon.almpp.ALMPP;
 import com.coadon.almpp.config.ConfigHandler;
 import com.coadon.almpp.config.ConfigOptions;
-import com.coadon.almpp.utils.DurationInterpreter;
-import com.coadon.almpp.utils.StringCombiner;
+import com.coadon.almpp.utils.DurationUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +41,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
 
     @Override
     public @NotNull Component generateKickMessage(@NotNull String reason, @NotNull Date date) {
-        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_REMOVAL).toArray(), "\n");
+        String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_REMOVAL).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[date]", date.toString());
         return mm.deserialize(source);
@@ -49,7 +49,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
 
     @Override
     public @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull Date date) {
-        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_PERM_TERM).toArray(), "\n");
+        String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_PERM_TERM).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[date]", date.toString());
         return mm.deserialize(source);
@@ -57,11 +57,11 @@ public final class ComponentProviderImpl implements ComponentProvider {
 
     @Override
     public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull Date date, @NotNull Date expiry) {
-        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.SCREEN_TEMP_TERM).toArray(), "\n");
+        String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_TEMP_TERM).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[date]", date.toString());
         source = source.replaceAll("\\[expiry]", expiry.toString());
-        source = source.replaceAll("\\[duration]", DurationInterpreter.getDurationString(expiry));
+        source = source.replaceAll("\\[duration]", DurationUtil.compileDurationString(expiry));
         return mm.deserialize(source);
     }
 
@@ -71,7 +71,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
         if (cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).isEmpty())
             return null;
 
-        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).toArray(), "\n");
+        String source = StringUtils.join(cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).toArray(), "\n");
         source = source.replaceAll("\\[player]", targetName);
         return mm.deserialize(source);
     }
@@ -82,7 +82,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
         if (cfg.getStringList(ConfigOptions.ANNOUNCE_REMOVAL).isEmpty())
             return null;
 
-        String source = StringCombiner.combine(cfg.getStringList(ConfigOptions.ANNOUNCE_REMOVAL).toArray(), "\n");
+        String source = StringUtils.join(cfg.getStringList(ConfigOptions.ANNOUNCE_REMOVAL).toArray(), "\n");
         source = source.replaceAll("\\[player]", targetName);
         return mm.deserialize(source);
     }

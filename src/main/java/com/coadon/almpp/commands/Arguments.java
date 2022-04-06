@@ -18,7 +18,7 @@
 
 package com.coadon.almpp.commands;
 
-import com.coadon.almpp.utils.StringCombiner;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,11 +40,11 @@ public final class Arguments extends ArrayList<String> {
     }
 
     public String getCombined() {
-        return StringCombiner.combine(this.toArray());
+        return StringUtils.join(this.toArray(), ' ');
     }
 
     public String getSkipCombined(int skipCount) throws IndexOutOfBoundsException{
-        return StringCombiner.combine(skipGetArray(skipCount));
+        return StringUtils.join(skipGetArray(skipCount), ' ');
     }
 
     public List<String> skipGet(int skipCount) throws IndexOutOfBoundsException{
