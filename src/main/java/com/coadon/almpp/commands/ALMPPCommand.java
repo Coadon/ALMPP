@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
+public abstract class ALMPPCommand implements TabExecutor {
     protected final ALMPPInterface plugin;
     protected final Logger logger;
     protected final ConfigHandler cfg;
@@ -73,16 +73,15 @@ public abstract class ALMPPCommand implements IALMPPCommand, TabExecutor {
                 return false;
 
             sender.sendMessage(usage);
-            return true;
         } catch (Throwable e) {
             sender.sendMessage(Component.text("An error occurred while performing this command.").color(NamedTextColor.RED));
             if (cfg.getBoolean(ConfigOptions.DEBUG_MODE))
                 e.printStackTrace();
         }
+
         return true;
     }
 
-    @Override
     public abstract void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable;
 
     @Override
