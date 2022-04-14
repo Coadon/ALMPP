@@ -59,6 +59,12 @@ public final class Arguments extends ArrayList<String> {
         return this.stream().skip(skipCount).toArray(String[]::new);
     }
 
+    public Arguments skipGetArgs(int skipCount) throws IndexOutOfBoundsException{
+        if (skipCount > this.size())
+            throw new IndexOutOfBoundsException();
+        return new Arguments(this.stream().skip(skipCount).toArray(String[]::new));
+    }
+
     public Set<String> getAsSet() {
         return new HashSet<>(this);
     }

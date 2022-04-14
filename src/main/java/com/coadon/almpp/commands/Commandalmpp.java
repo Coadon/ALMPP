@@ -21,25 +21,54 @@ package com.coadon.almpp.commands;
 import com.coadon.almpp.ALMPPInterface;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-import java.time.LocalDate;
-
 public class Commandalmpp extends ALMPPCommand {
 
     public Commandalmpp(ALMPPInterface plugin) {
-        super(plugin);
+        super(plugin, Component.text("Usage: /almpp [help|version|reload|terminate]\n" +
+                "\t/almpp help : display this help\n" +
+                "\t/almpp version : display plugin version\n" +
+                "\t/almpp reload : reload config\n")
+                .color(NamedTextColor.GOLD));
     }
 
     @Override
-    public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) {
+    public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Exception {
+        if (args.size() == 0 || args.get(0).equals("help")) {
+            showVersion(sender);
+            showUsage();
+        }
+
+        switch (args.get(0)) {
+            case "version":
+                showVersion(sender);
+                break;
+            case "reload":
+                reloadPlugin(sender);
+                break;
+            default:
+                showUsage();
+        }
+    }
+
+    private void showUsage() throws InvalidCommandArgumentsException {
+        throw new InvalidCommandArgumentsException();
+    }
+
+    private void showVersion(@NotNull CommandSender sender) {
         sender.sendMessage(Component.text("")
-                .append(Component.text("ALMPP ").color(NamedTextColor.AQUA).decorate(TextDecoration.BOLD))
-                .append(Component.text("v" + plugin.getVersion() + "\n").color(NamedTextColor.LIGHT_PURPLE).decorate(TextDecoration.BOLD))
-                .append(Component.text("Copyright (C) 2020-" + LocalDate.now().getYear() + " Coadon.").color(NamedTextColor.GRAY)));
+                .append(Component.text("ALMPP ").color(NamedTextColor.GOLD))
+                .append(Component.text("version ").color(NamedTextColor.GRAY))
+                .append(Component.text(plugin.getVersion()).color(NamedTextColor.RED)));
+    }
+
+    private void reloadPlugin(@NotNull CommandSender sender) {
+        sender.sendMessage(Component.text("Reloading config...").color(NamedTextColor.GOLD));
+        plugin.reload();
+        sender.sendMessage(Component.text("Config reloaded!").color(NamedTextColor.GREEN));
     }
 }

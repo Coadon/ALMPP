@@ -109,9 +109,10 @@ public final class ALMPP extends JavaPlugin implements ALMPPInterface {
     }
 
     @Override
-    public void terminate() {
-        logger.info("ALMPP has been issued to be terminated.");
-        logger.info("Self destructing.");
-        Bukkit.getPluginManager().disablePlugin(this);
+    public void reload() {
+        // Reload plugin config
+        saveDefaultConfig();
+        reloadConfig();
+        configHandler = new ConfigHandlerImpl(getConfig());
     }
 }

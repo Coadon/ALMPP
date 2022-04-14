@@ -7,8 +7,8 @@ description: The Advanced Lightweight Minecraft Punish Plugin
 
 commands:
   almpp:
-    description: Displays information about this plugin.
-    usage: /<command>
+    description: ALMPP debug utilities.
+    usage: /<command> [help|version|reload|terminate]
     permission: almpp.almpp
   ban:
     description: Permanently bans a specified player.

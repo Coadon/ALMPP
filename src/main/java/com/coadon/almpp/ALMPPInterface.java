@@ -33,5 +33,5 @@ public interface ALMPPInterface extends Plugin {
 
     String getVersion();
 
-    void terminate();
+    void reload();
 }
