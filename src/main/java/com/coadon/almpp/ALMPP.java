@@ -69,7 +69,6 @@ public final class ALMPP extends JavaPlugin implements ALMPPInterface {
         registerCommand("kickall", new Commandkickall(this));
         registerCommand("unban", new Commandunban(this));
         registerCommand("tempban", new Commandtempban(this));
-        registerCommand("almpp", new Commandalmpp(this));
 
         // Event Listener Registries.
         registerListeners(new PlayerLoginListeners(this));

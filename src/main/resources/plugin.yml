@@ -6,10 +6,6 @@ authors: [Coadon]
 description: The Advanced Lightweight Minecraft Punish Plugin
 
 commands:
-  almpp:
-    description: ALMPP debug utilities.
-    usage: /<command> [help|version|reload|terminate]
-    permission: almpp.almpp
   ban:
     description: Permanently bans a specified player.
     usage: /<command> <player> [reason]
@@ -40,8 +36,6 @@ permissions:
   almpp.*:
     default: op
     description: Wildcard permission for ALMPP.
-  almpp.almpp:
-    description: Allow access to /almpp command.
   almpp.ban:
     description: Allow access to /ban command.
   almpp.immune:
