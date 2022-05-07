@@ -23,6 +23,7 @@ import com.coadon.almpp.config.ConfigOptions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -56,10 +57,11 @@ public class Commandban extends ALMPPCommand {
         }
 
         // See if the player is immune
-        if (player.hasPermission("almpp.immune")) {
+        if (player.hasPermission("almpp.immune") && cfg.getBoolean(ConfigOptions.ENABLE_IMMUNITY)) {
             // Target is immune
             sender.sendMessage(ChatColor.DARK_RED + "Forbidden! " + ChatColor.RED + "You may not ban this player.");
-            logger.info("'" + sender.getName() + "' was forbidden to punish immune player '" + player.getName() + "'");
+            if (cfg.getBoolean(ConfigOptions.ENABLE_LOGGING))
+                Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "'" + sender.getName() + "' was forbidden to punish immune player '" + player.getName() + "'");
             return;
         }
 

@@ -27,6 +27,8 @@ public enum ConfigOptions {
     SCREEN_PERM_TERM("ban-screens.permanent-termination"),
     SCREEN_TEMP_TERM("ban-screens.temporary-termination"),
     SCREEN_REMOVAL("ban-screens.removal"),
+    ENABLE_LOGGING("enable-logging"),
+    ENABLE_IMMUNITY("enable-immunity"),
     DEBUG_MODE("debug-mode");
 
     private final String path;

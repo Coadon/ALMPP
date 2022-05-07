@@ -19,24 +19,26 @@
 package com.coadon.almpp.services;
 
 import com.coadon.almpp.ALMPPInterface;
+import com.coadon.almpp.config.ConfigHandler;
+import com.coadon.almpp.config.ConfigOptions;
 import net.kyori.adventure.text.Component;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
 
 import java.util.Date;
 
 public final class BanManagerImpl implements BanManager {
     private final ALMPPInterface plugin;
-    private final Logger logger;
     private final ComponentProvider formatter;
+    private final ConfigHandler cfg;
 
     public BanManagerImpl(ALMPPInterface plugin) {
         this.plugin = plugin;
-        this.logger = plugin.getSLF4JLogger();
         this.formatter = plugin.getComponentProvider();
+        this.cfg = plugin.getConfigHandler();
     }
 
     @Override
@@ -49,7 +51,7 @@ public final class BanManagerImpl implements BanManager {
         player.kick(formatter.generateKickMessage(reason, new Date()));
 
         // Log
-        logger.info("Kicked " + player.getName() + " from the server");
+        logToConsole("Kicked " + player.getName() + " from the server.");
     }
 
     @Override
@@ -63,7 +65,7 @@ public final class BanManagerImpl implements BanManager {
         player.banPlayer(reason, source);
 
         // Log
-        logger.info("Permanently banned " + player.getName() + " from the server");
+        logToConsole("Permanently banned " + player.getName() + " from the server.");
     }
 
     @Override
@@ -77,7 +79,7 @@ public final class BanManagerImpl implements BanManager {
         player.banPlayer(reason, expires, source);
 
         // Log
-        logger.info("Temporarily banned " + player.getName() + " from the server");
+        logToConsole("Temporarily banned " + player.getName() + " from the server.");
     }
 
     @Override
@@ -87,7 +89,7 @@ public final class BanManagerImpl implements BanManager {
                 player -> player.kick(formatter.generateKickMessage(reason, new Date())));
 
         // Log
-        logger.info("Kicked everyone from the server");
+        logToConsole("Kicked everyone from the server.");
     }
 
     @Override
@@ -112,9 +114,6 @@ public final class BanManagerImpl implements BanManager {
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.sendMessage(msg)
         );
-
-        // Send a message to the console
-        Bukkit.getConsoleSender().sendMessage(msg);
     }
 
     private void broadcastRemoval(Player target) {
@@ -129,8 +128,10 @@ public final class BanManagerImpl implements BanManager {
         plugin.getServer().getOnlinePlayers().forEach(
                 player -> player.sendMessage(msg)
         );
+    }
 
-        // Send a message to the console
-        Bukkit.getConsoleSender().sendMessage(msg);
+    private void logToConsole(String message) {
+        if (cfg.getBoolean(ConfigOptions.ENABLE_LOGGING))
+            Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + message);
     }
 }

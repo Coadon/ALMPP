@@ -95,6 +95,19 @@ ban-screens:
     - "<color:gray>Reason: <color:white>[reason]"
 
 
+### Optional Features
+
+# Enable logging
+#
+# - Weather or not to log in the console when somebody got punished.
+# - It will log regardless if the punishment is silent or not.
+enable-logging: true
+
+# Enable immunity
+#
+# - Weather or not to enable the feature that players with permission almpp.immune cannot be punished.
+enable-immunity: false
+
 # Debug mode.
 #
 # This feature is disabled by default to minimize verbose information that was sent to the console, enable it if you need to.
