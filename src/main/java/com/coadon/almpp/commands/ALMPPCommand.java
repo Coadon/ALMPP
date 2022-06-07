@@ -18,11 +18,11 @@
 
 package com.coadon.almpp.commands;
 
-import com.coadon.almpp.ALMPPInterface;
+import com.coadon.almpp.ALMPP;
 import com.coadon.almpp.config.ConfigOptions;
-import com.coadon.almpp.services.ComponentProvider;
-import com.coadon.almpp.config.ConfigHandler;
+import com.coadon.almpp.config.PluginConfigHandler;
 import com.coadon.almpp.services.BanManager;
+import com.coadon.almpp.services.ComponentProvider;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.BanList;
@@ -44,19 +44,19 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public abstract class ALMPPCommand implements TabExecutor {
-    protected final ALMPPInterface plugin;
+    protected final ALMPP plugin;
     protected final Logger logger;
-    protected final ConfigHandler cfg;
+    protected final PluginConfigHandler cfg;
     private final @Nullable Component usage;
 
-    public ALMPPCommand(ALMPPInterface plugin, @Nullable Component usage) {
+    public ALMPPCommand(ALMPP plugin, @Nullable Component usage) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
         this.cfg = plugin.getConfigHandler();
         this.usage = usage;
     }
 
-    public ALMPPCommand(ALMPPInterface plugin) {
+    public ALMPPCommand(ALMPP plugin) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
         this.cfg = plugin.getConfigHandler();

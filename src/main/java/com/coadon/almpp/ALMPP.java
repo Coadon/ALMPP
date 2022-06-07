@@ -19,8 +19,7 @@
 package com.coadon.almpp;
 
 import com.coadon.almpp.commands.*;
-import com.coadon.almpp.config.ConfigHandler;
-import com.coadon.almpp.config.ConfigHandlerImpl;
+import com.coadon.almpp.config.PluginConfigHandler;
 import com.coadon.almpp.listeners.PlayerLoginListeners;
 import com.coadon.almpp.services.BanManager;
 import com.coadon.almpp.services.BanManagerImpl;
@@ -34,11 +33,11 @@ import org.slf4j.Logger;
 
 import java.util.Objects;
 
-public final class ALMPP extends JavaPlugin implements ALMPPInterface {
+public final class ALMPP extends JavaPlugin {
     private final Logger logger = getSLF4JLogger();
     private final String VERSION = getDescription().getVersion();
 
-    private ConfigHandler configHandler;
+    private PluginConfigHandler configHandler;
     private ComponentProvider componentProvider;
     private BanManager banManager;
 
@@ -50,7 +49,7 @@ public final class ALMPP extends JavaPlugin implements ALMPPInterface {
         // Save config
         saveDefaultConfig();
 
-        configHandler = new ConfigHandlerImpl(getConfig());
+        configHandler = new PluginConfigHandler(getConfig());
         componentProvider = new ComponentProviderImpl(this);
         banManager = new BanManagerImpl(this);
 
@@ -87,31 +86,19 @@ public final class ALMPP extends JavaPlugin implements ALMPPInterface {
         Bukkit.getPluginManager().registerEvents(listener, this);
     }
 
-    @Override
     public ComponentProvider getComponentProvider() {
         return componentProvider;
     }
 
-    @Override
     public BanManager getBanManager() {
         return banManager;
     }
 
-    @Override
-    public ConfigHandler getConfigHandler() {
+    public PluginConfigHandler getConfigHandler() {
         return configHandler;
     }
 
-    @Override
     public String getVersion() {
         return VERSION;
-    }
-
-    @Override
-    public void reload() {
-        // Reload plugin config
-        saveDefaultConfig();
-        reloadConfig();
-        configHandler = new ConfigHandlerImpl(getConfig());
     }
 }

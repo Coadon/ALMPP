@@ -18,7 +18,7 @@
 
 package com.coadon.almpp.commands;
 
-import com.coadon.almpp.ALMPPInterface;
+import com.coadon.almpp.ALMPP;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.BanEntry;
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 
 public class Commandunban extends ALMPPCommand {
 
-    public Commandunban(ALMPPInterface plugin) {
+    public Commandunban(ALMPP plugin) {
         super(plugin, Component.text("Usage: /unban <player>").color(NamedTextColor.RED));
     }
 

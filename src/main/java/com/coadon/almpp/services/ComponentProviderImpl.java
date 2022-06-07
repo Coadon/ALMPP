@@ -19,8 +19,8 @@
 package com.coadon.almpp.services;
 
 import com.coadon.almpp.ALMPP;
-import com.coadon.almpp.config.ConfigHandler;
 import com.coadon.almpp.config.ConfigOptions;
+import com.coadon.almpp.config.PluginConfigHandler;
 import com.coadon.almpp.utils.DurationUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Date;
 
 public final class ComponentProviderImpl implements ComponentProvider {
-    private final ConfigHandler cfg;
+    private final PluginConfigHandler cfg;
     private final MiniMessage mm;
 
     public ComponentProviderImpl(ALMPP plugin) {

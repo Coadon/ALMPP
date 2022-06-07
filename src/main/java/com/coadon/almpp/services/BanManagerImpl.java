@@ -18,9 +18,9 @@
 
 package com.coadon.almpp.services;
 
-import com.coadon.almpp.ALMPPInterface;
-import com.coadon.almpp.config.ConfigHandler;
+import com.coadon.almpp.ALMPP;
 import com.coadon.almpp.config.ConfigOptions;
+import com.coadon.almpp.config.PluginConfigHandler;
 import net.kyori.adventure.text.Component;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -31,11 +31,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Date;
 
 public final class BanManagerImpl implements BanManager {
-    private final ALMPPInterface plugin;
+    private final ALMPP plugin;
     private final ComponentProvider formatter;
-    private final ConfigHandler cfg;
+    private final PluginConfigHandler cfg;
 
-    public BanManagerImpl(ALMPPInterface plugin) {
+    public BanManagerImpl(ALMPP plugin) {
         this.plugin = plugin;
         this.formatter = plugin.getComponentProvider();
         this.cfg = plugin.getConfigHandler();

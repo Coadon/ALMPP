@@ -18,20 +18,20 @@
 
 package com.coadon.almpp.config;
 
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
 
-public class ConfigHandlerImpl implements ConfigHandler {
+public class PluginConfigHandler {
     private final FileConfiguration cfg;
 
-    public ConfigHandlerImpl(@NotNull FileConfiguration cfg) {
+    public PluginConfigHandler(@NotNull FileConfiguration cfg) {
         this.cfg = cfg;
     }
 
-    @Override
     public @NotNull String getString(ConfigOptions option) {
         // Get the current value of a specified option
         String value = cfg.getString(option.getPath());
@@ -45,13 +45,15 @@ public class ConfigHandlerImpl implements ConfigHandler {
         return Objects.requireNonNull(value);
     }
 
-    @Override
     public @NotNull List<String> getStringList(ConfigOptions option) {
         return cfg.getStringList(option.getPath());
     }
 
-    @Override
     public boolean getBoolean(ConfigOptions option) {
         return cfg.getBoolean(option.getPath());
+    }
+
+    public Configuration cfg() {
+        return cfg;
     }
 }
