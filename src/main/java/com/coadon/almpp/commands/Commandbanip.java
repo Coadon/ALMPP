@@ -20,9 +20,6 @@ package com.coadon.almpp.commands;
 
 import com.coadon.almpp.ALMPP;
 import com.coadon.almpp.config.ConfigOptions;
-import com.coadon.almpp.utils.DurationUtil;
-import com.coadon.almpp.utils.MalformedDurationFormatException;
-import com.google.common.collect.ImmutableList;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.apache.commons.lang.StringUtils;
@@ -36,21 +33,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
-public class Commandtempban extends ALMPPCommand {
+public class Commandbanip extends ALMPPCommand {
 
-    // Common time durations, for use in tab completion
-    private static final List<String> COMMON_DURATIONS = ImmutableList.of("1m", "15m", "1h", "3h", "12h", "1d", "1w", "1mo", "3mo", "6mo", "1y");
-
-    public Commandtempban(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /tempban <player> <duration> [reason]").color(NamedTextColor.RED));
+    public Commandbanip(ALMPP plugin) {
+        super(plugin, Component.text("Usage: /banip <player> [reason]").color(NamedTextColor.RED));
     }
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.size() <= 1) {
+        if (args.size() == 0) {
             // Not enough arguments
             throw new InvalidCommandArgumentsException();
         }
@@ -72,17 +65,7 @@ public class Commandtempban extends ALMPPCommand {
             return;
         }
 
-        // Interprets the ban duration
-        Date expireDate;
-        try {
-            expireDate = DurationUtil.compileExpireDate(args.get(1));
-        } catch (MalformedDurationFormatException e) {
-            // Malformed ban duration
-            sender.sendMessage(ChatColor.RED + "Error: Invalid ban duration");
-            return;
-        }
-
-        String[] rawReason = args.skipGetArray(2);
+        String[] rawReason = args.skipGetArray(1);
         boolean broadcast = true;
 
         // See if the silence flag is present
@@ -93,10 +76,10 @@ public class Commandtempban extends ALMPPCommand {
 
         // Obtaining the reason
         String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
-        if (args.size() > 2 && !(StringUtils.join(rawReason, ' ').equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
+        if (args.size() > 1 && !(StringUtils.join(rawReason, ' ').equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = StringUtils.join(rawReason, ' ').replace("\\ ", " ");
 
-        getBanManager().tempBanPlayer(player, reason, sender.getName(), expireDate, broadcast);
+        getBanManager().permIpBanPlayer(player, reason, sender.getName(), broadcast);
     }
 
     @Override
@@ -104,10 +87,7 @@ public class Commandtempban extends ALMPPCommand {
         if (args.length == 1)
             return getListOfOnlinePlayers();
 
-        if (args.length == 2)
-            return COMMON_DURATIONS;
-
-        if (args.length == 3) {
+        if (args.length == 2) {
             List<String> tmp = cfg.getStringList(ConfigOptions.COMMON_PUNISH_REASONS);
 
             if (!cfg.getString(ConfigOptions.NO_REASON_ALT).equals(""))
@@ -116,7 +96,7 @@ public class Commandtempban extends ALMPPCommand {
             return tmp;
         }
 
-        if (args.length > 3)
+        if (args.length > 2)
             return Collections.singletonList("-s");
 
         return null;

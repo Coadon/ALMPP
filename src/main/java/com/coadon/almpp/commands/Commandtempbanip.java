@@ -39,13 +39,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class Commandtempban extends ALMPPCommand {
+public class Commandtempbanip extends ALMPPCommand {
 
     // Common time durations, for use in tab completion
     private static final List<String> COMMON_DURATIONS = ImmutableList.of("1m", "15m", "1h", "3h", "12h", "1d", "1w", "1mo", "3mo", "6mo", "1y");
 
-    public Commandtempban(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /tempban <player> <duration> [reason]").color(NamedTextColor.RED));
+    public Commandtempbanip(ALMPP plugin) {
+        super(plugin, Component.text("Usage: /tempbanip <player> <duration> [reason]").color(NamedTextColor.RED));
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Commandtempban extends ALMPPCommand {
         if (args.size() > 2 && !(StringUtils.join(rawReason, ' ').equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = StringUtils.join(rawReason, ' ').replace("\\ ", " ");
 
-        getBanManager().tempBanPlayer(player, reason, sender.getName(), expireDate, broadcast);
+        getBanManager().tempIpBanPlayer(player, reason, sender.getName(), expireDate, broadcast);
     }
 
     @Override

@@ -13,9 +13,9 @@ commands:
     aliases: [permban, bn]
   banip:
     description: Ban a player permanently by IP
-    usage: /<command> <player|ip> [reason]
+    usage: /<command> <player> [reason]
     permission: almpp.banip
-    aliases: [permbanip, bnip]
+    aliases: [permbanip, ban-ip, bnip]
   kick:
     description: Kick a player
     usage: /<command> <player> [reason]
@@ -33,9 +33,9 @@ commands:
     aliases: [tbn]
   tempbanip:
     description: Ban a player temporarily by IP
-    usage: /<command> <player|ip> <duration> [reason]
+    usage: /<command> <player> <duration> [reason]
     permission: almpp.tempbanip
-    aliases: [tbnip]
+    aliases: [tempban-ip, tbnip]
   unban:
     description: Unban a player
     usage: /<command> <player...>
