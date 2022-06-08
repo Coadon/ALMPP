@@ -37,7 +37,7 @@ public class Commandkickall extends ALMPPCommand {
     }
 
     @Override
-    public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) {
+    public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Exception {
         // Obtaining the reason
         String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
         if (args.size() > 0 && !(args.getCombined().equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
