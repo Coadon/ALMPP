@@ -7,27 +7,37 @@ description: The Advanced Lightweight Minecraft Punish Plugin
 
 commands:
   ban:
-    description: Permanently bans a specified player.
+    description: Ban a player permanently
     usage: /<command> <player> [reason]
     permission: almpp.ban
-    aliases: [permban, bn, expel]
+    aliases: [permban, bn]
+  banip:
+    description: Ban a player permanently by IP
+    usage: /<command> <player|ip> [reason]
+    permission: almpp.banip
+    aliases: [permbanip, bnip]
   kick:
-    description: Kicks a specified player.
+    description: Kick a player
     usage: /<command> <player> [reason]
     permission: almpp.kick
     aliases: [k, remove, rm]
   kickall:
-    description: Kicks all players.
+    description: Kick all online players
     usage: /<command> [reason]
     permission: almpp.kickall
     aliases: [kall]
   tempban:
-    description: Temporarily bans a specified player.
+    description: Ban a player temporarily
     usage: /<command> <player> <duration> [reason]
     permission: almpp.tempban
     aliases: [tbn]
+  tempbanip:
+    description: Ban a player temporarily by IP
+    usage: /<command> <player|ip> <duration> [reason]
+    permission: almpp.tempbanip
+    aliases: [tbnip]
   unban:
-    description: Unbans specified player(s) from the blacklist.
+    description: Unban a player
     usage: /<command> <player...>
     permission: almpp.pardon
     aliases: [pardon]
@@ -38,6 +48,8 @@ permissions:
     description: Wildcard permission for ALMPP.
   almpp.ban:
     description: Allow access to /ban command.
+  almpp.baip:
+    description: Allow access to /banip command.
   almpp.immune:
     description: Immune to all punishments except for kickall.
   almpp.kick:
@@ -46,5 +58,7 @@ permissions:
     description: Allow access to /kickall command.
   almpp.tempban:
     description: Allow access to /tempban command.
+  almpp.tempbanip:
+    description: Allow access to /tempbanip command.
   almpp.unban:
     description: Allow access to /unban command.

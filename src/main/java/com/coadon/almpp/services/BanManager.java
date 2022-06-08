@@ -29,7 +29,11 @@ public interface BanManager {
 
     void permBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast);
 
+    void permIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast);
+
     void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast);
+
+    void tempIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast);
 
     void kickAllPlayer(@NotNull String reason);
 

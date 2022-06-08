@@ -69,6 +69,20 @@ public final class BanManagerImpl implements BanManager {
     }
 
     @Override
+    public void permIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast) {
+        // Broadcast if punish announcement is enabled
+        if (broadcast)
+            broadcastTermination(player);
+
+        // Execute
+        player.kick(formatter.generateKickPermBanMessage(reason, new Date()));
+        player.banPlayerIP(reason, source);
+
+        // Log
+        logToConsole("Permanently banned " + player.getName() + " from the server by IP.");
+    }
+
+    @Override
     public void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast) {
         // Broadcast if punish announcement is enabled
         if (broadcast)
@@ -77,6 +91,20 @@ public final class BanManagerImpl implements BanManager {
         // Execute
         player.kick(formatter.generateKickTempBanMessage(reason, new Date(), expires));
         player.banPlayer(reason, expires, source);
+
+        // Log
+        logToConsole("Temporarily banned " + player.getName() + " from the server.");
+    }
+
+    @Override
+    public void tempIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast) {
+        // Broadcast if punish announcement is enabled
+        if (broadcast)
+            broadcastTermination(player);
+
+        // Execute
+        player.kick(formatter.generateKickTempBanMessage(reason, new Date(), expires));
+        player.banPlayerIP(reason, expires, source);
 
         // Log
         logToConsole("Temporarily banned " + player.getName() + " from the server.");
