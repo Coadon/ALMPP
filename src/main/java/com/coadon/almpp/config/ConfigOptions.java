@@ -20,6 +20,7 @@ package com.coadon.almpp.config;
 
 public enum ConfigOptions {
     DEFAULT_PUNISH_REASON("default-punish-reason"),
+    ENABLE_ANNOUNCE("enable-announcements"),
     ANNOUNCE_TERMINATION("punish-announcement.termination"),
     ANNOUNCE_REMOVAL("punish-announcement.removal"),
     COMMON_PUNISH_REASONS("common-punish-reasons"),

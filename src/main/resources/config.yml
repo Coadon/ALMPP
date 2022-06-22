@@ -45,6 +45,9 @@ common-punish-reasons:
 # When a player is punished, a broadcast will be made for all online players.
 # The below options determines the broadcast message.
 #
+# - Weather to enable this feature generally
+enable-announcements: true
+#
 # - This feature uses the Kyori adventure MiniMessage API, formatting reference is above.
 # - Leave any option(s) empty to disable it.
 # - Use the [player] placeholder for the punished player's name.

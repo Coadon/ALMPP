@@ -131,6 +131,9 @@ public final class BanManagerImpl implements BanManager {
     }
 
     private void broadcastTermination(Player target) {
+        if (!cfg.getBoolean(ConfigOptions.ENABLE_ANNOUNCE))
+            return;
+
         Component msg = formatter.getTerminationAnnouncementMessage(target.getName());
 
         if (msg == null) {
@@ -145,6 +148,9 @@ public final class BanManagerImpl implements BanManager {
     }
 
     private void broadcastRemoval(Player target) {
+        if (!cfg.getBoolean(ConfigOptions.ENABLE_ANNOUNCE))
+            return;
+
         Component msg = formatter.getRemovalAnnouncementMessage(target.getName());
 
         if (msg == null) {
