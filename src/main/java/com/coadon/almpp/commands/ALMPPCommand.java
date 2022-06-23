@@ -23,7 +23,6 @@ import com.coadon.almpp.config.ConfigOptions;
 import com.coadon.almpp.config.PluginConfigHandler;
 import com.coadon.almpp.services.BanManager;
 import com.coadon.almpp.services.ComponentProvider;
-import com.coadon.almpp.services.FeatureNotSupportedException;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.BanList;
@@ -74,8 +73,6 @@ public abstract class ALMPPCommand implements TabExecutor {
                 return false;
 
             sender.sendMessage(usage);
-        } catch (FeatureNotSupportedException e) {
-            sender.sendMessage(Component.text("Feature not supported: " + e.getMessage()).color(NamedTextColor.RED));
         } catch (Throwable e) {
             sender.sendMessage(Component.text("An error occurred while performing this command.").color(NamedTextColor.RED));
             if (cfg.getBoolean(ConfigOptions.DEBUG_MODE))

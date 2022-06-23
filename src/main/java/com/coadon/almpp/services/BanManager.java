@@ -25,17 +25,17 @@ import java.util.Date;
 
 public interface BanManager {
 
-    void kickPlayer(@NotNull Player player, @NotNull String reason, boolean broadcast) throws FeatureNotSupportedException;
+    void kickPlayer(@NotNull Player player, @NotNull String reason, boolean broadcast);
 
-    void permBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast) throws FeatureNotSupportedException;
+    void permBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast);
 
-    void permIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast) throws FeatureNotSupportedException;
+    void permIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast);
 
-    void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast) throws FeatureNotSupportedException;
+    void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast);
 
-    void tempIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast) throws FeatureNotSupportedException;
+    void tempIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast);
 
-    void kickAllPlayer(@NotNull String reason) throws FeatureNotSupportedException;
+    void kickAllPlayer(@NotNull String reason);
 
     void pardon(@NotNull String player);
 
