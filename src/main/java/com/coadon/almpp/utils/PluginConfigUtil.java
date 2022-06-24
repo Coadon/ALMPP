@@ -16,8 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.config;
+package com.coadon.almpp.utils;
 
+import com.coadon.almpp.config.ConfigOptions;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
@@ -25,10 +26,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
-public class PluginConfigHandler {
+public class PluginConfigUtil {
     private final FileConfiguration cfg;
 
-    public PluginConfigHandler(@NotNull FileConfiguration cfg) {
+    public PluginConfigUtil(@NotNull FileConfiguration cfg) {
         this.cfg = cfg;
     }
 

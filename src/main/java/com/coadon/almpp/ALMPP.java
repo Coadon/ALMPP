@@ -19,12 +19,12 @@
 package com.coadon.almpp;
 
 import com.coadon.almpp.commands.*;
-import com.coadon.almpp.config.PluginConfigHandler;
+import com.coadon.almpp.utils.PluginConfigUtil;
 import com.coadon.almpp.listeners.PlayerLoginListeners;
-import com.coadon.almpp.services.BanManager;
-import com.coadon.almpp.services.BanManagerImpl;
-import com.coadon.almpp.services.ComponentProvider;
-import com.coadon.almpp.services.ComponentProviderImpl;
+import com.coadon.almpp.system.BanManager;
+import com.coadon.almpp.system.BanManagerImpl;
+import com.coadon.almpp.system.ComponentProvider;
+import com.coadon.almpp.system.ComponentProviderImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
@@ -37,7 +37,7 @@ public final class ALMPP extends JavaPlugin {
     private final Logger logger = getSLF4JLogger();
     private final String VERSION = getDescription().getVersion();
 
-    private PluginConfigHandler configHandler;
+    private PluginConfigUtil configHandler;
     private ComponentProvider componentProvider;
     private BanManager banManager;
 
@@ -49,7 +49,7 @@ public final class ALMPP extends JavaPlugin {
         // Save config
         saveDefaultConfig();
 
-        configHandler = new PluginConfigHandler(getConfig());
+        configHandler = new PluginConfigUtil(getConfig());
         componentProvider = new ComponentProviderImpl(this);
         banManager = new BanManagerImpl(this);
 
@@ -94,7 +94,7 @@ public final class ALMPP extends JavaPlugin {
         return banManager;
     }
 
-    public PluginConfigHandler getConfigHandler() {
+    public PluginConfigUtil getConfigHandler() {
         return configHandler;
     }
 

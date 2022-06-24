@@ -16,23 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.services;
+package com.coadon.almpp.system;
 
-import net.kyori.adventure.text.Component;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
 
-public interface ComponentProvider {
+public interface BanManager {
 
-    @NotNull Component generateKickMessage(@NotNull String reason, @NotNull Date date);
+    void kickPlayer(@NotNull Player player, @NotNull String reason, boolean broadcast);
 
-    @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull Date date);
+    void permBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast);
 
-    @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull Date date, @NotNull Date expiry);
+    void permIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast);
 
-    @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName);
+    void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast);
 
-    @Nullable Component getRemovalAnnouncementMessage(@NotNull String targetName);
+    void tempIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast);
+
+    void kickAllPlayer(@NotNull String reason);
+
+    void pardon(@NotNull String player);
+
+    boolean isBanned(@NotNull String player);
 }

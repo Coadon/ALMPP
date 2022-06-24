@@ -16,11 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.services;
+package com.coadon.almpp.system;
 
 import com.coadon.almpp.ALMPP;
 import com.coadon.almpp.config.ConfigOptions;
-import com.coadon.almpp.config.PluginConfigHandler;
+import com.coadon.almpp.utils.PluginConfigUtil;
 import net.kyori.adventure.text.Component;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -33,7 +33,7 @@ import java.util.Date;
 public final class BanManagerImpl implements BanManager {
     private final ALMPP plugin;
     private final ComponentProvider formatter;
-    private final PluginConfigHandler cfg;
+    private final PluginConfigUtil cfg;
 
     public BanManagerImpl(ALMPP plugin) {
         this.plugin = plugin;
