@@ -39,7 +39,8 @@ public final class DurationUtil {
     private static final int YEAR = DAY * 365;
 
     // A pattern used to find any non-digit character(s) in a token.
-    private static final Pattern pattern = Pattern.compile("\\D");
+    // Since 1.3.0, a decimal point is now considered to be a digit.
+    private static final Pattern nonDigitPattern = Pattern.compile("[^\\d\\.]");
 
     /**
      * Converts a ban duration string into a date object.
@@ -50,13 +51,13 @@ public final class DurationUtil {
      * @throws MalformedDurationFormatException if the duration is malformed
      */
     public static Date compileExpireDate(final @NotNull String duration) throws MalformedDurationFormatException {
-        int seconds = 0;
+        double seconds = 0;
         String[] tokens = duration.split(",");
         for (String token : tokens) {
             if (token.endsWith("y")) {
                 String slice = token.substring(0, token.length() - 1);
                 try {
-                    int provided = Integer.parseInt(slice);
+                    double provided = Double.parseDouble(slice);
                     seconds = seconds + (YEAR * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
@@ -64,7 +65,7 @@ public final class DurationUtil {
             } else if (token.endsWith("q")) {
                 String slice = token.substring(0, token.length() - 1);
                 try {
-                    int provided = Integer.parseInt(slice);
+                    double provided = Double.parseDouble(slice);
                     seconds = seconds + (QUARTER * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
@@ -72,7 +73,7 @@ public final class DurationUtil {
             } else if (token.endsWith("mo")) {
                 String slice = token.substring(0, token.length() - 2);
                 try {
-                    int provided = Integer.parseInt(slice);
+                    double provided = Double.parseDouble(slice);
                     seconds = seconds + (MONTH * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
@@ -80,7 +81,7 @@ public final class DurationUtil {
             } else if (token.endsWith("w")) {
                 String slice = token.substring(0, token.length() - 1);
                 try {
-                    int provided = Integer.parseInt(slice);
+                    double provided = Double.parseDouble(slice);
                     seconds = seconds + (WEEK * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
@@ -89,7 +90,7 @@ public final class DurationUtil {
             } else if (token.endsWith("d")) {
                 String slice = token.substring(0, token.length() - 1);
                 try {
-                    int provided = Integer.parseInt(slice);
+                    double provided = Double.parseDouble(slice);
                     seconds = seconds + (DAY * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
@@ -97,7 +98,7 @@ public final class DurationUtil {
             } else if (token.endsWith("h")) {
                 String slice = token.substring(0, token.length() - 1);
                 try {
-                    int provided = Integer.parseInt(slice);
+                    double provided = Double.parseDouble(slice);
                     seconds = seconds + (HOUR * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
@@ -105,7 +106,7 @@ public final class DurationUtil {
             } else if (token.endsWith("m")) {
                 String slice = token.substring(0, token.length() - 1);
                 try {
-                    int provided = Integer.parseInt(slice);
+                    double provided = Double.parseDouble(slice);
                     seconds = seconds + (MINUTE * provided);
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
@@ -113,16 +114,16 @@ public final class DurationUtil {
             } else if (token.endsWith("s")) {
                 String slice = token.substring(0, token.length() - 1);
                 try {
-                    int provided = Integer.parseInt(slice);
+                    double provided = Double.parseDouble(slice);
                     seconds = seconds + provided;
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
                 }
-            } else if (!(pattern.matcher(token).find())) {
+            } else if (!(nonDigitPattern.matcher(token).find())) {
                 // There is no time-unit suffix, therefore default to second.
                 // No need to strip the suffix, since there is none.
                 try {
-                    int provided = Integer.parseInt(token);
+                    double provided = Double.parseDouble(token);
                     seconds = seconds + provided;
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
@@ -131,7 +132,7 @@ public final class DurationUtil {
                 throw new MalformedDurationFormatException("Unidentified time-unit suffix.");
             }
         }
-        return new Date(System.currentTimeMillis() + (seconds * 1000L));
+        return new Date(System.currentTimeMillis() + ((long) (seconds * 1000L)));
     }
 
     /**

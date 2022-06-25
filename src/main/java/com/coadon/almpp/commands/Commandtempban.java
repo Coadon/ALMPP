@@ -78,7 +78,7 @@ public class Commandtempban extends ALMPPCommand {
             expireDate = DurationUtil.compileExpireDate(args.get(1));
         } catch (MalformedDurationFormatException e) {
             // Malformed ban duration
-            sender.sendMessage(ChatColor.RED + "Error: Invalid ban duration");
+            sender.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "Invalid ban duration" + ChatColor.GRAY + " - " + ChatColor.GOLD + e.getMessage());
             return;
         }
 
