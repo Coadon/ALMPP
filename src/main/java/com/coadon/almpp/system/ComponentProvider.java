@@ -26,11 +26,11 @@ import java.util.Date;
 
 public interface ComponentProvider {
 
-    @NotNull Component generateKickMessage(@NotNull String reason, @NotNull Date date);
+    @NotNull Component generateKickScreen(@NotNull String reason, @NotNull Date date);
 
-    @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull Date date);
+    @NotNull Component generateKickPermBanScreen(@NotNull String reason, @NotNull Date date);
 
-    @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull Date date, @NotNull Date expiry);
+    @NotNull Component generateKickTempBanScreen(@NotNull String reason, @NotNull Date date, @NotNull Date expiry);
 
     @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName);
 

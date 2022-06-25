@@ -48,7 +48,7 @@ public final class BanManagerImpl implements BanManager {
             broadcastRemoval(player);
 
         // Execute
-        player.kick(formatter.generateKickMessage(reason, new Date()));
+        player.kick(formatter.generateKickScreen(reason, new Date()));
 
         // Log
         logToConsole("Kicked " + player.getName() + " from the server.");
@@ -61,7 +61,7 @@ public final class BanManagerImpl implements BanManager {
             broadcastTermination(player);
 
         // Execute
-        player.kick(formatter.generateKickPermBanMessage(reason, new Date()));
+        player.kick(formatter.generateKickPermBanScreen(reason, new Date()));
         player.banPlayer(reason, source);
 
         // Log
@@ -75,7 +75,7 @@ public final class BanManagerImpl implements BanManager {
             broadcastTermination(player);
 
         // Execute
-        player.kick(formatter.generateKickPermBanMessage(reason, new Date()));
+        player.kick(formatter.generateKickPermBanScreen(reason, new Date()));
         player.banPlayerIP(reason, source);
 
         // Log
@@ -89,7 +89,7 @@ public final class BanManagerImpl implements BanManager {
             broadcastTermination(player);
 
         // Execute
-        player.kick(formatter.generateKickTempBanMessage(reason, new Date(), expires));
+        player.kick(formatter.generateKickTempBanScreen(reason, new Date(), expires));
         player.banPlayer(reason, expires, source);
 
         // Log
@@ -103,7 +103,7 @@ public final class BanManagerImpl implements BanManager {
             broadcastTermination(player);
 
         // Execute
-        player.kick(formatter.generateKickTempBanMessage(reason, new Date(), expires));
+        player.kick(formatter.generateKickTempBanScreen(reason, new Date(), expires));
         player.banPlayerIP(reason, expires, source);
 
         // Log
@@ -114,7 +114,7 @@ public final class BanManagerImpl implements BanManager {
     public void kickAllPlayer(@NotNull String reason) {
         // Execute for each player online
         plugin.getServer().getOnlinePlayers().forEach(
-                player -> player.kick(formatter.generateKickMessage(reason, new Date())));
+                player -> player.kick(formatter.generateKickScreen(reason, new Date())));
 
         // Log
         logToConsole("Kicked everyone from the server.");
@@ -126,8 +126,13 @@ public final class BanManagerImpl implements BanManager {
     }
 
     @Override
-    public boolean isBanned(@NotNull String player) {
+    public boolean isNameBanned(@NotNull String player) {
         return plugin.getServer().getBanList(BanList.Type.NAME).isBanned(player);
+    }
+
+    @Override
+    public boolean isIpBanned(@NotNull String player) {
+        return plugin.getServer().getBanList(BanList.Type.IP).isBanned(player);
     }
 
     private void broadcastTermination(Player target) {

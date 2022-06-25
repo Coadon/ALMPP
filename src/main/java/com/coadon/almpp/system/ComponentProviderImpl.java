@@ -40,7 +40,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
     }
 
     @Override
-    public @NotNull Component generateKickMessage(@NotNull String reason, @NotNull Date date) {
+    public @NotNull Component generateKickScreen(@NotNull String reason, @NotNull Date date) {
         String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_REMOVAL).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[date]", date.toString());
@@ -48,7 +48,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
     }
 
     @Override
-    public @NotNull Component generateKickPermBanMessage(@NotNull String reason, @NotNull Date date) {
+    public @NotNull Component generateKickPermBanScreen(@NotNull String reason, @NotNull Date date) {
         String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_PERM_TERM).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[date]", date.toString());
@@ -56,7 +56,7 @@ public final class ComponentProviderImpl implements ComponentProvider {
     }
 
     @Override
-    public @NotNull Component generateKickTempBanMessage(@NotNull String reason, @NotNull Date date, @NotNull Date expiry) {
+    public @NotNull Component generateKickTempBanScreen(@NotNull String reason, @NotNull Date date, @NotNull Date expiry) {
         String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_TEMP_TERM).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[date]", date.toString());

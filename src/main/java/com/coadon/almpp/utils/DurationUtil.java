@@ -40,10 +40,10 @@ public final class DurationUtil {
 
     // A pattern used to find any non-digit character(s) in a token.
     // Since 1.3.0, a decimal point is now considered to be a digit.
-    private static final Pattern nonDigitPattern = Pattern.compile("[^\\d\\.]");
+    private static final Pattern nonDigitPattern = Pattern.compile("[^\\d.]");
 
     /**
-     * Converts a ban duration string into a date object.
+     * An algorithm that converts a ban duration string into a date object.
      * Used in temporary punish.
      *
      * @param duration the ban duration string
@@ -136,7 +136,7 @@ public final class DurationUtil {
     }
 
     /**
-     * Converts a date to a String of duration in compare to the time when the method is called.
+     * An algorithm that converts a date to a String of duration in compare to the time when the method is called.
      *
      * @param date the date.
      * @return the duration string.

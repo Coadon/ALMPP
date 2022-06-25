@@ -70,6 +70,7 @@ public final class ALMPP extends JavaPlugin {
         registerCommand("unban", new Commandunban(this));
         registerCommand("tempban", new Commandtempban(this));
         registerCommand("tempbanip", new Commandtempbanip(this));
+        registerCommand("unbanip", new Commandunbanip(this));
 
         // Event Listener Registries.
         registerListeners(new PlayerLoginListeners(this));

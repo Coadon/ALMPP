@@ -41,6 +41,11 @@ commands:
     usage: /<command> <player...>
     permission: almpp.pardon
     aliases: [pardon]
+  unbanip:
+    description: Ban a player temporarily by IP
+    usage: /<command> <player> <duration> [reason]
+    permission: almpp.tempbanip
+    aliases: [unban-ip, pardonip, pardon-ip]
 
 permissions:
   almpp.*:

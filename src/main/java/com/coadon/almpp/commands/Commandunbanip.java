@@ -22,6 +22,7 @@ import com.coadon.almpp.ALMPP;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.BanEntry;
+import org.bukkit.BanList;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -34,10 +35,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Commandunban extends ALMPPCommand {
-
-    public Commandunban(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /unban <player...>").color(NamedTextColor.RED));
+public class Commandunbanip extends ALMPPCommand{
+    public Commandunbanip(ALMPP plugin) {
+        super(plugin, Component.text("Usage: /unbanip <player...>").color(NamedTextColor.RED));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Commandunban extends ALMPPCommand {
         Set<String> playersBuffer = new HashSet<>();
         for (String s : args.getContent()) {
             // Check is the specified player is unbanned.
-            if (!getBanManager().isNameBanned(s)) {
+            if (!getBanManager().isIpBanned(s)) {
                 sender.sendMessage(ChatColor.RED + "Specified player '" + s + "' does not exist or is not banned.");
                 continue;
             }
@@ -67,6 +67,6 @@ public class Commandunban extends ALMPPCommand {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
-        return getBanList().getBanEntries().stream().map(BanEntry::getTarget).collect(Collectors.toList());
+        return getBanList(BanList.Type.IP).getBanEntries().stream().map(BanEntry::getTarget).collect(Collectors.toList());
     }
 }
