@@ -48,7 +48,7 @@ permissions:
     description: Wildcard permission for ALMPP.
   almpp.ban:
     description: Allow access to /ban command.
-  almpp.baip:
+  almpp.banip:
     description: Allow access to /banip command.
   almpp.immune:
     description: Immune to all punishments except for kickall.

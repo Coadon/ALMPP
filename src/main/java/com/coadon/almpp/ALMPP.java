@@ -65,9 +65,11 @@ public final class ALMPP extends JavaPlugin {
         // Command registries.
         registerCommand("kick", new Commandkick(this));
         registerCommand("ban", new Commandban(this));
+        registerCommand("banip", new Commandbanip(this));
         registerCommand("kickall", new Commandkickall(this));
         registerCommand("unban", new Commandunban(this));
         registerCommand("tempban", new Commandtempban(this));
+        registerCommand("tempbanip", new Commandtempbanip(this));
 
         // Event Listener Registries.
         registerListeners(new PlayerLoginListeners(this));

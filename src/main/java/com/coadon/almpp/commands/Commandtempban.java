@@ -50,7 +50,7 @@ public class Commandtempban extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.size() <= 1) {
+        if (args.size() < 2) {
             // Not enough arguments
             throw new InvalidCommandArgumentsException();
         }
@@ -87,14 +87,14 @@ public class Commandtempban extends ALMPPCommand {
 
         // See if the silence flag is present
         if (rawReason.length >= 2 && rawReason[rawReason.length - 1].equals("-s")) {
-            rawReason[rawReason.length - 1] = "";
+            rawReason[rawReason.length - 1] = null;
             broadcast = false;
         }
 
         // Obtaining the reason
         String reason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
-        if (args.size() > 2 && !(StringUtils.join(rawReason, ' ').equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
-            reason = StringUtils.join(rawReason, ' ').replace("\\ ", " ");
+        if (args.size() > 2 && !(StringUtils.join(rawReason, ' ').trim().equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
+            reason = StringUtils.join(rawReason, ' ').replace("\\ ", " ").trim();
 
         getBanManager().tempBanPlayer(player, reason, sender.getName(), expireDate, broadcast);
     }
