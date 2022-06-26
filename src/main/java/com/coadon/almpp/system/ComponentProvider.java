@@ -28,11 +28,15 @@ public interface ComponentProvider {
 
     @NotNull Component generateKickScreen(@NotNull String reason, @NotNull Date date);
 
-    @NotNull Component generateKickPermBanScreen(@NotNull String reason, @NotNull Date date);
+    @NotNull Component generateKickPermNameBanScreen(@NotNull String reason, @NotNull Date date);
 
-    @NotNull Component generateKickTempBanScreen(@NotNull String reason, @NotNull Date date, @NotNull Date expiry);
+    @NotNull Component generateKickTempNameBanScreen(@NotNull String reason, @NotNull Date date, @NotNull Date expiry);
 
-    @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName);
+    @NotNull Component generateKickPermIpBanScreen(@NotNull String reason, @NotNull Date date);
+
+    @NotNull Component generateKickTempIpBanScreen(@NotNull String reason, @NotNull Date date, @NotNull Date expiry);
+
+    @Nullable Component getBanAnnouncementMessage(@NotNull String targetName);
 
     @Nullable Component getRemovalAnnouncementMessage(@NotNull String targetName);
 }

@@ -48,16 +48,16 @@ public final class ComponentProviderImpl implements ComponentProvider {
     }
 
     @Override
-    public @NotNull Component generateKickPermBanScreen(@NotNull String reason, @NotNull Date date) {
-        String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_PERM_TERM).toArray(), "\n");
+    public @NotNull Component generateKickPermNameBanScreen(@NotNull String reason, @NotNull Date date) {
+        String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_PERM_NAME_BAN).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[date]", date.toString());
         return mm.deserialize(source);
     }
 
     @Override
-    public @NotNull Component generateKickTempBanScreen(@NotNull String reason, @NotNull Date date, @NotNull Date expiry) {
-        String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_TEMP_TERM).toArray(), "\n");
+    public @NotNull Component generateKickTempNameBanScreen(@NotNull String reason, @NotNull Date date, @NotNull Date expiry) {
+        String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_TEMP_NAME_BAN).toArray(), "\n");
         source = source.replaceAll("\\[reason]", reason);
         source = source.replaceAll("\\[date]", date.toString());
         source = source.replaceAll("\\[expiry]", expiry.toString());
@@ -66,12 +66,30 @@ public final class ComponentProviderImpl implements ComponentProvider {
     }
 
     @Override
-    public @Nullable Component getTerminationAnnouncementMessage(@NotNull String targetName) {
+    public @NotNull Component generateKickPermIpBanScreen(@NotNull String reason, @NotNull Date date) {
+        String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_PERM_IP_BAN).toArray(), "\n");
+        source = source.replaceAll("\\[reason]", reason);
+        source = source.replaceAll("\\[date]", date.toString());
+        return mm.deserialize(source);
+    }
+
+    @Override
+    public @NotNull Component generateKickTempIpBanScreen(@NotNull String reason, @NotNull Date date, @NotNull Date expiry) {
+        String source = StringUtils.join(cfg.getStringList(ConfigOptions.SCREEN_TEMP_IP_BAN).toArray(), "\n");
+        source = source.replaceAll("\\[reason]", reason);
+        source = source.replaceAll("\\[date]", date.toString());
+        source = source.replaceAll("\\[expiry]", expiry.toString());
+        source = source.replaceAll("\\[duration]", DurationUtil.compileDurationString(expiry));
+        return mm.deserialize(source);
+    }
+
+    @Override
+    public @Nullable Component getBanAnnouncementMessage(@NotNull String targetName) {
         // Check if the option is left empty, if it is, return null
-        if (cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).isEmpty())
+        if (cfg.getStringList(ConfigOptions.ANNOUNCE_BAN).isEmpty())
             return null;
 
-        String source = StringUtils.join(cfg.getStringList(ConfigOptions.ANNOUNCE_TERMINATION).toArray(), "\n");
+        String source = StringUtils.join(cfg.getStringList(ConfigOptions.ANNOUNCE_BAN).toArray(), "\n");
         source = source.replaceAll("\\[player]", targetName);
         return mm.deserialize(source);
     }

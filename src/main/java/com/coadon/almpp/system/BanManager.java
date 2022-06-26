@@ -37,9 +37,9 @@ public interface BanManager {
 
     void kickAllPlayer(@NotNull String reason);
 
-    void pardon(@NotNull String player);
+    void pardonName(@NotNull String player);
+
+    void pardonIp(@NotNull String ip);
 
     boolean isNameBanned(@NotNull String player);
-
-    boolean isIpBanned(@NotNull String player);
 }

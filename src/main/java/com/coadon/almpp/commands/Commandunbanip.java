@@ -19,6 +19,7 @@
 package com.coadon.almpp.commands;
 
 import com.coadon.almpp.ALMPP;
+import com.coadon.almpp.utils.FormatUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.BanEntry;
@@ -37,31 +38,25 @@ import java.util.stream.Collectors;
 
 public class Commandunbanip extends ALMPPCommand{
     public Commandunbanip(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /unbanip <player...>").color(NamedTextColor.RED));
+        super(plugin, Component.text("Usage: /unbanip <ip...>").color(NamedTextColor.RED));
     }
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.size() == 0)
+        if (args.size() < 1)
             throw new InvalidCommandArgumentsException();
 
-        // Iterate over all specified entries in the argument.
-        Set<String> playersBuffer = new HashSet<>();
-        for (String s : args.getContent()) {
-            // Check is the specified player is unbanned.
-            if (!getBanManager().isIpBanned(s)) {
-                sender.sendMessage(ChatColor.RED + "Specified player '" + s + "' does not exist or is not banned.");
-                continue;
+        // Iterate over the arguments, unbanning each valid element.
+        args.forEach(ip -> {
+
+            // Check if the address is valid
+            if (!FormatUtil.validIP(ip)) {
+                sender.sendMessage(ChatColor.RED + "IP Address '" + ip + "' is not a valid address.");
+                return;
             }
 
-            // The specified player is banned, adding to the buffer.
-            playersBuffer.add(s);
-        }
-
-        // Iterate over the buffer, unbanning each element.
-        playersBuffer.forEach(player -> {
-            getBanManager().pardon(player);
-            sender.sendMessage(ChatColor.GREEN + "Specified player '" + player + "' is now unbanned.");
+            getBanManager().pardonIp(ip);
+            sender.sendMessage(ChatColor.GREEN + "Attempted to unban specified IP address '" + ip + "'.");
         });
     }
 

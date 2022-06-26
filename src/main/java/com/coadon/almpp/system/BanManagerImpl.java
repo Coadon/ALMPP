@@ -58,10 +58,10 @@ public final class BanManagerImpl implements BanManager {
     public void permBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast) {
         // Broadcast if punish announcement is enabled
         if (broadcast)
-            broadcastTermination(player);
+            broadcastBan(player);
 
         // Execute
-        player.kick(formatter.generateKickPermBanScreen(reason, new Date()));
+        player.kick(formatter.generateKickPermNameBanScreen(reason, new Date()));
         player.banPlayer(reason, source);
 
         // Log
@@ -72,10 +72,10 @@ public final class BanManagerImpl implements BanManager {
     public void permIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, boolean broadcast) {
         // Broadcast if punish announcement is enabled
         if (broadcast)
-            broadcastTermination(player);
+            broadcastBan(player);
 
         // Execute
-        player.kick(formatter.generateKickPermBanScreen(reason, new Date()));
+        player.kick(formatter.generateKickPermIpBanScreen(reason, new Date()));
         player.banPlayerIP(reason, source);
 
         // Log
@@ -86,10 +86,10 @@ public final class BanManagerImpl implements BanManager {
     public void tempBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast) {
         // Broadcast if punish announcement is enabled
         if (broadcast)
-            broadcastTermination(player);
+            broadcastBan(player);
 
         // Execute
-        player.kick(formatter.generateKickTempBanScreen(reason, new Date(), expires));
+        player.kick(formatter.generateKickTempNameBanScreen(reason, new Date(), expires));
         player.banPlayer(reason, expires, source);
 
         // Log
@@ -100,10 +100,10 @@ public final class BanManagerImpl implements BanManager {
     public void tempIpBanPlayer(@NotNull Player player, @NotNull String reason, @NotNull String source, @NotNull Date expires, boolean broadcast) {
         // Broadcast if punish announcement is enabled
         if (broadcast)
-            broadcastTermination(player);
+            broadcastBan(player);
 
         // Execute
-        player.kick(formatter.generateKickTempBanScreen(reason, new Date(), expires));
+        player.kick(formatter.generateKickTempIpBanScreen(reason, new Date(), expires));
         player.banPlayerIP(reason, expires, source);
 
         // Log
@@ -121,8 +121,13 @@ public final class BanManagerImpl implements BanManager {
     }
 
     @Override
-    public void pardon(@NotNull String player) {
+    public void pardonName(@NotNull String player) {
         plugin.getServer().getBanList(BanList.Type.NAME).pardon(player);
+    }
+
+    @Override
+    public void pardonIp(@NotNull String ip) {
+        plugin.getServer().getBanList(BanList.Type.IP).pardon(ip);
     }
 
     @Override
@@ -130,16 +135,11 @@ public final class BanManagerImpl implements BanManager {
         return plugin.getServer().getBanList(BanList.Type.NAME).isBanned(player);
     }
 
-    @Override
-    public boolean isIpBanned(@NotNull String player) {
-        return plugin.getServer().getBanList(BanList.Type.IP).isBanned(player);
-    }
-
-    private void broadcastTermination(Player target) {
+    private void broadcastBan(Player target) {
         if (!cfg.getBoolean(ConfigOptions.ENABLE_ANNOUNCE))
             return;
 
-        Component msg = formatter.getTerminationAnnouncementMessage(target.getName());
+        Component msg = formatter.getBanAnnouncementMessage(target.getName());
 
         if (msg == null) {
             // Disabled

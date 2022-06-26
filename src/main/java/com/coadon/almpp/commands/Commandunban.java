@@ -29,9 +29,7 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Commandunban extends ALMPPCommand {
@@ -42,26 +40,19 @@ public class Commandunban extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.size() == 0)
+        if (args.size() < 1)
             throw new InvalidCommandArgumentsException();
 
-        // Iterate over all specified entries in the argument.
-        Set<String> playersBuffer = new HashSet<>();
-        for (String s : args.getContent()) {
+        // Iterate over the arguments, unbanning each valid element.
+        args.forEach(name -> {
             // Check is the specified player is unbanned.
-            if (!getBanManager().isNameBanned(s)) {
-                sender.sendMessage(ChatColor.RED + "Specified player '" + s + "' does not exist or is not banned.");
-                continue;
+            if (!getBanManager().isNameBanned(name)) {
+                sender.sendMessage(ChatColor.RED + "Specified player name '" + name + "' does not exist or is not banned.");
+                return;
             }
 
-            // The specified player is banned, adding to the buffer.
-            playersBuffer.add(s);
-        }
-
-        // Iterate over the buffer, unbanning each element.
-        playersBuffer.forEach(player -> {
-            getBanManager().pardon(player);
-            sender.sendMessage(ChatColor.GREEN + "Specified player '" + player + "' is now unbanned.");
+            getBanManager().pardonName(name);
+            sender.sendMessage(ChatColor.GREEN + "Specified player '" + name + "' is now unbanned.");
         });
     }
 

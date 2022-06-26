@@ -17,6 +17,15 @@
 
 # For features using the Kyori adventure MiniMessage API, you can find formatting docs on https://docs.adventure.kyori.net/minimessage/format.
 
+# ==================== NAME BAN vs. IP BAN ====================
+# There are two types of banning in Minecraft:
+# one is name ban, and the other one is ip ban. Each having their very own blacklist.
+#
+# Name ban blacklists a player by their Universal-Unique-Identifier (UUID). They don't store the player's IGN as they can change.
+# On the other hand, IP ban blacklists a player by their Internet-Protocol-Address (IP Address).
+#
+# Name bans can be run using /ban or /tempban, while IP bans uses /banip or /tempbanip.
+# =============================================================
 
 # The default punishment reason.
 #
@@ -32,6 +41,7 @@ no-reason-alt: "#"
 # Punishment reason auto-completion.
 #
 # - These reasons will appear as tab completion when writing a punishment command.
+# - This feature is disabled by default. Uncomment if needed.
 common-punish-reasons:
 #  - "Cheat Detection."
 #  - "Spamming in chat."
@@ -54,8 +64,8 @@ enable-announcements: true
 punish-announcement:
 
   # When a player is punished with /ban or /tempban
-  termination:
-    - "<bold><color:red>Player [player] has been terminated from this server."
+  ban:
+    - "<bold><color:red>Player [player] has been banned from this server."
 
   # When a player is kicked with /kick
   removal:
@@ -74,7 +84,7 @@ ban-screens:
   # Permanent Ban with /ban
   # [reason] - The punishment reason
   # [date] - The date of issue
-  permanent-termination:
+  permanent-name-ban:
     - "<color:red>You are permanently banned from this server!"
     - ""
     - "<color:gray>Reason: <color:white>[reason]"
@@ -84,7 +94,25 @@ ban-screens:
   # [date] - The date of issue
   # [expiry] - The expire date
   # [duration] - The remaining duration of the ban
-  temporary-termination:
+  temporary-name-ban:
+    - "<color:red>You are temporarily banned for <color:white>[duration]<color:red> from this server!"
+    - ""
+    - "<color:gray>Reason: <color:white>[reason]"
+
+  # Permanent IP Ban with /banip
+  # [reason] - The punishment reason
+  # [date] - The date of issue
+  permanent-ip-ban:
+    - "<color:red>You are permanently banned from this server!"
+    - ""
+    - "<color:gray>Reason: <color:white>[reason]"
+
+  # Temporary IP Ban with /tempbanip
+  # [reason] - The punishment reason
+  # [date] - The date of issue
+  # [expiry] - The expire date
+  # [duration] - The remaining duration of the ban
+  temporary-ip-ban:
     - "<color:red>You are temporarily banned for <color:white>[duration]<color:red> from this server!"
     - ""
     - "<color:gray>Reason: <color:white>[reason]"
@@ -117,3 +145,5 @@ enable-immunity: false
 # This setting determines weather or not to print the stacktrace to the console when an error occurred while executing a command.
 # This can be useful when trying to provide the error log when submitting a bug report.
 debug-mode: false
+
+# End of configuration file <- no, seriously. You are done.

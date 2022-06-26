@@ -40,7 +40,7 @@ public final class DurationUtil {
 
     // A pattern used to find any non-digit character(s) in a token.
     // Since 1.3.0, a decimal point is now considered to be a digit.
-    private static final Pattern nonDigitPattern = Pattern.compile("[^\\d.]");
+    private static final Pattern NON_DIGIT_PATTERN = Pattern.compile("[^\\d.]");
 
     /**
      * An algorithm that converts a ban duration string into a date object.
@@ -119,7 +119,7 @@ public final class DurationUtil {
                 } catch (NumberFormatException e) {
                     throw new MalformedDurationFormatException(e);
                 }
-            } else if (!(nonDigitPattern.matcher(token).find())) {
+            } else if (!(NON_DIGIT_PATTERN.matcher(token).find())) {
                 // There is no time-unit suffix, therefore default to second.
                 // No need to strip the suffix, since there is none.
                 try {

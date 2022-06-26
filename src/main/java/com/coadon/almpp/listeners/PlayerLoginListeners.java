@@ -20,6 +20,7 @@ package com.coadon.almpp.listeners;
 
 import com.coadon.almpp.ALMPP;
 import com.coadon.almpp.config.ConfigOptions;
+import com.coadon.almpp.utils.DurationUtil;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.event.EventHandler;
@@ -27,6 +28,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class PlayerLoginListeners extends PluginEventListener {
@@ -37,30 +39,65 @@ public class PlayerLoginListeners extends PluginEventListener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerLogin(PlayerLoginEvent event) {
-        BanList banList = getBanList();
-
-        if (!(banList.isBanned(event.getPlayer().getName())))
+        // Check if the player is banned
+        if (event.getResult() != PlayerLoginEvent.Result.KICK_BANNED)
             return;
 
-        // Get the ban entry of the banned player.
-        @NotNull BanEntry entry =
-                Objects.requireNonNull(banList.getBanEntry(event.getPlayer().getName()), "Ban entry is null.");
-        // No ban entry for a banned player, weird huh. ¯\_(ツ)_/¯
+        // Ban entry initialization
+        BanEntry banEntry;
 
-        String banReason;
-        if (entry.getReason() == null) {
-            banReason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
-            // Only in situation where the ban is triggered by vanilla Minecraft or another plugin with no reason.
-            // We will be working on a feature that supports no reason punishment.
-        } else
-            banReason = entry.getReason();
+        // Get the ban entry by name (uuid)
+        banEntry = plugin.getServer().getBanList(BanList.Type.NAME).getBanEntry(event.getPlayer().getName());
 
-        if (entry.getExpiration() == null) {
-            event.disallow(PlayerLoginEvent.Result.KICK_BANNED, plugin.getComponentProvider().generateKickPermBanScreen(
-                    banReason, entry.getCreated()));
+        // Check if a name ban entry exist for the player. If not, then the banned player is IP banned.
+        if (banEntry != null) {
+            // Get the ban reason
+            String banReason;
+            if (banEntry.getReason() == null)
+                banReason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
+            else
+                banReason = banEntry.getReason();
+
+            // Get the ban expiry
+            final Date banExpiry = banEntry.getExpiration();
+            if (banExpiry == null) {
+                // Ban is permanent
+                event.kickMessage(
+                        plugin.getComponentProvider().generateKickPermNameBanScreen(
+                                banReason, banEntry.getCreated()));
+            } else {
+                // Ban is temporary
+                event.kickMessage(
+                        plugin.getComponentProvider().generateKickTempNameBanScreen(
+                                banReason, banEntry.getCreated(), banEntry.getExpiration()));
+            }
         } else {
-            event.disallow(PlayerLoginEvent.Result.KICK_BANNED, plugin.getComponentProvider().generateKickTempBanScreen(
-                    banReason, entry.getCreated(), entry.getExpiration()));
+            // Player is IP banned, switch to IP ban entry.
+            banEntry = Objects.requireNonNull(
+                    plugin.getServer().getBanList(BanList.Type.IP).getBanEntry(event.getAddress().getHostAddress()),
+                    "Ban entry is null!");
+            // No ban entry for a banned player. Weird. ¯\_(ツ)_/¯
+
+            // Get the ban reason
+            String banReason;
+            if (banEntry.getReason() == null)
+                banReason = cfg.getString(ConfigOptions.DEFAULT_PUNISH_REASON);
+            else
+                banReason = banEntry.getReason();
+
+            // Get the ban expiry
+            final Date banExpiry = banEntry.getExpiration();
+            if (banExpiry == null) {
+                // Ban is permanent
+                event.kickMessage(
+                        plugin.getComponentProvider().generateKickPermIpBanScreen(
+                                banReason, banEntry.getCreated()));
+            } else {
+                // Ban is temporary
+                event.kickMessage(
+                        plugin.getComponentProvider().generateKickTempIpBanScreen(
+                                banReason, banEntry.getCreated(), banEntry.getExpiration()));
+            }
         }
     }
 }
