@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.config;
+package com.coadonpile.almpp.config;
 
 public enum ConfigOptions {
     DEFAULT_PUNISH_REASON("default-punish-reason"),

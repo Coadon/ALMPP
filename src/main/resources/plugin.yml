@@ -1,6 +1,6 @@
 name: ALMPP
 version: '${version}'
-main: com.coadon.almpp.ALMPP
+main: com.coadonpile.almpp.ALMPP
 api-version: 1.16
 authors: [Coadon]
 description: The Advanced Lightweight Minecraft Punish Plugin

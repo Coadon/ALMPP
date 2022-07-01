@@ -16,17 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.listeners;
+package com.coadonpile.almpp.listeners;
 
-import com.coadon.almpp.ALMPP;
-import com.coadon.almpp.config.ConfigOptions;
-import com.coadon.almpp.utils.DurationUtil;
+import com.coadonpile.almpp.ALMPP;
+import com.coadonpile.almpp.config.ConfigOptions;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerLoginEvent;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 import java.util.Objects;

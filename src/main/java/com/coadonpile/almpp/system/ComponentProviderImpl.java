@@ -16,12 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.system;
+package com.coadonpile.almpp.system;
 
-import com.coadon.almpp.ALMPP;
-import com.coadon.almpp.config.ConfigOptions;
-import com.coadon.almpp.utils.PluginConfigUtil;
-import com.coadon.almpp.utils.DurationUtil;
+import com.coadonpile.almpp.ALMPP;
+import com.coadonpile.almpp.config.ConfigOptions;
+import com.coadonpile.almpp.utils.PluginConfigUtil;
+import com.coadonpile.almpp.utils.DurationUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.apache.commons.lang.StringUtils;

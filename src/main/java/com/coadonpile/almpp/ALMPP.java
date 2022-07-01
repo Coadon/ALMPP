@@ -16,15 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp;
+package com.coadonpile.almpp;
 
-import com.coadon.almpp.commands.*;
-import com.coadon.almpp.utils.PluginConfigUtil;
-import com.coadon.almpp.listeners.PlayerLoginListeners;
-import com.coadon.almpp.system.BanManager;
-import com.coadon.almpp.system.BanManagerImpl;
-import com.coadon.almpp.system.ComponentProvider;
-import com.coadon.almpp.system.ComponentProviderImpl;
+import com.coadonpile.almpp.commands.*;
+import com.coadonpile.almpp.utils.PluginConfigUtil;
+import com.coadonpile.almpp.listeners.PlayerLoginListeners;
+import com.coadonpile.almpp.system.BanManager;
+import com.coadonpile.almpp.system.BanManagerImpl;
+import com.coadonpile.almpp.system.ComponentProvider;
+import com.coadonpile.almpp.system.ComponentProviderImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;

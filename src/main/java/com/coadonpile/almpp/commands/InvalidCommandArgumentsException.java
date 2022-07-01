@@ -16,23 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.utils;
+package com.coadonpile.almpp.commands;
 
-public class MalformedDurationFormatException extends Exception {
+public class InvalidCommandArgumentsException extends Exception {
 
-    public MalformedDurationFormatException() {
+    public InvalidCommandArgumentsException() {
         super();
     }
 
-    public MalformedDurationFormatException(String message) {
+    public InvalidCommandArgumentsException(String message) {
         super(message);
     }
 
-    public MalformedDurationFormatException(String message, Throwable cause) {
+    public InvalidCommandArgumentsException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public MalformedDurationFormatException(Throwable cause) {
+    public InvalidCommandArgumentsException(Throwable cause) {
         super(cause);
     }
 }

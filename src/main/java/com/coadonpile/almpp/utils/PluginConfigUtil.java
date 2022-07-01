@@ -16,9 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.utils;
+package com.coadonpile.almpp.utils;
 
-import com.coadon.almpp.config.ConfigOptions;
+import com.coadonpile.almpp.config.ConfigOptions;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;

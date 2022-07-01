@@ -16,14 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.commands;
+package com.coadonpile.almpp.commands;
 
-import com.coadon.almpp.ALMPP;
-import com.coadon.almpp.utils.FormatUtil;
+import com.coadonpile.almpp.ALMPP;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.BanEntry;
-import org.bukkit.BanList;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -31,14 +29,13 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Commandunbanip extends ALMPPCommand{
-    public Commandunbanip(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /unbanip <ip...>").color(NamedTextColor.RED));
+public class Commandunban extends ALMPPCommand {
+
+    public Commandunban(ALMPP plugin) {
+        super(plugin, Component.text("Usage: /unban <player...>").color(NamedTextColor.RED));
     }
 
     @Override
@@ -47,21 +44,20 @@ public class Commandunbanip extends ALMPPCommand{
             throw new InvalidCommandArgumentsException();
 
         // Iterate over the arguments, unbanning each valid element.
-        args.forEach(ip -> {
-
-            // Check if the address is valid
-            if (!FormatUtil.validIP(ip)) {
-                sender.sendMessage(ChatColor.RED + "IP Address '" + ip + "' is not a valid address.");
+        args.forEach(name -> {
+            // Check is the specified player is unbanned.
+            if (!getBanManager().isNameBanned(name)) {
+                sender.sendMessage(ChatColor.RED + "Specified player name '" + name + "' does not exist or is not banned.");
                 return;
             }
 
-            getBanManager().pardonIp(ip);
-            sender.sendMessage(ChatColor.GREEN + "Attempted to unban specified IP address '" + ip + "'.");
+            getBanManager().pardonName(name);
+            sender.sendMessage(ChatColor.GREEN + "Specified player '" + name + "' is now unbanned.");
         });
     }
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
-        return getBanList(BanList.Type.IP).getBanEntries().stream().map(BanEntry::getTarget).collect(Collectors.toList());
+        return getBanList().getBanEntries().stream().map(BanEntry::getTarget).collect(Collectors.toList());
     }
 }

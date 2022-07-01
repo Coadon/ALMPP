@@ -16,12 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.listeners;
+package com.coadonpile.almpp.listeners;
 
-import com.coadon.almpp.ALMPP;
-import com.coadon.almpp.utils.PluginConfigUtil;
-import com.coadon.almpp.system.BanManager;
-import com.coadon.almpp.system.ComponentProvider;
+import com.coadonpile.almpp.ALMPP;
+import com.coadonpile.almpp.utils.PluginConfigUtil;
+import com.coadonpile.almpp.system.BanManager;
+import com.coadonpile.almpp.system.ComponentProvider;
 import org.bukkit.BanList;
 import org.bukkit.Server;
 import org.bukkit.World;

@@ -16,10 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadon.almpp.commands;
+package com.coadonpile.almpp.commands;
 
-import com.coadon.almpp.ALMPP;
-import com.coadon.almpp.config.ConfigOptions;
+import com.coadonpile.almpp.ALMPP;
+import com.coadonpile.almpp.config.ConfigOptions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.apache.commons.lang.StringUtils;
@@ -35,15 +35,15 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class Commandbanip extends ALMPPCommand {
+public class Commandkick extends ALMPPCommand {
 
-    public Commandbanip(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /banip <player> [reason]").color(NamedTextColor.RED));
+    public Commandkick(ALMPP plugin) {
+        super(plugin, Component.text("Usage: /kick <player> [reason]").color(NamedTextColor.RED));
     }
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
-        if (args.size() <= 0) {
+        if (args.size() == 0) {
             // Not enough arguments
             throw new InvalidCommandArgumentsException();
         }
@@ -59,7 +59,7 @@ public class Commandbanip extends ALMPPCommand {
         // See if the player is immune
         if (player.hasPermission("almpp.immune") && cfg.getBoolean(ConfigOptions.ENABLE_IMMUNITY)) {
             // Target is immune
-            sender.sendMessage(ChatColor.DARK_RED + "Forbidden! " + ChatColor.RED + "You may not ban this player.");
+            sender.sendMessage(ChatColor.DARK_RED + "Forbidden! " + ChatColor.RED + "You may not kick this player.");
             if (cfg.getBoolean(ConfigOptions.ENABLE_LOGGING))
                 Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "'" + sender.getName() + "' was forbidden to punish immune player '" + player.getName() + "'");
             return;
@@ -79,7 +79,7 @@ public class Commandbanip extends ALMPPCommand {
         if (args.size() > 1 && !(StringUtils.join(rawReason, ' ').trim().equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = StringUtils.join(rawReason, ' ').replace("\\ ", " ").trim();
 
-        getBanManager().permIpBanPlayer(player, reason, sender.getName(), broadcast);
+        getBanManager().kickPlayer(player, reason, broadcast);
     }
 
     @Override
