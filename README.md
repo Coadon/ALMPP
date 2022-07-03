@@ -1,6 +1,6 @@
 # ALMPP
 
-**The Advanced Lightweight Minecraft Punish Plugin** is a powerful and lightweight Punishment Plugin designed for Bukkit servers.
+**The Advanced Lightweight Minecraft Punish Plugin** is a powerful but super lightweight Punishment Plugin designed for paper servers.
 
 ## Installation
 
