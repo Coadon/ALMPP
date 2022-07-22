@@ -24,6 +24,6 @@ jobs:
     - name: Build artifacts
       run: ./gradlew build
     - name: Upload build artifacts
-      uses: kittaakos/upload-artifact-as-is@v1
+      uses: kittaakos/upload-artifact-as-is@v0
       with:
         path: build/libs
