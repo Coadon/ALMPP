@@ -1,24 +1,30 @@
 # ALMPP
 
-**The Advanced Lightweight Minecraft Punish Plugin** is a powerful but super lightweight Punishment Plugin designed for paper servers.
+The super simple **Advanced Lightweight Minecraft Punishment Plugin.**
 
-## Installation
+---
 
-Download the latest plugin Jar file from the [GitHub releases page.](https://github.com/Coadon/ALMPP/releases)
-
-To install the plugin to your server, put the Jar file into your server plugins folder.
-
-Then, if your server is running, reload your server.
+### Downloads
 
 Since this plugin is using the PaperAPI for minecraft 1.16, this plugin only supports paper servers with a minecraft version above 1.16.1.
 
-Other server software including bukkit and spigot is not tested and may not guarantee plugin performance.
+Other server software including bukkit and spigot are not tested and may not guarantee plugin performance.
 
-## Usage
+#### Stable releases
 
-This plugin improves the Punishment features in vanilla Minecraft. It introduces the feature to permanently and temporarily ban players,
-It also includes an improved, cleaner ban gui.
+![GitHub release version](https://img.shields.io/github/v/release/coadon/ALMPP)
 
-For in-depth documentation on how to use this plugin, please refer to the [wiki.](https://github.com/Coadon/ALMPP/wiki)
+The latest stable releases of ALMPP are published to our [GitHub release page](https://github.com/coadon/ALMPP/releases).
 
-If you found a bug, please consider reporting it to us [here](https://github.com/Coadon/ALMPP/issues/new/choose).
+#### Latest builds (unstable)
+
+![GitHub build status](https://img.shields.io/github/workflow/status/coadon/ALMPP/Java%20CI%20with%20Gradle/master)
+
+For players who would like to use the builds from the latest cutting edge code changes, 
+you can download the automated builds produced through our [GitHub Actions workflow](https://github.com/coadon/ALMPP/actions/workflows/gradle.yml).
+
+Since these builds often include unfinished code that hasn't been extensively tested, bugs, crashes, incomplete features, and all other kinds of weird issues may be present.
+
+---
+
+Refer to the [documentations](https://github.com/Coadon/ALMPP/wiki) on how to use this plugin, and you can report bugs and crashes on our [issue tracker](https://github.com/Coadon/ALMPP/issues/new/choose).
