@@ -18,7 +18,7 @@ The latest stable releases of ALMPP are published to our [GitHub release page](h
 
 #### Latest builds (unstable)
 
-![GitHub build status](https://img.shields.io/github/workflow/status/coadon/ALMPP/Java%20CI%20with%20Gradle/master)
+![GitHub build status](https://img.shields.io/github/workflow/status/coadon/ALMPP/gradle-ci/master)
 
 For players who would like to use the builds from the latest cutting edge code changes, 
 you can download the automated builds produced through our [GitHub Actions workflow](https://github.com/coadon/ALMPP/actions/workflows/gradle.yml).
