@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.system;
+package net.coadonpile.almpp.system;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

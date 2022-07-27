@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.system;
+package net.coadonpile.almpp.system;
 
 import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.NotNull;

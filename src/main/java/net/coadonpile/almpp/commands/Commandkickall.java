@@ -16,10 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.commands;
+package net.coadonpile.almpp.commands;
 
-import com.coadonpile.almpp.ALMPP;
-import com.coadonpile.almpp.config.ConfigOptions;
+import net.coadonpile.almpp.config.ConfigOptions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Server;
@@ -31,10 +30,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class Commandkickall extends ALMPPCommand {
-
-    public Commandkickall(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /kickall [reason]").color(NamedTextColor.RED));
-    }
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Exception {
@@ -54,5 +49,10 @@ public class Commandkickall extends ALMPPCommand {
             tmp.add(0, cfg.getString(ConfigOptions.NO_REASON_ALT));
 
         return tmp;
+    }
+
+    @Override
+    protected @Nullable Component getUsage() {
+        return Component.text("Usage: /kickall [reason]").color(NamedTextColor.RED);
     }
 }

@@ -16,10 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.listeners;
+package net.coadonpile.almpp.listeners;
 
-import com.coadonpile.almpp.ALMPP;
-import com.coadonpile.almpp.config.ConfigOptions;
+import net.coadonpile.almpp.ALMPP;
+import net.coadonpile.almpp.config.ConfigOptions;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.event.EventHandler;

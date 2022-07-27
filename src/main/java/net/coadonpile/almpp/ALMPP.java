@@ -16,15 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp;
+package net.coadonpile.almpp;
 
-import com.coadonpile.almpp.commands.*;
-import com.coadonpile.almpp.utils.PluginConfigUtil;
-import com.coadonpile.almpp.listeners.PlayerLoginListeners;
-import com.coadonpile.almpp.system.BanManager;
-import com.coadonpile.almpp.system.BanManagerImpl;
-import com.coadonpile.almpp.system.ComponentProvider;
-import com.coadonpile.almpp.system.ComponentProviderImpl;
+import net.coadonpile.almpp.commands.*;
+import net.coadonpile.almpp.utils.PluginConfigUtil;
+import net.coadonpile.almpp.listeners.PlayerLoginListeners;
+import net.coadonpile.almpp.system.BanManager;
+import net.coadonpile.almpp.system.BanManagerImpl;
+import net.coadonpile.almpp.system.ComponentProvider;
+import net.coadonpile.almpp.system.ComponentProviderImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.event.Listener;
@@ -34,24 +34,28 @@ import org.slf4j.Logger;
 import java.util.Objects;
 
 public final class ALMPP extends JavaPlugin {
+    private static ALMPP instance;
+
     private final Logger logger = getSLF4JLogger();
     private final String VERSION = getDescription().getVersion();
 
-    private PluginConfigUtil configHandler;
+    private PluginConfigUtil pluginConfig;
     private ComponentProvider componentProvider;
     private BanManager banManager;
 
     @Override
     public void onEnable() {
-        logger.info("Advanced Lightweight Minecraft Punishment Plugin");
-        logger.info("Version ALMPP " + VERSION);
+        instance = this;
+
+        $().info("Advanced Lightweight Minecraft Punishment Plugin");
+        $().info("Version ALMPP " + VERSION);
 
         // Save config
         saveDefaultConfig();
 
-        configHandler = new PluginConfigUtil(getConfig());
-        componentProvider = new ComponentProviderImpl(this);
-        banManager = new BanManagerImpl(this);
+        pluginConfig = new PluginConfigUtil(getConfig());
+        componentProvider = new ComponentProviderImpl();
+        banManager = new BanManagerImpl();
 
         registerAllCommandsAndListeners();
     }
@@ -63,14 +67,14 @@ public final class ALMPP extends JavaPlugin {
 
     private void registerAllCommandsAndListeners() {
         // Command registries.
-        registerCommand("kick", new Commandkick(this));
-        registerCommand("ban", new Commandban(this));
-        registerCommand("banip", new Commandbanip(this));
-        registerCommand("kickall", new Commandkickall(this));
-        registerCommand("unban", new Commandunban(this));
-        registerCommand("tempban", new Commandtempban(this));
-        registerCommand("tempbanip", new Commandtempbanip(this));
-        registerCommand("unbanip", new Commandunbanip(this));
+        registerCommand("kick", new Commandkick());
+        registerCommand("ban", new Commandban());
+        registerCommand("banip", new Commandbanip());
+        registerCommand("kickall", new Commandkickall());
+        registerCommand("unban", new Commandunban());
+        registerCommand("tempban", new Commandtempban());
+        registerCommand("tempbanip", new Commandtempbanip());
+        registerCommand("unbanip", new Commandunbanip());
 
         // Event Listener Registries.
         registerListeners(new PlayerLoginListeners(this));
@@ -97,11 +101,23 @@ public final class ALMPP extends JavaPlugin {
         return banManager;
     }
 
-    public PluginConfigUtil getConfigHandler() {
-        return configHandler;
+    public PluginConfigUtil getPluginConfig() {
+        return pluginConfig;
     }
 
     public String getVersion() {
         return VERSION;
+    }
+
+    public static ALMPP getInstance() {
+        return instance;
+    }
+
+    /**
+     * Get Logger
+     * @return Plugin logger
+     */
+    public static Logger $() {
+        return getInstance().logger;
     }
 }

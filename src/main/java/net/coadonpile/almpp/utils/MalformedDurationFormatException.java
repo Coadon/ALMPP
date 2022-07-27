@@ -1,6 +1,6 @@
 /*
  * ALMPP - The advanced lightweight punishment plugin for Minecraft servers
- * Copyright (C) 2022 Coadon
+ * Copyright (C) 2021-2022 Coadon
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,15 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.utils;
+package net.coadonpile.almpp.utils;
 
-import java.util.regex.Pattern;
+public class MalformedDurationFormatException extends Exception {
 
-public class FormatUtil {
+    public MalformedDurationFormatException() {
+        super();
+    }
 
-    public static final Pattern IP_PATTERN = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
+    public MalformedDurationFormatException(String message) {
+        super(message);
+    }
 
-    public static boolean validIP(final String ipAddress) {
-        return IP_PATTERN.matcher(ipAddress).matches();
+    public MalformedDurationFormatException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public MalformedDurationFormatException(Throwable cause) {
+        super(cause);
     }
 }

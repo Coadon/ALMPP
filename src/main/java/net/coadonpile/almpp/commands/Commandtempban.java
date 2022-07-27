@@ -16,13 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.commands;
+package net.coadonpile.almpp.commands;
 
-import com.coadonpile.almpp.ALMPP;
-import com.coadonpile.almpp.config.ConfigOptions;
-import com.coadonpile.almpp.utils.DurationUtil;
-import com.coadonpile.almpp.utils.MalformedDurationFormatException;
-import com.google.common.collect.ImmutableList;
+import net.coadonpile.almpp.config.ConfigOptions;
+import net.coadonpile.almpp.utils.DurationUtil;
+import net.coadonpile.almpp.utils.MalformedDurationFormatException;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.apache.commons.lang.StringUtils;
@@ -39,14 +37,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class Commandtempbanip extends ALMPPCommand {
-
-    // Common time durations, for use in tab completion
-    private static final List<String> COMMON_DURATIONS = ImmutableList.of("1m", "15m", "1h", "3h", "12h", "1d", "1w", "1mo", "3mo", "6mo", "1y");
-
-    public Commandtempbanip(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /tempbanip <player> <duration> [reason]").color(NamedTextColor.RED));
-    }
+public class Commandtempban extends ALMPPCommand {
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
@@ -78,7 +69,7 @@ public class Commandtempbanip extends ALMPPCommand {
             expireDate = DurationUtil.compileExpireDate(args.get(1));
         } catch (MalformedDurationFormatException e) {
             // Malformed ban duration
-            sender.sendMessage(ChatColor.RED + "Error: Invalid ban duration");
+            sender.sendMessage(ChatColor.DARK_RED + "Error: " + ChatColor.RED + "Invalid ban duration" + ChatColor.GRAY + " - " + ChatColor.GOLD + e.getMessage());
             return;
         }
 
@@ -96,7 +87,7 @@ public class Commandtempbanip extends ALMPPCommand {
         if (args.size() > 2 && !(StringUtils.join(rawReason, ' ').trim().equals(cfg.getString(ConfigOptions.NO_REASON_ALT))))
             reason = StringUtils.join(rawReason, ' ').replace("\\ ", " ").trim();
 
-        getBanManager().tempIpBanPlayer(player, reason, sender.getName(), expireDate, broadcast);
+        getBanManager().tempBanPlayer(player, reason, sender.getName(), expireDate, broadcast);
     }
 
     @Override
@@ -120,5 +111,10 @@ public class Commandtempbanip extends ALMPPCommand {
             return Collections.singletonList("-s");
 
         return null;
+    }
+
+    @Override
+    protected @Nullable Component getUsage() {
+        return Component.text("Usage: /tempban <player> <duration> [reason]").color(NamedTextColor.RED);
     }
 }

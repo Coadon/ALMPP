@@ -16,12 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.listeners;
+package net.coadonpile.almpp.listeners;
 
-import com.coadonpile.almpp.ALMPP;
-import com.coadonpile.almpp.utils.PluginConfigUtil;
-import com.coadonpile.almpp.system.BanManager;
-import com.coadonpile.almpp.system.ComponentProvider;
+import net.coadonpile.almpp.ALMPP;
+import net.coadonpile.almpp.utils.PluginConfigUtil;
+import net.coadonpile.almpp.system.BanManager;
+import net.coadonpile.almpp.system.ComponentProvider;
 import org.bukkit.BanList;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -43,7 +43,7 @@ public abstract class PluginEventListener implements Listener {
     public PluginEventListener(ALMPP plugin) {
         this.plugin = plugin;
         this.logger = plugin.getSLF4JLogger();
-        this.cfg = plugin.getConfigHandler();
+        this.cfg = plugin.getPluginConfig();
     }
 
     protected @Nullable Player getPlayer(final String playerName) {

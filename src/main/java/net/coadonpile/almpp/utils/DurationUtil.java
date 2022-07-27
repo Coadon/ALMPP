@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.utils;
+package net.coadonpile.almpp.utils;
 
 import org.jetbrains.annotations.NotNull;
 

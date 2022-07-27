@@ -16,12 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.system;
+package net.coadonpile.almpp.system;
 
-import com.coadonpile.almpp.ALMPP;
-import com.coadonpile.almpp.config.ConfigOptions;
-import com.coadonpile.almpp.utils.PluginConfigUtil;
-import com.coadonpile.almpp.utils.DurationUtil;
+import net.coadonpile.almpp.ALMPP;
+import net.coadonpile.almpp.config.ConfigOptions;
+import net.coadonpile.almpp.utils.PluginConfigUtil;
+import net.coadonpile.almpp.utils.DurationUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.apache.commons.lang.StringUtils;
@@ -34,9 +34,9 @@ public final class ComponentProviderImpl implements ComponentProvider {
     private final PluginConfigUtil cfg;
     private final MiniMessage mm;
 
-    public ComponentProviderImpl(ALMPP plugin) {
+    public ComponentProviderImpl() {
         this.mm = MiniMessage.miniMessage();
-        this.cfg = plugin.getConfigHandler();
+        this.cfg = ALMPP.getInstance().getPluginConfig();
     }
 
     @Override

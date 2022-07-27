@@ -16,9 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.commands;
+package net.coadonpile.almpp.commands;
 
-import com.coadonpile.almpp.ALMPP;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.BanEntry;
@@ -33,10 +32,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Commandunban extends ALMPPCommand {
-
-    public Commandunban(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /unban <player...>").color(NamedTextColor.RED));
-    }
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
@@ -59,5 +54,10 @@ public class Commandunban extends ALMPPCommand {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
         return getBanList().getBanEntries().stream().map(BanEntry::getTarget).collect(Collectors.toList());
+    }
+
+    @Override
+    protected @Nullable Component getUsage() {
+        return Component.text("Usage: /unban <player...>").color(NamedTextColor.RED);
     }
 }

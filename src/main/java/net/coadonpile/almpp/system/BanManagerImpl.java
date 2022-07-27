@@ -16,11 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.system;
+package net.coadonpile.almpp.system;
 
-import com.coadonpile.almpp.ALMPP;
-import com.coadonpile.almpp.config.ConfigOptions;
-import com.coadonpile.almpp.utils.PluginConfigUtil;
+import net.coadonpile.almpp.ALMPP;
+import net.coadonpile.almpp.config.ConfigOptions;
+import net.coadonpile.almpp.utils.PluginConfigUtil;
 import net.kyori.adventure.text.Component;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -35,10 +35,10 @@ public final class BanManagerImpl implements BanManager {
     private final ComponentProvider formatter;
     private final PluginConfigUtil cfg;
 
-    public BanManagerImpl(ALMPP plugin) {
-        this.plugin = plugin;
+    public BanManagerImpl() {
+        this.plugin = ALMPP.getInstance();
         this.formatter = plugin.getComponentProvider();
-        this.cfg = plugin.getConfigHandler();
+        this.cfg = plugin.getPluginConfig();
     }
 
     @Override

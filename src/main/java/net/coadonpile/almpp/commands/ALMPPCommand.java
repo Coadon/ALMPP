@@ -16,13 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.commands;
+package net.coadonpile.almpp.commands;
 
-import com.coadonpile.almpp.ALMPP;
-import com.coadonpile.almpp.config.ConfigOptions;
-import com.coadonpile.almpp.utils.PluginConfigUtil;
-import com.coadonpile.almpp.system.BanManager;
-import com.coadonpile.almpp.system.ComponentProvider;
+import com.google.common.collect.ImmutableList;
+import net.coadonpile.almpp.ALMPP;
+import net.coadonpile.almpp.config.ConfigOptions;
+import net.coadonpile.almpp.utils.PluginConfigUtil;
+import net.coadonpile.almpp.system.BanManager;
+import net.coadonpile.almpp.system.ComponentProvider;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.BanList;
@@ -36,7 +37,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
 
 import java.util.Collection;
 import java.util.List;
@@ -44,23 +44,15 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public abstract class ALMPPCommand implements TabExecutor {
+    // Common time durations, for use in tab completion
+    protected static final List<String> COMMON_DURATIONS = ImmutableList.of("1m", "15m", "1h", "3h", "12h", "1d", "1w", "1mo", "3mo", "6mo", "1y");
+
     protected final ALMPP plugin;
-    protected final Logger logger;
     protected final PluginConfigUtil cfg;
-    private final @Nullable Component usage;
 
-    public ALMPPCommand(ALMPP plugin, @Nullable Component usage) {
-        this.plugin = plugin;
-        this.logger = plugin.getSLF4JLogger();
-        this.cfg = plugin.getConfigHandler();
-        this.usage = usage;
-    }
-
-    public ALMPPCommand(ALMPP plugin) {
-        this.plugin = plugin;
-        this.logger = plugin.getSLF4JLogger();
-        this.cfg = plugin.getConfigHandler();
-        this.usage = null;
+    public ALMPPCommand() {
+        this.plugin = ALMPP.getInstance();
+        this.cfg = plugin.getPluginConfig();
     }
 
 
@@ -69,10 +61,10 @@ public abstract class ALMPPCommand implements TabExecutor {
         try {
             run(sender.getServer(), sender, command, label, new Arguments(args));
         } catch (InvalidCommandArgumentsException e) {
-            if (usage == null)
+            if (getUsage() == null)
                 return false;
 
-            sender.sendMessage(usage);
+            sender.sendMessage(getUsage());
         } catch (Throwable e) {
             sender.sendMessage(Component.text("An error occurred while performing this command.").color(NamedTextColor.RED));
             if (cfg.getBoolean(ConfigOptions.DEBUG_MODE))
@@ -86,6 +78,10 @@ public abstract class ALMPPCommand implements TabExecutor {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String alias, @NotNull String[] args) {
+        return null;
+    }
+
+    protected @Nullable Component getUsage() {
         return null;
     }
 

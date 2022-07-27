@@ -16,10 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.coadonpile.almpp.commands;
+package net.coadonpile.almpp.commands;
 
-import com.coadonpile.almpp.ALMPP;
-import com.coadonpile.almpp.config.ConfigOptions;
+import net.coadonpile.almpp.config.ConfigOptions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.apache.commons.lang.StringUtils;
@@ -36,10 +35,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Commandban extends ALMPPCommand {
-
-    public Commandban(ALMPP plugin) {
-        super(plugin, Component.text("Usage: /ban <player> [reason]").color(NamedTextColor.RED));
-    }
 
     @Override
     public void run(@NotNull Server server, @NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull Arguments args) throws Throwable {
@@ -100,5 +95,10 @@ public class Commandban extends ALMPPCommand {
             return Collections.singletonList("-s");
 
         return null;
+    }
+
+    @Override
+    protected @Nullable Component getUsage() {
+        return Component.text("Usage: /ban <player> [reason]").color(NamedTextColor.RED);
     }
 }
